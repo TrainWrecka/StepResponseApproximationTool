@@ -21,8 +21,8 @@
   	
   	private Controller controller;
  	protected JButton btOk = new JButton("open file chooser pls press me thank");
-  	private InputPanel inputPanel;
-  	private OutputPanel outputPanel;
+  	private InputPanel inputPanel=new InputPanel();
+  	private OutputPanel outputPanel = new OutputPanel();
  	private JFileChooser fileChooser = new JFileChooser();
  	private File filefile;	
   
@@ -30,10 +30,14 @@
   		super(new GridBagLayout());
   		setBorder(MyBorderFactory.createMyBorder(" Topview "));
   		this.controller = controller;
-  		add(btOk, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-  				new Insets(10, 10, 10, 10), 0, 0));
-
- 		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+//  		add(btOk, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+//  				new Insets(10, 10, 10, 10), 0, 0));
+  		add(inputPanel,new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.VERTICAL,
+  				new Insets(0, 0, 10, 10), 0, 0));
+  		add(outputPanel,new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_END, GridBagConstraints.BOTH,
+  				new Insets(0, 0, 10, 10), 0, 0));
+  		
+   		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 
  		btOk.addActionListener(new ActionListener() {
  			

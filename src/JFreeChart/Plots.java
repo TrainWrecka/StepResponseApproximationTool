@@ -21,6 +21,6 @@ public class Plots{
     ChartPanel chartPanel = new ChartPanel( lineChart );
    
     public Plots(){
-    	
+    		
     }
 }
