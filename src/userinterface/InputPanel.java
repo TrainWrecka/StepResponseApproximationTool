@@ -228,7 +228,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	    	lbqp9.setEnabled(false);
 	    	lbwp10.setEnabled(false);
 	    	lbqp10.setEnabled(false);
-	    	lbSigma.setEnabled(false);
+	    	lbSigma.setEnabled(true);
 	    	
 	    	tfwp1.setEditable(true);
 	    	tfqp1.setEditable(true);
@@ -250,7 +250,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	    	tfqp9.setEditable(false);
 	    	tfwp10.setEditable(false);
 	    	tfqp10.setEditable(false);
-	    	tfSigma.setEditable(false);
+	    	tfSigma.setEditable(true);
 	    	break;
 	    	
 	    case "2":
@@ -320,7 +320,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	    	lbqp9.setEnabled(false);
 	    	lbwp10.setEnabled(false);
 	    	lbqp10.setEnabled(false);
-	    	lbSigma.setEnabled(false);
+	    	lbSigma.setEnabled(true);
 	    	
 	    	tfwp1.setEditable(true);
 	    	tfqp1.setEditable(true);
@@ -342,7 +342,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	    	tfqp9.setEditable(false);
 	    	tfwp10.setEditable(false);
 	    	tfqp10.setEditable(false);
-	    	tfSigma.setEditable(false);
+	    	tfSigma.setEditable(true);
 	    	break;
 	    	
 	    case "4":
@@ -412,7 +412,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	    	lbqp9.setEnabled(false);
 	    	lbwp10.setEnabled(false);
 	    	lbqp10.setEnabled(false);
-	    	lbSigma.setEnabled(false);
+	    	lbSigma.setEnabled(true);
 	    	
 	    	tfwp1.setEditable(true);
 	    	tfqp1.setEditable(true);
@@ -434,7 +434,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	    	tfqp9.setEditable(false);
 	    	tfwp10.setEditable(false);
 	    	tfqp10.setEditable(false);
-	    	tfSigma.setEditable(false);
+	    	tfSigma.setEditable(true);
 	    	break;
 	    	
 	    case "6":
@@ -504,7 +504,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	    	lbqp9.setEnabled(false);
 	    	lbwp10.setEnabled(false);
 	    	lbqp10.setEnabled(false);
-	    	lbSigma.setEnabled(false);
+	    	lbSigma.setEnabled(true);
 	    	
 	    	tfwp1.setEditable(true);
 	    	tfqp1.setEditable(true);
@@ -526,7 +526,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	    	tfqp9.setEditable(false);
 	    	tfwp10.setEditable(false);
 	    	tfqp10.setEditable(false);
-	    	tfSigma.setEditable(false);
+	    	tfSigma.setEditable(true);
 	    	break;
 	    	
 	    case "8":
@@ -618,7 +618,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	    	tfqp9.setEditable(true);
 	    	tfwp10.setEditable(false);
 	    	tfqp10.setEditable(false);
-	    	tfSigma.setEditable(false);
+	    	tfSigma.setEditable(true);
 	    	break;
 	    	
 	    case "10":
