@@ -2,6 +2,7 @@ package userinterface;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.*;
@@ -80,10 +81,12 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		// add Buttons to Panel
 		add(btLoad,new GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,  
 				new Insets(10, 30, 0, 10), 0, 0));
-		add(rbtAuto,new GridBagConstraints( 0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,  
+		
+		add(rbtAuto,new GridBagConstraints( 0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
 				new Insets(10, 30, 0, 10), 0, 0));
-		add(rbtManual,new GridBagConstraints( 0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,  
+		add(rbtManual,new GridBagConstraints( 0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
 				new Insets(10, 30, 0, 10), 0, 0));
+		
 		add(btRun,new GridBagConstraints( 0, 25, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,  
 				new Insets(10, 30, 0, 10), 0, 0));
 		
@@ -136,15 +139,15 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		
 		// add Textfields to Panel
 		add(tfwp1,new GridBagConstraints( 1, 4, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(tfqp1,new GridBagConstraints( 1, 5, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(tfwp2,new GridBagConstraints( 1, 6, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(tfqp2,new GridBagConstraints( 1, 7, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(tfwp3,new GridBagConstraints( 1, 8, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(tfqp3,new GridBagConstraints( 1, 9, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
 				new Insets(10, 0, 0, 10), 0, 0));
 		add(tfwp4,new GridBagConstraints( 1, 10, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
@@ -184,44 +187,8 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 				new Insets(10, 0, 0, 0), 0, 0));
 		
 		
-		cbOrdnungsauswahl.addItemListener(new java.awt.event.ItemListener(){
-			public void itemStateChanged(java.awt.event.ItemEvent e)
-			   {
-			    Ordnung = null;
-			    Ordnung = (String)cbOrdnungsauswahl.getSelectedItem();
-			    switch(Ordnung){
-			    case "1":
-			    	lbwp1.setEnabled(true);
-			    	lbqp1.setEnabled(true);
-			    	tfwp1.setEditable(true);
-			    	tfqp1.setEditable(true);
-			    	lbwp2.setVisible(false);
-			    	lbqp2.setVisible(false);
-			    	lbwp3.setVisible(false);
-			    	lbqp3.setVisible(false);
-			    	lbwp4.setVisible(false);
-			    	lbqp4.setVisible(false);
-			    	lbwp5.setVisible(false);
-			    	lbqp5.setVisible(false);
-			    	lbwp6.setVisible(false);
-			    	lbqp6.setVisible(false);
-			    	lbwp7.setVisible(false);
-			    	lbqp7.setVisible(false);
-			    	lbwp8.setVisible(false);
-			    	lbqp8.setVisible(false);
-			    	lbwp9.setVisible(false);
-			    	lbqp9.setVisible(false);
-			    	lbwp10.setVisible(false);
-			    	lbqp10.setVisible(false);
-			    	lbSigma.setVisible(false);
-			    	
-			    	
-			    }
-			     }
-			});
-		
-		
-		
+		cbOrdnungsauswahl.addItemListener(this);
+
 	}
 	
 
@@ -230,14 +197,480 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==cbOrdnungsauswahl){
-			int Ordnung=(int) cbOrdnungsauswahl.getSelectedItem();
-			for (int i=1;i<=Ordnung;i++){
-				
-			}
-		}
+				}
 		// TODO Auto-generated method stub
+
+
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		Ordnung = null;
+	    Ordnung = (String)cbOrdnungsauswahl.getSelectedItem();
+	    switch(Ordnung){
+	    case "1":
+	    	lbwp1.setEnabled(true);
+	    	lbqp1.setEnabled(true);
+	    	lbwp2.setEnabled(false);
+	    	lbqp2.setEnabled(false);
+	    	lbwp3.setEnabled(false);
+	    	lbqp3.setEnabled(false);
+	    	lbwp4.setEnabled(false);
+	    	lbqp4.setEnabled(false);
+	    	lbwp5.setEnabled(false);
+	    	lbqp5.setEnabled(false);
+	    	lbwp6.setEnabled(false);
+	    	lbqp6.setEnabled(false);
+	    	lbwp7.setEnabled(false);
+	    	lbqp7.setEnabled(false);
+	    	lbwp8.setEnabled(false);
+	    	lbqp8.setEnabled(false);
+	    	lbwp9.setEnabled(false);
+	    	lbqp9.setEnabled(false);
+	    	lbwp10.setEnabled(false);
+	    	lbqp10.setEnabled(false);
+	    	lbSigma.setEnabled(false);
+	    	
+	    	tfwp1.setEditable(true);
+	    	tfqp1.setEditable(true);
+	    	tfwp2.setEditable(false);
+	    	tfqp2.setEditable(false);
+	    	tfwp3.setEditable(false);
+	    	tfqp3.setEditable(false);
+	    	tfwp4.setEditable(false);
+	    	tfqp4.setEditable(false);
+	    	tfwp5.setEditable(false);
+	    	tfqp5.setEditable(false);
+	    	tfwp6.setEditable(false);
+	    	tfqp6.setEditable(false);
+	    	tfwp7.setEditable(false);
+	    	tfqp7.setEditable(false);
+	    	tfwp8.setEditable(false);
+	    	tfqp8.setEditable(false);
+	    	tfwp9.setEditable(false);
+	    	tfqp9.setEditable(false);
+	    	tfwp10.setEditable(false);
+	    	tfqp10.setEditable(false);
+	    	tfSigma.setEditable(false);
+	    	break;
+	    	
+	    case "2":
+	    	lbwp1.setEnabled(true);
+	    	lbqp1.setEnabled(true);
+	    	lbwp2.setEnabled(true);
+	    	lbqp2.setEnabled(true);
+	    	lbwp3.setEnabled(false);
+	    	lbqp3.setEnabled(false);
+	    	lbwp4.setEnabled(false);
+	    	lbqp4.setEnabled(false);
+	    	lbwp5.setEnabled(false);
+	    	lbqp5.setEnabled(false);
+	    	lbwp6.setEnabled(false);
+	    	lbqp6.setEnabled(false);
+	    	lbwp7.setEnabled(false);
+	    	lbqp7.setEnabled(false);
+	    	lbwp8.setEnabled(false);
+	    	lbqp8.setEnabled(false);
+	    	lbwp9.setEnabled(false);
+	    	lbqp9.setEnabled(false);
+	    	lbwp10.setEnabled(false);
+	    	lbqp10.setEnabled(false);
+	    	lbSigma.setEnabled(false);
+	    	
+	    	tfwp1.setEditable(true);
+	    	tfqp1.setEditable(true);
+	    	tfwp2.setEditable(true);
+	    	tfqp2.setEditable(true);
+	    	tfwp3.setEditable(false);
+	    	tfqp3.setEditable(false);
+	    	tfwp4.setEditable(false);
+	    	tfqp4.setEditable(false);
+	    	tfwp5.setEditable(false);
+	    	tfqp5.setEditable(false);
+	    	tfwp6.setEditable(false);
+	    	tfqp6.setEditable(false);
+	    	tfwp7.setEditable(false);
+	    	tfqp7.setEditable(false);
+	    	tfwp8.setEditable(false);
+	    	tfqp8.setEditable(false);
+	    	tfwp9.setEditable(false);
+	    	tfqp9.setEditable(false);
+	    	tfwp10.setEditable(false);
+	    	tfqp10.setEditable(false);
+	    	tfSigma.setEditable(false);
+	    	break;
+	    	
+	    case "3":
+	    	lbwp1.setEnabled(true);
+	    	lbqp1.setEnabled(true);
+	    	lbwp2.setEnabled(true);
+	    	lbqp2.setEnabled(true);
+	    	lbwp3.setEnabled(true);
+	    	lbqp3.setEnabled(true);
+	    	lbwp4.setEnabled(false);
+	    	lbqp4.setEnabled(false);
+	    	lbwp5.setEnabled(false);
+	    	lbqp5.setEnabled(false);
+	    	lbwp6.setEnabled(false);
+	    	lbqp6.setEnabled(false);
+	    	lbwp7.setEnabled(false);
+	    	lbqp7.setEnabled(false);
+	    	lbwp8.setEnabled(false);
+	    	lbqp8.setEnabled(false);
+	    	lbwp9.setEnabled(false);
+	    	lbqp9.setEnabled(false);
+	    	lbwp10.setEnabled(false);
+	    	lbqp10.setEnabled(false);
+	    	lbSigma.setEnabled(false);
+	    	
+	    	tfwp1.setEditable(true);
+	    	tfqp1.setEditable(true);
+	    	tfwp2.setEditable(true);
+	    	tfqp2.setEditable(true);
+	    	tfwp3.setEditable(true);
+	    	tfqp3.setEditable(true);
+	    	tfwp4.setEditable(false);
+	    	tfqp4.setEditable(false);
+	    	tfwp5.setEditable(false);
+	    	tfqp5.setEditable(false);
+	    	tfwp6.setEditable(false);
+	    	tfqp6.setEditable(false);
+	    	tfwp7.setEditable(false);
+	    	tfqp7.setEditable(false);
+	    	tfwp8.setEditable(false);
+	    	tfqp8.setEditable(false);
+	    	tfwp9.setEditable(false);
+	    	tfqp9.setEditable(false);
+	    	tfwp10.setEditable(false);
+	    	tfqp10.setEditable(false);
+	    	tfSigma.setEditable(false);
+	    	break;
+	    	
+	    case "4":
+	    	lbwp1.setEnabled(true);
+	    	lbqp1.setEnabled(true);
+	    	lbwp2.setEnabled(true);
+	    	lbqp2.setEnabled(true);
+	    	lbwp3.setEnabled(true);
+	    	lbqp3.setEnabled(true);
+	    	lbwp4.setEnabled(true);
+	    	lbqp4.setEnabled(true);
+	    	lbwp5.setEnabled(false);
+	    	lbqp5.setEnabled(false);
+	    	lbwp6.setEnabled(false);
+	    	lbqp6.setEnabled(false);
+	    	lbwp7.setEnabled(false);
+	    	lbqp7.setEnabled(false);
+	    	lbwp8.setEnabled(false);
+	    	lbqp8.setEnabled(false);
+	    	lbwp9.setEnabled(false);
+	    	lbqp9.setEnabled(false);
+	    	lbwp10.setEnabled(false);
+	    	lbqp10.setEnabled(false);
+	    	lbSigma.setEnabled(false);
+	    	
+	    	tfwp1.setEditable(true);
+	    	tfqp1.setEditable(true);
+	    	tfwp2.setEditable(true);
+	    	tfqp2.setEditable(true);
+	    	tfwp3.setEditable(true);
+	    	tfqp3.setEditable(true);
+	    	tfwp4.setEditable(true);
+	    	tfqp4.setEditable(true);
+	    	tfwp5.setEditable(false);
+	    	tfqp5.setEditable(false);
+	    	tfwp6.setEditable(false);
+	    	tfqp6.setEditable(false);
+	    	tfwp7.setEditable(false);
+	    	tfqp7.setEditable(false);
+	    	tfwp8.setEditable(false);
+	    	tfqp8.setEditable(false);
+	    	tfwp9.setEditable(false);
+	    	tfqp9.setEditable(false);
+	    	tfwp10.setEditable(false);
+	    	tfqp10.setEditable(false);
+	    	tfSigma.setEditable(false);
+	    	break;
+	    	
+	    case "5":
+	    	lbwp1.setEnabled(true);
+	    	lbqp1.setEnabled(true);
+	    	lbwp2.setEnabled(true);
+	    	lbqp2.setEnabled(true);
+	    	lbwp3.setEnabled(true);
+	    	lbqp3.setEnabled(true);
+	    	lbwp4.setEnabled(true);
+	    	lbqp4.setEnabled(true);
+	    	lbwp5.setEnabled(true);
+	    	lbqp5.setEnabled(true);
+	    	lbwp6.setEnabled(false);
+	    	lbqp6.setEnabled(false);
+	    	lbwp7.setEnabled(false);
+	    	lbqp7.setEnabled(false);
+	    	lbwp8.setEnabled(false);
+	    	lbqp8.setEnabled(false);
+	    	lbwp9.setEnabled(false);
+	    	lbqp9.setEnabled(false);
+	    	lbwp10.setEnabled(false);
+	    	lbqp10.setEnabled(false);
+	    	lbSigma.setEnabled(false);
+	    	
+	    	tfwp1.setEditable(true);
+	    	tfqp1.setEditable(true);
+	    	tfwp2.setEditable(true);
+	    	tfqp2.setEditable(true);
+	    	tfwp3.setEditable(true);
+	    	tfqp3.setEditable(true);
+	    	tfwp4.setEditable(true);
+	    	tfqp4.setEditable(true);
+	    	tfwp5.setEditable(true);
+	    	tfqp5.setEditable(true);
+	    	tfwp6.setEditable(false);
+	    	tfqp6.setEditable(false);
+	    	tfwp7.setEditable(false);
+	    	tfqp7.setEditable(false);
+	    	tfwp8.setEditable(false);
+	    	tfqp8.setEditable(false);
+	    	tfwp9.setEditable(false);
+	    	tfqp9.setEditable(false);
+	    	tfwp10.setEditable(false);
+	    	tfqp10.setEditable(false);
+	    	tfSigma.setEditable(false);
+	    	break;
+	    	
+	    case "6":
+	    	lbwp1.setEnabled(true);
+	    	lbqp1.setEnabled(true);
+	    	lbwp2.setEnabled(true);
+	    	lbqp2.setEnabled(true);
+	    	lbwp3.setEnabled(true);
+	    	lbqp3.setEnabled(true);
+	    	lbwp4.setEnabled(true);
+	    	lbqp4.setEnabled(true);
+	    	lbwp5.setEnabled(true);
+	    	lbqp5.setEnabled(true);
+	    	lbwp6.setEnabled(true);
+	    	lbqp6.setEnabled(true);
+	    	lbwp7.setEnabled(false);
+	    	lbqp7.setEnabled(false);
+	    	lbwp8.setEnabled(false);
+	    	lbqp8.setEnabled(false);
+	    	lbwp9.setEnabled(false);
+	    	lbqp9.setEnabled(false);
+	    	lbwp10.setEnabled(false);
+	    	lbqp10.setEnabled(false);
+	    	lbSigma.setEnabled(false);
+	    	
+	    	tfwp1.setEditable(true);
+	    	tfqp1.setEditable(true);
+	    	tfwp2.setEditable(true);
+	    	tfqp2.setEditable(true);
+	    	tfwp3.setEditable(true);
+	    	tfqp3.setEditable(true);
+	    	tfwp4.setEditable(true);
+	    	tfqp4.setEditable(true);
+	    	tfwp5.setEditable(true);
+	    	tfqp5.setEditable(true);
+	    	tfwp6.setEditable(true);
+	    	tfqp6.setEditable(true);
+	    	tfwp7.setEditable(false);
+	    	tfqp7.setEditable(false);
+	    	tfwp8.setEditable(false);
+	    	tfqp8.setEditable(false);
+	    	tfwp9.setEditable(false);
+	    	tfqp9.setEditable(false);
+	    	tfwp10.setEditable(false);
+	    	tfqp10.setEditable(false);
+	    	tfSigma.setEditable(false);
+	    	break;
+	    	
+	    case "7":
+	    	lbwp1.setEnabled(true);
+	    	lbqp1.setEnabled(true);
+	    	lbwp2.setEnabled(true);
+	    	lbqp2.setEnabled(true);
+	    	lbwp3.setEnabled(true);
+	    	lbqp3.setEnabled(true);
+	    	lbwp4.setEnabled(true);
+	    	lbqp4.setEnabled(true);
+	    	lbwp5.setEnabled(true);
+	    	lbqp5.setEnabled(true);
+	    	lbwp6.setEnabled(true);
+	    	lbqp6.setEnabled(true);
+	    	lbwp7.setEnabled(true);
+	    	lbqp7.setEnabled(true);
+	    	lbwp8.setEnabled(false);
+	    	lbqp8.setEnabled(false);
+	    	lbwp9.setEnabled(false);
+	    	lbqp9.setEnabled(false);
+	    	lbwp10.setEnabled(false);
+	    	lbqp10.setEnabled(false);
+	    	lbSigma.setEnabled(false);
+	    	
+	    	tfwp1.setEditable(true);
+	    	tfqp1.setEditable(true);
+	    	tfwp2.setEditable(true);
+	    	tfqp2.setEditable(true);
+	    	tfwp3.setEditable(true);
+	    	tfqp3.setEditable(true);
+	    	tfwp4.setEditable(true);
+	    	tfqp4.setEditable(true);
+	    	tfwp5.setEditable(true);
+	    	tfqp5.setEditable(true);
+	    	tfwp6.setEditable(true);
+	    	tfqp6.setEditable(true);
+	    	tfwp7.setEditable(true);
+	    	tfqp7.setEditable(true);
+	    	tfwp8.setEditable(false);
+	    	tfqp8.setEditable(false);
+	    	tfwp9.setEditable(false);
+	    	tfqp9.setEditable(false);
+	    	tfwp10.setEditable(false);
+	    	tfqp10.setEditable(false);
+	    	tfSigma.setEditable(false);
+	    	break;
+	    	
+	    case "8":
+	    	lbwp1.setEnabled(true);
+	    	lbqp1.setEnabled(true);
+	    	lbwp2.setEnabled(true);
+	    	lbqp2.setEnabled(true);
+	    	lbwp3.setEnabled(true);
+	    	lbqp3.setEnabled(true);
+	    	lbwp4.setEnabled(true);
+	    	lbqp4.setEnabled(true);
+	    	lbwp5.setEnabled(true);
+	    	lbqp5.setEnabled(true);
+	    	lbwp6.setEnabled(true);
+	    	lbqp6.setEnabled(true);
+	    	lbwp7.setEnabled(true);
+	    	lbqp7.setEnabled(true);
+	    	lbwp8.setEnabled(true);
+	    	lbqp8.setEnabled(true);
+	    	lbwp9.setEnabled(false);
+	    	lbqp9.setEnabled(false);
+	    	lbwp10.setEnabled(false);
+	    	lbqp10.setEnabled(false);
+	    	lbSigma.setEnabled(false);
+	    	
+	    	tfwp1.setEditable(true);
+	    	tfqp1.setEditable(true);
+	    	tfwp2.setEditable(true);
+	    	tfqp2.setEditable(true);
+	    	tfwp3.setEditable(true);
+	    	tfqp3.setEditable(true);
+	    	tfwp4.setEditable(true);
+	    	tfqp4.setEditable(true);
+	    	tfwp5.setEditable(true);
+	    	tfqp5.setEditable(true);
+	    	tfwp6.setEditable(true);
+	    	tfqp6.setEditable(true);
+	    	tfwp7.setEditable(true);
+	    	tfqp7.setEditable(true);
+	    	tfwp8.setEditable(true);
+	    	tfqp8.setEditable(true);
+	    	tfwp9.setEditable(false);
+	    	tfqp9.setEditable(false);
+	    	tfwp10.setEditable(false);
+	    	tfqp10.setEditable(false);
+	    	tfSigma.setEditable(false);
+	    	break;
+	    	
+	    case "9":
+	    	lbwp1.setEnabled(true);
+	    	lbqp1.setEnabled(true);
+	    	lbwp2.setEnabled(true);
+	    	lbqp2.setEnabled(true);
+	    	lbwp3.setEnabled(true);
+	    	lbqp3.setEnabled(true);
+	    	lbwp4.setEnabled(true);
+	    	lbqp4.setEnabled(true);
+	    	lbwp5.setEnabled(true);
+	    	lbqp5.setEnabled(true);
+	    	lbwp6.setEnabled(true);
+	    	lbqp6.setEnabled(true);
+	    	lbwp7.setEnabled(true);
+	    	lbqp7.setEnabled(true);
+	    	lbwp8.setEnabled(true);
+	    	lbqp8.setEnabled(true);
+	    	lbwp9.setEnabled(true);
+	    	lbqp9.setEnabled(true);
+	    	lbwp10.setEnabled(false);
+	    	lbqp10.setEnabled(false);
+	    	lbSigma.setEnabled(false);
+	    	
+	    	tfwp1.setEditable(true);
+	    	tfqp1.setEditable(true);
+	    	tfwp2.setEditable(true);
+	    	tfqp2.setEditable(true);
+	    	tfwp3.setEditable(true);
+	    	tfqp3.setEditable(true);
+	    	tfwp4.setEditable(true);
+	    	tfqp4.setEditable(true);
+	    	tfwp5.setEditable(true);
+	    	tfqp5.setEditable(true);
+	    	tfwp6.setEditable(true);
+	    	tfqp6.setEditable(true);
+	    	tfwp7.setEditable(true);
+	    	tfqp7.setEditable(true);
+	    	tfwp8.setEditable(true);
+	    	tfqp8.setEditable(true);
+	    	tfwp9.setEditable(true);
+	    	tfqp9.setEditable(true);
+	    	tfwp10.setEditable(false);
+	    	tfqp10.setEditable(false);
+	    	tfSigma.setEditable(false);
+	    	break;
+	    	
+	    case "10":
+	    	lbwp1.setEnabled(true);
+	    	lbqp1.setEnabled(true);
+	    	lbwp2.setEnabled(true);
+	    	lbqp2.setEnabled(true);
+	    	lbwp3.setEnabled(true);
+	    	lbqp3.setEnabled(true);
+	    	lbwp4.setEnabled(true);
+	    	lbqp4.setEnabled(true);
+	    	lbwp5.setEnabled(true);
+	    	lbqp5.setEnabled(true);
+	    	lbwp6.setEnabled(true);
+	    	lbqp6.setEnabled(true);
+	    	lbwp7.setEnabled(true);
+	    	lbqp7.setEnabled(true);
+	    	lbwp8.setEnabled(true);
+	    	lbqp8.setEnabled(true);
+	    	lbwp9.setEnabled(true);
+	    	lbqp9.setEnabled(true);
+	    	lbwp10.setEnabled(true);
+	    	lbqp10.setEnabled(true);
+	    	lbSigma.setEnabled(false);
+	    	
+	    	tfwp1.setEditable(true);
+	    	tfqp1.setEditable(true);
+	    	tfwp2.setEditable(true);
+	    	tfqp2.setEditable(true);
+	    	tfwp3.setEditable(true);
+	    	tfqp3.setEditable(true);
+	    	tfwp4.setEditable(true);
+	    	tfqp4.setEditable(true);
+	    	tfwp5.setEditable(true);
+	    	tfqp5.setEditable(true);
+	    	tfwp6.setEditable(true);
+	    	tfqp6.setEditable(true);
+	    	tfwp7.setEditable(true);
+	    	tfqp7.setEditable(true);
+	    	tfwp8.setEditable(true);
+	    	tfqp8.setEditable(true);
+	    	tfwp9.setEditable(true);
+	    	tfqp9.setEditable(true);
+	    	tfwp10.setEditable(true);
+	    	tfqp10.setEditable(true);
+	    	tfSigma.setEditable(false);
+	    	break;
+		
 		
 	}
-
+		
+	}
 }
+
+
