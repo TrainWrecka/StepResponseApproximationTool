@@ -71,6 +71,8 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
     
     private String Ordnung;
     
+    private StatusBar statusBar = new StatusBar();
+    
 	public InputPanel(){
 		super(new GridBagLayout());
 		
@@ -79,15 +81,15 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		gruppeAuto_Manual.add(rbtManual);
 		
 		// add Buttons to Panel
-		add(btLoad,new GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,  
+		add(btLoad,new GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTH, GridBagConstraints.NONE,  
 				new Insets(10, 30, 0, 10), 0, 0));
 		
-		add(rbtAuto,new GridBagConstraints( 0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+		add(rbtAuto,new GridBagConstraints( 0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTH, GridBagConstraints.NONE,  
 				new Insets(10, 30, 0, 10), 0, 0));
-		add(rbtManual,new GridBagConstraints( 0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+		add(rbtManual,new GridBagConstraints( 0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.NORTH, GridBagConstraints.NONE,  
 				new Insets(10, 30, 0, 10), 0, 0));
 		
-		add(btRun,new GridBagConstraints( 0, 25, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,  
+		add(btRun,new GridBagConstraints( 0, 25, 1, 1, 0.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.NONE,  
 				new Insets(10, 30, 0, 10), 0, 0));
 		
 		// add Labels to Panel	
@@ -181,6 +183,10 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		add(tfSigma,new GridBagConstraints( 1, 24, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
 				new Insets(10, 0, 0, 10), 0, 0));
 		
+		statusBar.setPreferredSize(new Dimension(400,200));
+		add(statusBar, new GridBagConstraints( 0, 25, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTH, GridBagConstraints.NONE,  
+				new Insets(10, 0, 0, 10), 0, 0));
+		
 		// add Combobox
 		cbOrdnungsauswahl.setPreferredSize(new Dimension(50,20));
 		add(cbOrdnungsauswahl,new GridBagConstraints( 1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
@@ -188,7 +194,8 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		
 		
 		cbOrdnungsauswahl.addItemListener(this);
-
+		rbtAuto.addActionListener(this);
+		rbtManual.addActionListener(this);
 	}
 	
 
@@ -197,14 +204,61 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==rbtAuto){
+			lbwp1.setEnabled(false);
+	    	lbqp1.setEnabled(false);
+	    	lbwp2.setEnabled(false);
+	    	lbqp2.setEnabled(false);
+	    	lbwp3.setEnabled(false);
+	    	lbqp3.setEnabled(false);
+	    	lbwp4.setEnabled(false);
+	    	lbqp4.setEnabled(false);
+	    	lbwp5.setEnabled(false);
+	    	lbqp5.setEnabled(false);
+	    	lbwp6.setEnabled(false);
+	    	lbqp6.setEnabled(false);
+	    	lbwp7.setEnabled(false);
+	    	lbqp7.setEnabled(false);
+	    	lbwp8.setEnabled(false);
+	    	lbqp8.setEnabled(false);
+	    	lbwp9.setEnabled(false);
+	    	lbqp9.setEnabled(false);
+	    	lbwp10.setEnabled(false);
+	    	lbqp10.setEnabled(false);
+	    	lbSigma.setEnabled(false);
+	    	
+	    	tfwp1.setEditable(false);
+	    	tfqp1.setEditable(false);
+	    	tfwp2.setEditable(false);
+	    	tfqp2.setEditable(false);
+	    	tfwp3.setEditable(false);
+	    	tfqp3.setEditable(false);
+	    	tfwp4.setEditable(false);
+	    	tfqp4.setEditable(false);
+	    	tfwp5.setEditable(false);
+	    	tfqp5.setEditable(false);
+	    	tfwp6.setEditable(false);
+	    	tfqp6.setEditable(false);
+	    	tfwp7.setEditable(false);
+	    	tfqp7.setEditable(false);
+	    	tfwp8.setEditable(false);
+	    	tfqp8.setEditable(false);
+	    	tfwp9.setEditable(false);
+	    	tfqp9.setEditable(false);
+	    	tfwp10.setEditable(false);
+	    	tfqp10.setEditable(false);
+	    	tfSigma.setEditable(false);
+			
+	    	cbOrdnungsauswahl.setEditable(false);
+	    	lbOrdnung.setEnabled(false);
+		}
 				}
-		// TODO Auto-generated method stub
 
 
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		Ordnung = null;
+		Ordnung = "1";
 	    Ordnung = (String)cbOrdnungsauswahl.getSelectedItem();
 	    switch(Ordnung){
 	    case "1":

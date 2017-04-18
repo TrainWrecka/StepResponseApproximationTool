@@ -33,7 +33,7 @@ public class StepResponseApproximationTool extends JFrame {
 	private Controller controller = new Controller(model, this);
 	private View view = new View(controller);
 	private MenuBar menuBar = new MenuBar(controller, this);
-	private StatusBar statusBar = new StatusBar();
+//	private StatusBar statusBar = new StatusBar();
 
 	private static enum LAF {
 		METAL, OCEAN, SYSTEM, NIMROD, NAPKIN
@@ -46,7 +46,7 @@ public class StepResponseApproximationTool extends JFrame {
 		model.addObserver(menuBar);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(view, BorderLayout.CENTER);
-		getContentPane().add(statusBar, BorderLayout.SOUTH);
+//		getContentPane().add(statusBar, BorderLayout.SOUTH);
 		setJMenuBar(menuBar);
 
 		pack();
