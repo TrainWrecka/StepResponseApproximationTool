@@ -26,6 +26,7 @@ public class VariablePanel extends JPanel implements ActionListener{
 	
 	public VariablePanel(){
 		super(new GridBagLayout());
+		setSize(getPreferredSize());
 		add(lbk, new GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
 				new Insets(0, 0, 0, 0), 0, 0));
 		add(lbwp,new GridBagConstraints( 0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
@@ -36,6 +37,7 @@ public class VariablePanel extends JPanel implements ActionListener{
 				new Insets(0, 0, 0, 0), 0, 0));
 		add(lbError, new GridBagConstraints( 0, 4, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
 				new Insets(0, 0, 0, 0), 0, 0));	
+		setBorder(MyBorderFactory.createMyBorder("Variables"));
 	}
 	
 	

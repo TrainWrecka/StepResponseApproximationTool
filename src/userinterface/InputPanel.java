@@ -44,6 +44,8 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
     private JLabel lbwp10 = new JLabel("\u03C9p10:");
     private JLabel lbqp10 = new JLabel("qp10:");
     private JLabel lbSigma=new JLabel("\u03C3:");
+    
+    private JLabel Output=new JLabel("");
     // Textfields
     private JTextField tfwp1 = new JTextField();
     private JTextField tfqp1 = new JTextField();
@@ -81,20 +83,20 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		gruppeAuto_Manual.add(rbtManual);
 		
 		// add Buttons to Panel
-		add(btLoad,new GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTH, GridBagConstraints.NONE,  
-				new Insets(10, 30, 0, 10), 0, 0));
+		add(btLoad,new GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
+				new Insets(10, 40, 0, 10), 0, 0));
 		
-		add(rbtAuto,new GridBagConstraints( 0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTH, GridBagConstraints.NONE,  
-				new Insets(10, 30, 0, 10), 0, 0));
-		add(rbtManual,new GridBagConstraints( 0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.NORTH, GridBagConstraints.NONE,  
-				new Insets(10, 30, 0, 10), 0, 0));
+		add(rbtAuto,new GridBagConstraints( 0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
+				new Insets(10, 40, 0, 10), 0, 0));
+		add(rbtManual,new GridBagConstraints( 0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
+				new Insets(10, 40, 0, 10), 0, 0));
 		
-		add(btRun,new GridBagConstraints( 0, 25, 1, 1, 0.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.NONE,  
-				new Insets(10, 30, 0, 10), 0, 0));
+		add(btRun,new GridBagConstraints( 0, 25, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
+				new Insets(10, 40, 0, 10), 0, 0));
 		
 		// add Labels to Panel	
-		add(lbOrdnung,new GridBagConstraints( 0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
-				new Insets(0, 30, 0, 0), 0, 0));
+		add(lbOrdnung,new GridBagConstraints( 0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH,  
+				new Insets(0, 40, 0, 0), 0, 0));
 		add(lbwp1,new GridBagConstraints( 0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
 				new Insets(0, 0, 0, 0), 0, 0));
 		add(lbqp1,new GridBagConstraints( 0, 5, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
@@ -183,9 +185,8 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		add(tfSigma,new GridBagConstraints( 1, 24, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
 				new Insets(10, 0, 0, 10), 0, 0));
 		
-		statusBar.setPreferredSize(new Dimension(400,200));
-		add(statusBar, new GridBagConstraints( 0, 25, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTH, GridBagConstraints.NONE,  
-				new Insets(10, 0, 0, 10), 0, 0));
+		add(Output,new GridBagConstraints( 0, 0, 1, 1, 0.0, 1.0, GridBagConstraints.SOUTH, GridBagConstraints.NONE,  
+				new Insets(0, 0, 0, 0), 0, 0));
 		
 		// add Combobox
 		cbOrdnungsauswahl.setPreferredSize(new Dimension(50,20));
@@ -249,8 +250,56 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	    	tfqp10.setEditable(false);
 	    	tfSigma.setEditable(false);
 			
-	    	cbOrdnungsauswahl.setEditable(false);
+	    	cbOrdnungsauswahl.setEnabled(false);
 	    	lbOrdnung.setEnabled(false);
+	    
+		}else{
+			lbwp1.setEnabled(true);
+	    	lbqp1.setEnabled(true);
+	    	lbwp2.setEnabled(true);
+	    	lbqp2.setEnabled(true);
+	    	lbwp3.setEnabled(true);
+	    	lbqp3.setEnabled(true);
+	    	lbwp4.setEnabled(true);
+	    	lbqp4.setEnabled(true);
+	    	lbwp5.setEnabled(true);
+	    	lbqp5.setEnabled(true);
+	    	lbwp6.setEnabled(true);
+	    	lbqp6.setEnabled(true);
+	    	lbwp7.setEnabled(true);
+	    	lbqp7.setEnabled(true);
+	    	lbwp8.setEnabled(true);
+	    	lbqp8.setEnabled(true);
+	    	lbwp9.setEnabled(true);
+	    	lbqp9.setEnabled(true);
+	    	lbwp10.setEnabled(true);
+	    	lbqp10.setEnabled(true);
+	    	lbSigma.setEnabled(true);
+	    	
+	    	tfwp1.setEditable(true);
+	    	tfqp1.setEditable(true);
+	    	tfwp2.setEditable(true);
+	    	tfqp2.setEditable(true);
+	    	tfwp3.setEditable(true);
+	    	tfqp3.setEditable(true);
+	    	tfwp4.setEditable(true);
+	    	tfqp4.setEditable(true);
+	    	tfwp5.setEditable(true);
+	    	tfqp5.setEditable(true);
+	    	tfwp6.setEditable(true);
+	    	tfqp6.setEditable(true);
+	    	tfwp7.setEditable(true);
+	    	tfqp7.setEditable(true);
+	    	tfwp8.setEditable(true);
+	    	tfqp8.setEditable(true);
+	    	tfwp9.setEditable(true);
+	    	tfqp9.setEditable(true);
+	    	tfwp10.setEditable(true);
+	    	tfqp10.setEditable(true);
+	    	tfSigma.setEditable(true);
+			
+	    	cbOrdnungsauswahl.setEnabled(true);
+	    	lbOrdnung.setEnabled(true);
 		}
 				}
 
@@ -650,7 +699,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	    	lbqp9.setEnabled(true);
 	    	lbwp10.setEnabled(false);
 	    	lbqp10.setEnabled(false);
-	    	lbSigma.setEnabled(false);
+	    	lbSigma.setEnabled(true);
 	    	
 	    	tfwp1.setEditable(true);
 	    	tfqp1.setEditable(true);

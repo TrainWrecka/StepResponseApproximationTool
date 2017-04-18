@@ -10,7 +10,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 
 
-public class Plots{
+public class Plots {
     JFreeChart lineChart = ChartFactory.createLineChart(
        "Title",
        "Years","Number of Schools",

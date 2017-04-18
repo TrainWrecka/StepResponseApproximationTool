@@ -30,15 +30,15 @@ public class OutputPanel extends JPanel implements ActionListener{
 	public OutputPanel(){
 		super(new GridBagLayout());
 
-		DefaultPanel.add(StepresponsePanel, new GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
+		DefaultPanel.add(StepresponsePanel, new GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH,  
 				new Insets(0, 0, 0, 0), 0, 0));
-		DefaultPanel.add(ZeroesPanel, new GridBagConstraints( 1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_END, GridBagConstraints.BOTH,  
+		DefaultPanel.add(ZeroesPanel, new GridBagConstraints( 1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.NORTHEAST, GridBagConstraints.BOTH,  
 				new Insets(0, 0, 0, 0), 0, 0));
-		DefaultPanel.add(ErrorPanel, new GridBagConstraints( 0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
+		DefaultPanel.add(ErrorPanel, new GridBagConstraints( 0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.SOUTHWEST, GridBagConstraints.BOTH,  
 				new Insets(0, 0, 0, 0), 0, 0));
-		DefaultPanel.add(VariablePanel, new GridBagConstraints( 1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_END, GridBagConstraints.BOTH,  
+		DefaultPanel.add(VariablePanel, new GridBagConstraints( 1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.SOUTHEAST, GridBagConstraints.BOTH,  
 				new Insets(0, 0, 0, 0), 0, 0));
-
+//		add(DefaultPanel);
 		
 		tabpane.addTab("Default",DefaultPanel);
         tabpane.addTab("StepResponse", StepresponsePanel);
