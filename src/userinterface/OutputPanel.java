@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class OutputPanel extends JPanel implements ActionListener, ChangeListener{
+public class OutputPanel extends JPanel implements ActionListener{
 	
     JTabbedPane tabpane = new JTabbedPane
             (JTabbedPane.TOP,JTabbedPane.SCROLL_TAB_LAYOUT );
@@ -33,28 +33,66 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 	public OutputPanel(){
 		super(new GridBagLayout());
 		
-		tabpane.addTab("Default",DefaultPanel);
-		tabpane.addTab("StepResponse", StepresponsePanel);
-        tabpane.addTab("Zeroes", ZeroesPanel);
-        tabpane.addTab("Error", ErrorPanel);
 		
-//		DefaultPanel.add(StepresponsePanel, new GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH,  
-//				new Insets(0, 0, 0, 0), 0, 0));
-//		DefaultPanel.add(ZeroesPanel, new GridBagConstraints( 1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.NORTHEAST, GridBagConstraints.BOTH,  
-//				new Insets(0, 0, 0, 0), 0, 0));
-//		DefaultPanel.add(ErrorPanel, new GridBagConstraints( 0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.SOUTHWEST, GridBagConstraints.BOTH,  
-//				new Insets(0, 0, 0, 0), 0, 0));
-//		DefaultPanel.add(VariablePanel, new GridBagConstraints( 1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.SOUTHEAST, GridBagConstraints.BOTH,  
-//				new Insets(0, 0, 0, 0), 0, 0));
-//		add(DefaultPanel);
-		tabpane.addChangeListener(this);
+		DefaultPanel.add(StepresponsePanel, new GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
+				new Insets(0, 0, 0, 0), 0, 0));
+		DefaultPanel.add(ZeroesPanel, new GridBagConstraints( 1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE,  
+				new Insets(0, 0, 0, 0), 0, 0));
+		DefaultPanel.add(ErrorPanel, new GridBagConstraints( 0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE,  
+				new Insets(0, 0, 0, 0), 0, 0));
+		DefaultPanel.add(VariablePanel, new GridBagConstraints( 1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTHEAST, GridBagConstraints.NONE,  
+				new Insets(0, 0, 0, 0), 0, 0));
+		
+		
+		tabpane.addTab("Default",DefaultPanel);
+		tabpane.addTab("StepResponse", new JPanel());
+        tabpane.addTab("Zeroes", new JPanel());
+        tabpane.addTab("Error", new JPanel());
+		
+		
+		tabpane.addChangeListener(new ChangeListener() {
+			
+			
+            public void stateChanged(ChangeEvent e) {
+            	
+            	
+			if (e.getSource() instanceof JTabbedPane) {
+	            JTabbedPane pane = (JTabbedPane) e.getSource();
+				switch(pane.getSelectedIndex()){
+				case 0:
+					DefaultPanel.add(StepresponsePanel, new GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
+							new Insets(0, 0, 0, 0), 0, 0));
+					DefaultPanel.add(ZeroesPanel, new GridBagConstraints( 1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE,  
+							new Insets(0, 0, 0, 0), 0, 0));
+					DefaultPanel.add(ErrorPanel, new GridBagConstraints( 0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE,  
+							new Insets(0, 0, 0, 0), 0, 0));
+					DefaultPanel.add(VariablePanel, new GridBagConstraints( 1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTHEAST, GridBagConstraints.NONE,  
+							new Insets(0, 0, 0, 0), 0, 0));
+					
+					tabpane.addTab("Default",DefaultPanel);
+					tabpane.addTab("StepResponse", new JPanel());
+			        tabpane.addTab("Zeroes", new JPanel());
+			        tabpane.addTab("Error", new JPanel());
+					break;
+				case 1:
+					
+					tabpane.addTab("Default",new JPanel());
+					tabpane.addTab("StepResponse", StepresponsePanel);
+			        tabpane.addTab("Zeroes", new JPanel());
+			        tabpane.addTab("Error", new JPanel());
+			        
+			        break;
+				}
+			}
+            }
+		});
 		
 		
         add(tabpane,new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH, 
         		new Insets(0, 0, 0, 0), 0, 0));	
 //        tabpane.setPreferredSize(new Dimension(400,200));
-	}
-	
+            
+		}
 	
 	public void update(Observable obs, Object obj) {}
 	
@@ -63,12 +101,6 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 		// TODO Auto-generated method stub
 		
 	}
-
-
-	@Override
-	public void stateChanged(ChangeEvent e) {
-			
-
-	}
-
 }
+
+
