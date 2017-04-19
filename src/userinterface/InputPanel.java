@@ -11,6 +11,9 @@ import java.util.Observable;
 
 
 public class InputPanel extends JPanel implements ActionListener, ItemListener {
+	
+	private int wpPlacement=4;
+	private int qpPlacement=5;
 	// Buttons
 	public JButton btLoad = new JButton("Load");
 	private JButton btRun = new JButton("Run");	
@@ -22,63 +25,29 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
     private String comboBoxListe[] = {"1","2","3","4","5","6","7","8","9","10"};
     private JComboBox cbOrdnungsauswahl = new JComboBox(comboBoxListe);
     // Labels
+    
+    private JLabel[] lbwp = new JLabel[10];
+    private JLabel[] lbqp = new JLabel[10];
+
     private JLabel lbOrdnung = new JLabel("Ordnung:");
-    private JLabel lbwp1 = new JLabel("\u03C9p1:");
-    private JLabel lbqp1 = new JLabel("qp1:");
-    private JLabel lbwp2 = new JLabel("\u03C9p2:");
-    private JLabel lbqp2 = new JLabel("qp2:");
-    private JLabel lbwp3 = new JLabel("\u03C9p3:");
-    private JLabel lbqp3 = new JLabel("qp3:");
-    private JLabel lbwp4 = new JLabel("\u03C9p4:");
-    private JLabel lbqp4 = new JLabel("qp4:");
-    private JLabel lbwp5 = new JLabel("\u03C9p5:");
-    private JLabel lbqp5 = new JLabel("qp5:");
-    private JLabel lbwp6 = new JLabel("\u03C9p6:");
-    private JLabel lbqp6 = new JLabel("qp6:");
-    private JLabel lbwp7 = new JLabel("\u03C9p7:");
-    private JLabel lbqp7 = new JLabel("qp7:");
-    private JLabel lbwp8 = new JLabel("\u03C9p8:");
-    private JLabel lbqp8 = new JLabel("qp8:");
-    private JLabel lbwp9 = new JLabel("\u03C9p9:");
-    private JLabel lbqp9 = new JLabel("qp9:");
-    private JLabel lbwp10 = new JLabel("\u03C9p10:");
-    private JLabel lbqp10 = new JLabel("qp10:");
     private JLabel lbSigma=new JLabel("\u03C3:");
     
     private JLabel Output=new JLabel("");
     // Textfields
-    private JTextField tfwp1 = new JTextField();
-    private JTextField tfqp1 = new JTextField();
-    private JTextField tfwp2 = new JTextField();
-    
-    private JTextField tfqp2 = new JTextField();
-    private JTextField tfwp3 = new JTextField();
-    private JTextField tfqp3 = new JTextField();
-    private JTextField tfwp4 = new JTextField();
-    private JTextField tfqp4 = new JTextField();
-    private JTextField tfwp5 = new JTextField();
-    private JTextField tfqp5 = new JTextField();
-    private JTextField tfwp6 = new JTextField();
-    private JTextField tfqp6 = new JTextField();
-    private JTextField tfwp7 = new JTextField();
-    private JTextField tfqp7 = new JTextField();
-    private JTextField tfwp8 = new JTextField();
-    private JTextField tfqp8 = new JTextField();
-    private JTextField tfwp9 = new JTextField();
-    private JTextField tfqp9 = new JTextField();
-    private JTextField tfwp10 = new JTextField();
-    private JTextField tfqp10 = new JTextField();
+    private JTextField[] tfwp=new JTextField[10];
+    private JTextField[] tfqp=new JTextField[10];
     private JTextField tfSigma=new JTextField();
     
     
     private String Ordnung;
     
-    private StatusBar statusBar = new StatusBar();
+//    private StatusBar statusBar = new StatusBar();
     
 	public InputPanel(){
-		super(new GridBagLayout());
+		super(new GridBagLayout());		
 		
 		// create Buttongroup
+		rbtAuto.setSelected(true);
 		gruppeAuto_Manual.add(rbtAuto);
 		gruppeAuto_Manual.add(rbtManual);
 		
@@ -97,98 +66,44 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		// add Labels to Panel	
 		add(lbOrdnung,new GridBagConstraints( 0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
 				new Insets(10, 40, 0, 0), 0, 0));
-		add(lbwp1,new GridBagConstraints( 0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbqp1,new GridBagConstraints( 0, 5, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbwp2,new GridBagConstraints( 0, 6, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbqp2,new GridBagConstraints( 0, 7, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbwp3,new GridBagConstraints( 0, 8, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbqp3,new GridBagConstraints( 0, 9, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbwp4,new GridBagConstraints( 0, 10, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbqp4,new GridBagConstraints( 0, 11, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbwp5,new GridBagConstraints( 0, 12, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbqp5,new GridBagConstraints( 0, 13, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbwp6,new GridBagConstraints( 0, 14, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbqp6,new GridBagConstraints( 0, 15, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbwp7,new GridBagConstraints( 0, 16, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbqp7,new GridBagConstraints( 0, 17, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbwp8,new GridBagConstraints( 0, 18, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbqp8,new GridBagConstraints( 0, 19, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbwp9,new GridBagConstraints( 0, 20, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbqp9,new GridBagConstraints( 0, 21, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbwp10,new GridBagConstraints( 0, 22, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbqp10,new GridBagConstraints( 0, 23, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(0, 0, 0, 0), 0, 0));
+		
+		// Array für wp Labels und Textfelder erzeugen & platzieren
+		for(int i=0;i<10;i++){
+        	lbwp[i]=new JLabel("\u03C9p"+(i+1)+":");
+        	tfwp[i]=new JTextField();
+			add(lbwp[i],new GridBagConstraints( 0, wpPlacement, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
+					new Insets(0, 0, 0, 0), 0, 0));
+			add(tfwp[i],new GridBagConstraints( 1, wpPlacement, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
+				new Insets(5, 0, 0, 0), 0, 0));
+			lbwp[i].setEnabled(false);
+			tfwp[i].setEnabled(false);
+			wpPlacement=wpPlacement+2;
+		}
+		// Array für qp Labels und Textfelder erzeugen & platzieren
+		for(int i=0;i<10;i++){
+			lbqp[i]=new JLabel("qp"+(i+1)+":");
+        	tfqp[i]=new JTextField();
+			add(lbqp[i],new GridBagConstraints( 0, qpPlacement, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
+					new Insets(0, 0, 0, 0), 0, 0));
+			add(tfqp[i],new GridBagConstraints( 1, qpPlacement, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
+					new Insets(5, 0, 0, 0), 0, 0));
+			lbqp[i].setEnabled(false);
+			tfqp[i].setEnabled(false);
+			qpPlacement=qpPlacement+2;
+		}
+		
+		lbSigma.setEnabled(false);
+		tfSigma.setEnabled(false);
+    	cbOrdnungsauswahl.setEnabled(false);
+    	lbOrdnung.setEnabled(false);
+		
+    	// Label und Textfeld Sigma platzieren
 		add(lbSigma,new GridBagConstraints( 0, 24, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
 				new Insets(0, 0, 0, 0), 0, 0));
-		
-		
-		// add Textfields to Panel
-		add(tfwp1,new GridBagConstraints( 1, 4, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfqp1,new GridBagConstraints( 1, 5, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfwp2,new GridBagConstraints( 1, 6, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfqp2,new GridBagConstraints( 1, 7, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfwp3,new GridBagConstraints( 1, 8, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfqp3,new GridBagConstraints( 1, 9, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfwp4,new GridBagConstraints( 1, 10, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfqp4,new GridBagConstraints( 1, 11, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfwp5,new GridBagConstraints( 1, 12, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfqp5,new GridBagConstraints( 1, 13, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfwp6,new GridBagConstraints( 1, 14, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfqp6,new GridBagConstraints( 1, 15, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfwp7,new GridBagConstraints( 1, 16, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfqp7,new GridBagConstraints( 1, 17, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfwp8,new GridBagConstraints( 1, 18, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfqp8,new GridBagConstraints( 1, 19, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfwp9,new GridBagConstraints( 1, 20, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfqp9,new GridBagConstraints( 1, 21, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfwp10,new GridBagConstraints( 1, 22, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));
-		add(tfqp10,new GridBagConstraints( 1, 23, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(5, 0, 0, 0), 0, 0));		
 		add(tfSigma,new GridBagConstraints( 1, 24, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
 				new Insets(5, 0, 0, 0), 0, 0));
 		
-//		add(Output,new GridBagConstraints( 0, 0, 1, 1, 0.0, 1.0, GridBagConstraints.SOUTH, GridBagConstraints.NONE,  
-//				new Insets(0, 0, 0, 0), 0, 0));
-		
-		// add Combobox
+		// Combobox platzieren
 		cbOrdnungsauswahl.setPreferredSize(new Dimension(50,20));
 		add(cbOrdnungsauswahl,new GridBagConstraints( 1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
 				new Insets(10, 0, 0, 0), 0, 0));
@@ -203,576 +118,229 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 
 	public void update(Observable obs, Object obj) {}
 	
+	// Ausgrauen von allen Textfeldern, Labels, Ordnungsauswahl und Combobox bei entsprechender Aktion
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==rbtAuto){
-			lbwp1.setEnabled(false);
-	    	lbqp1.setEnabled(false);
-	    	lbwp2.setEnabled(false);
-	    	lbqp2.setEnabled(false);
-	    	lbwp3.setEnabled(false);
-	    	lbqp3.setEnabled(false);
-	    	lbwp4.setEnabled(false);
-	    	lbqp4.setEnabled(false);
-	    	lbwp5.setEnabled(false);
-	    	lbqp5.setEnabled(false);
-	    	lbwp6.setEnabled(false);
-	    	lbqp6.setEnabled(false);
-	    	lbwp7.setEnabled(false);
-	    	lbqp7.setEnabled(false);
-	    	lbwp8.setEnabled(false);
-	    	lbqp8.setEnabled(false);
-	    	lbwp9.setEnabled(false);
-	    	lbqp9.setEnabled(false);
-	    	lbwp10.setEnabled(false);
-	    	lbqp10.setEnabled(false);
+			for(int i=0;i<10;i++){
+				lbwp[i].setEnabled(false);
+				lbqp[i].setEnabled(false);
+				tfwp[i].setEnabled(false);
+				tfqp[i].setEnabled(false);
+			}
 	    	lbSigma.setEnabled(false);
-	    	
-	    	tfwp1.setEditable(false);
-	    	tfqp1.setEditable(false);
-	    	tfwp2.setEditable(false);
-	    	tfqp2.setEditable(false);
-	    	tfwp3.setEditable(false);
-	    	tfqp3.setEditable(false);
-	    	tfwp4.setEditable(false);
-	    	tfqp4.setEditable(false);
-	    	tfwp5.setEditable(false);
-	    	tfqp5.setEditable(false);
-	    	tfwp6.setEditable(false);
-	    	tfqp6.setEditable(false);
-	    	tfwp7.setEditable(false);
-	    	tfqp7.setEditable(false);
-	    	tfwp8.setEditable(false);
-	    	tfqp8.setEditable(false);
-	    	tfwp9.setEditable(false);
-	    	tfqp9.setEditable(false);
-	    	tfwp10.setEditable(false);
-	    	tfqp10.setEditable(false);
-	    	tfSigma.setEditable(false);
-			
+	    	tfSigma.setEnabled(false);
 	    	cbOrdnungsauswahl.setEnabled(false);
 	    	lbOrdnung.setEnabled(false);
-	    
 		}else{
-			lbwp1.setEnabled(true);
-	    	lbqp1.setEnabled(true);
-	    	lbwp2.setEnabled(true);
-	    	lbqp2.setEnabled(true);
-	    	lbwp3.setEnabled(true);
-	    	lbqp3.setEnabled(true);
-	    	lbwp4.setEnabled(true);
-	    	lbqp4.setEnabled(true);
-	    	lbwp5.setEnabled(true);
-	    	lbqp5.setEnabled(true);
-	    	lbwp6.setEnabled(true);
-	    	lbqp6.setEnabled(true);
-	    	lbwp7.setEnabled(true);
-	    	lbqp7.setEnabled(true);
-	    	lbwp8.setEnabled(true);
-	    	lbqp8.setEnabled(true);
-	    	lbwp9.setEnabled(true);
-	    	lbqp9.setEnabled(true);
-	    	lbwp10.setEnabled(true);
-	    	lbqp10.setEnabled(true);
-	    	lbSigma.setEnabled(true);
-	    	
-	    	tfwp1.setEditable(true);
-	    	tfqp1.setEditable(true);
-	    	tfwp2.setEditable(true);
-	    	tfqp2.setEditable(true);
-	    	tfwp3.setEditable(true);
-	    	tfqp3.setEditable(true);
-	    	tfwp4.setEditable(true);
-	    	tfqp4.setEditable(true);
-	    	tfwp5.setEditable(true);
-	    	tfqp5.setEditable(true);
-	    	tfwp6.setEditable(true);
-	    	tfqp6.setEditable(true);
-	    	tfwp7.setEditable(true);
-	    	tfqp7.setEditable(true);
-	    	tfwp8.setEditable(true);
-	    	tfqp8.setEditable(true);
-	    	tfwp9.setEditable(true);
-	    	tfqp9.setEditable(true);
-	    	tfwp10.setEditable(true);
-	    	tfqp10.setEditable(true);
-	    	tfSigma.setEditable(true);
-			
+			lbwp[0].setEnabled(true);
+			lbqp[0].setEnabled(true);
+			tfwp[0].setEnabled(true);
+			tfqp[0].setEnabled(true);
+			lbSigma.setEnabled(true);
+			tfSigma.setEnabled(true);
 	    	cbOrdnungsauswahl.setEnabled(true);
 	    	lbOrdnung.setEnabled(true);
 		}
-				}
+
+	}
 
 
-
+	// Ausgrauen von Textfeldern und Labels bei entsprechender Aktion
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		Ordnung = "1";
 	    Ordnung = (String)cbOrdnungsauswahl.getSelectedItem();
 	    switch(Ordnung){
 	    case "1":
-	    	lbwp1.setEnabled(true);
-	    	lbqp1.setEnabled(true);
-	    	lbwp2.setEnabled(false);
-	    	lbqp2.setEnabled(false);
-	    	lbwp3.setEnabled(false);
-	    	lbqp3.setEnabled(false);
-	    	lbwp4.setEnabled(false);
-	    	lbqp4.setEnabled(false);
-	    	lbwp5.setEnabled(false);
-	    	lbqp5.setEnabled(false);
-	    	lbwp6.setEnabled(false);
-	    	lbqp6.setEnabled(false);
-	    	lbwp7.setEnabled(false);
-	    	lbqp7.setEnabled(false);
-	    	lbwp8.setEnabled(false);
-	    	lbqp8.setEnabled(false);
-	    	lbwp9.setEnabled(false);
-	    	lbqp9.setEnabled(false);
-	    	lbwp10.setEnabled(false);
-	    	lbqp10.setEnabled(false);
+	    	for(int i=0;i<10;i++){
+	    		if(i<1){
+	    			lbwp[i].setEnabled(true);
+	    			lbqp[i].setEnabled(true);
+	    			tfwp[i].setEnabled(true);
+	    			tfqp[i].setEnabled(true);
+	    		}
+	    		else{
+	    			lbwp[i].setEnabled(false);
+	    			lbqp[i].setEnabled(false);
+	    			tfwp[i].setEnabled(false);
+	    			tfqp[i].setEnabled(false);
+	    		}
+	    	}
 	    	lbSigma.setEnabled(true);
-	    	
-	    	tfwp1.setEditable(true);
-	    	tfqp1.setEditable(true);
-	    	tfwp2.setEditable(false);
-	    	tfqp2.setEditable(false);
-	    	tfwp3.setEditable(false);
-	    	tfqp3.setEditable(false);
-	    	tfwp4.setEditable(false);
-	    	tfqp4.setEditable(false);
-	    	tfwp5.setEditable(false);
-	    	tfqp5.setEditable(false);
-	    	tfwp6.setEditable(false);
-	    	tfqp6.setEditable(false);
-	    	tfwp7.setEditable(false);
-	    	tfqp7.setEditable(false);
-	    	tfwp8.setEditable(false);
-	    	tfqp8.setEditable(false);
-	    	tfwp9.setEditable(false);
-	    	tfqp9.setEditable(false);
-	    	tfwp10.setEditable(false);
-	    	tfqp10.setEditable(false);
 	    	tfSigma.setEditable(true);
 	    	break;
 	    	
 	    case "2":
-	    	lbwp1.setEnabled(true);
-	    	lbqp1.setEnabled(true);
-	    	lbwp2.setEnabled(true);
-	    	lbqp2.setEnabled(true);
-	    	lbwp3.setEnabled(false);
-	    	lbqp3.setEnabled(false);
-	    	lbwp4.setEnabled(false);
-	    	lbqp4.setEnabled(false);
-	    	lbwp5.setEnabled(false);
-	    	lbqp5.setEnabled(false);
-	    	lbwp6.setEnabled(false);
-	    	lbqp6.setEnabled(false);
-	    	lbwp7.setEnabled(false);
-	    	lbqp7.setEnabled(false);
-	    	lbwp8.setEnabled(false);
-	    	lbqp8.setEnabled(false);
-	    	lbwp9.setEnabled(false);
-	    	lbqp9.setEnabled(false);
-	    	lbwp10.setEnabled(false);
-	    	lbqp10.setEnabled(false);
+	    	for(int i=0;i<10;i++){
+	    		if(i<2){
+	    			lbwp[i].setEnabled(true);
+	    			lbqp[i].setEnabled(true);
+	    			tfwp[i].setEnabled(true);
+	    			tfqp[i].setEnabled(true);
+	    		}
+	    		else{
+	    			lbwp[i].setEnabled(false);
+	    			lbqp[i].setEnabled(false);
+	    			tfwp[i].setEnabled(false);
+	    			tfqp[i].setEnabled(false);
+	    		}
+	    	}
 	    	lbSigma.setEnabled(false);
-	    	
-	    	tfwp1.setEditable(true);
-	    	tfqp1.setEditable(true);
-	    	tfwp2.setEditable(true);
-	    	tfqp2.setEditable(true);
-	    	tfwp3.setEditable(false);
-	    	tfqp3.setEditable(false);
-	    	tfwp4.setEditable(false);
-	    	tfqp4.setEditable(false);
-	    	tfwp5.setEditable(false);
-	    	tfqp5.setEditable(false);
-	    	tfwp6.setEditable(false);
-	    	tfqp6.setEditable(false);
-	    	tfwp7.setEditable(false);
-	    	tfqp7.setEditable(false);
-	    	tfwp8.setEditable(false);
-	    	tfqp8.setEditable(false);
-	    	tfwp9.setEditable(false);
-	    	tfqp9.setEditable(false);
-	    	tfwp10.setEditable(false);
-	    	tfqp10.setEditable(false);
 	    	tfSigma.setEditable(false);
 	    	break;
+	    	
 	    	
 	    case "3":
-	    	lbwp1.setEnabled(true);
-	    	lbqp1.setEnabled(true);
-	    	lbwp2.setEnabled(true);
-	    	lbqp2.setEnabled(true);
-	    	lbwp3.setEnabled(true);
-	    	lbqp3.setEnabled(true);
-	    	lbwp4.setEnabled(false);
-	    	lbqp4.setEnabled(false);
-	    	lbwp5.setEnabled(false);
-	    	lbqp5.setEnabled(false);
-	    	lbwp6.setEnabled(false);
-	    	lbqp6.setEnabled(false);
-	    	lbwp7.setEnabled(false);
-	    	lbqp7.setEnabled(false);
-	    	lbwp8.setEnabled(false);
-	    	lbqp8.setEnabled(false);
-	    	lbwp9.setEnabled(false);
-	    	lbqp9.setEnabled(false);
-	    	lbwp10.setEnabled(false);
-	    	lbqp10.setEnabled(false);
+	    	for(int i=0;i<10;i++){
+	    		if(i<3){
+	    			lbwp[i].setEnabled(true);
+	    			lbqp[i].setEnabled(true);
+	    			tfwp[i].setEnabled(true);
+	    			tfqp[i].setEnabled(true);
+	    		}
+	    		else{
+	    			lbwp[i].setEnabled(false);
+	    			lbqp[i].setEnabled(false);
+	    			tfwp[i].setEnabled(false);
+	    			tfqp[i].setEnabled(false);
+	    		}
+	    	}
 	    	lbSigma.setEnabled(true);
-	    	
-	    	tfwp1.setEditable(true);
-	    	tfqp1.setEditable(true);
-	    	tfwp2.setEditable(true);
-	    	tfqp2.setEditable(true);
-	    	tfwp3.setEditable(true);
-	    	tfqp3.setEditable(true);
-	    	tfwp4.setEditable(false);
-	    	tfqp4.setEditable(false);
-	    	tfwp5.setEditable(false);
-	    	tfqp5.setEditable(false);
-	    	tfwp6.setEditable(false);
-	    	tfqp6.setEditable(false);
-	    	tfwp7.setEditable(false);
-	    	tfqp7.setEditable(false);
-	    	tfwp8.setEditable(false);
-	    	tfqp8.setEditable(false);
-	    	tfwp9.setEditable(false);
-	    	tfqp9.setEditable(false);
-	    	tfwp10.setEditable(false);
-	    	tfqp10.setEditable(false);
 	    	tfSigma.setEditable(true);
 	    	break;
+	    	
 	    	
 	    case "4":
-	    	lbwp1.setEnabled(true);
-	    	lbqp1.setEnabled(true);
-	    	lbwp2.setEnabled(true);
-	    	lbqp2.setEnabled(true);
-	    	lbwp3.setEnabled(true);
-	    	lbqp3.setEnabled(true);
-	    	lbwp4.setEnabled(true);
-	    	lbqp4.setEnabled(true);
-	    	lbwp5.setEnabled(false);
-	    	lbqp5.setEnabled(false);
-	    	lbwp6.setEnabled(false);
-	    	lbqp6.setEnabled(false);
-	    	lbwp7.setEnabled(false);
-	    	lbqp7.setEnabled(false);
-	    	lbwp8.setEnabled(false);
-	    	lbqp8.setEnabled(false);
-	    	lbwp9.setEnabled(false);
-	    	lbqp9.setEnabled(false);
-	    	lbwp10.setEnabled(false);
-	    	lbqp10.setEnabled(false);
+	    	for(int i=0;i<10;i++){
+	    		if(i<4){
+	    			lbwp[i].setEnabled(true);
+	    			lbqp[i].setEnabled(true);
+	    			tfwp[i].setEnabled(true);
+	    			tfqp[i].setEnabled(true);
+	    		}
+	    		else{
+	    			lbwp[i].setEnabled(false);
+	    			lbqp[i].setEnabled(false);
+	    			tfwp[i].setEnabled(false);
+	    			tfqp[i].setEnabled(false);
+	    		}
+	    	}
 	    	lbSigma.setEnabled(false);
-	    	
-	    	tfwp1.setEditable(true);
-	    	tfqp1.setEditable(true);
-	    	tfwp2.setEditable(true);
-	    	tfqp2.setEditable(true);
-	    	tfwp3.setEditable(true);
-	    	tfqp3.setEditable(true);
-	    	tfwp4.setEditable(true);
-	    	tfqp4.setEditable(true);
-	    	tfwp5.setEditable(false);
-	    	tfqp5.setEditable(false);
-	    	tfwp6.setEditable(false);
-	    	tfqp6.setEditable(false);
-	    	tfwp7.setEditable(false);
-	    	tfqp7.setEditable(false);
-	    	tfwp8.setEditable(false);
-	    	tfqp8.setEditable(false);
-	    	tfwp9.setEditable(false);
-	    	tfqp9.setEditable(false);
-	    	tfwp10.setEditable(false);
-	    	tfqp10.setEditable(false);
 	    	tfSigma.setEditable(false);
 	    	break;
+	    	
 	    	
 	    case "5":
-	    	lbwp1.setEnabled(true);
-	    	lbqp1.setEnabled(true);
-	    	lbwp2.setEnabled(true);
-	    	lbqp2.setEnabled(true);
-	    	lbwp3.setEnabled(true);
-	    	lbqp3.setEnabled(true);
-	    	lbwp4.setEnabled(true);
-	    	lbqp4.setEnabled(true);
-	    	lbwp5.setEnabled(true);
-	    	lbqp5.setEnabled(true);
-	    	lbwp6.setEnabled(false);
-	    	lbqp6.setEnabled(false);
-	    	lbwp7.setEnabled(false);
-	    	lbqp7.setEnabled(false);
-	    	lbwp8.setEnabled(false);
-	    	lbqp8.setEnabled(false);
-	    	lbwp9.setEnabled(false);
-	    	lbqp9.setEnabled(false);
-	    	lbwp10.setEnabled(false);
-	    	lbqp10.setEnabled(false);
+	    	for(int i=0;i<10;i++){
+	    		if(i<5){
+	    			lbwp[i].setEnabled(true);
+	    			lbqp[i].setEnabled(true);
+	    			tfwp[i].setEnabled(true);
+	    			tfqp[i].setEnabled(true);
+	    		}
+	    		else{
+	    			lbwp[i].setEnabled(false);
+	    			lbqp[i].setEnabled(false);
+	    			tfwp[i].setEnabled(false);
+	    			tfqp[i].setEnabled(false);
+	    		}
+	    	}
 	    	lbSigma.setEnabled(true);
-	    	
-	    	tfwp1.setEditable(true);
-	    	tfqp1.setEditable(true);
-	    	tfwp2.setEditable(true);
-	    	tfqp2.setEditable(true);
-	    	tfwp3.setEditable(true);
-	    	tfqp3.setEditable(true);
-	    	tfwp4.setEditable(true);
-	    	tfqp4.setEditable(true);
-	    	tfwp5.setEditable(true);
-	    	tfqp5.setEditable(true);
-	    	tfwp6.setEditable(false);
-	    	tfqp6.setEditable(false);
-	    	tfwp7.setEditable(false);
-	    	tfqp7.setEditable(false);
-	    	tfwp8.setEditable(false);
-	    	tfqp8.setEditable(false);
-	    	tfwp9.setEditable(false);
-	    	tfqp9.setEditable(false);
-	    	tfwp10.setEditable(false);
-	    	tfqp10.setEditable(false);
 	    	tfSigma.setEditable(true);
 	    	break;
+	    	
 	    	
 	    case "6":
-	    	lbwp1.setEnabled(true);
-	    	lbqp1.setEnabled(true);
-	    	lbwp2.setEnabled(true);
-	    	lbqp2.setEnabled(true);
-	    	lbwp3.setEnabled(true);
-	    	lbqp3.setEnabled(true);
-	    	lbwp4.setEnabled(true);
-	    	lbqp4.setEnabled(true);
-	    	lbwp5.setEnabled(true);
-	    	lbqp5.setEnabled(true);
-	    	lbwp6.setEnabled(true);
-	    	lbqp6.setEnabled(true);
-	    	lbwp7.setEnabled(false);
-	    	lbqp7.setEnabled(false);
-	    	lbwp8.setEnabled(false);
-	    	lbqp8.setEnabled(false);
-	    	lbwp9.setEnabled(false);
-	    	lbqp9.setEnabled(false);
-	    	lbwp10.setEnabled(false);
-	    	lbqp10.setEnabled(false);
+	    	for(int i=0;i<10;i++){
+	    		if(i<6){
+	    			lbwp[i].setEnabled(true);
+	    			lbqp[i].setEnabled(true);
+	    			tfwp[i].setEnabled(true);
+	    			tfqp[i].setEnabled(true);
+	    		}
+	    		else{
+	    			lbwp[i].setEnabled(false);
+	    			lbqp[i].setEnabled(false);
+	    			tfwp[i].setEnabled(false);
+	    			tfqp[i].setEnabled(false);
+	    		}
+	    	}
 	    	lbSigma.setEnabled(false);
-	    	
-	    	tfwp1.setEditable(true);
-	    	tfqp1.setEditable(true);
-	    	tfwp2.setEditable(true);
-	    	tfqp2.setEditable(true);
-	    	tfwp3.setEditable(true);
-	    	tfqp3.setEditable(true);
-	    	tfwp4.setEditable(true);
-	    	tfqp4.setEditable(true);
-	    	tfwp5.setEditable(true);
-	    	tfqp5.setEditable(true);
-	    	tfwp6.setEditable(true);
-	    	tfqp6.setEditable(true);
-	    	tfwp7.setEditable(false);
-	    	tfqp7.setEditable(false);
-	    	tfwp8.setEditable(false);
-	    	tfqp8.setEditable(false);
-	    	tfwp9.setEditable(false);
-	    	tfqp9.setEditable(false);
-	    	tfwp10.setEditable(false);
-	    	tfqp10.setEditable(false);
 	    	tfSigma.setEditable(false);
 	    	break;
+	    
 	    	
 	    case "7":
-	    	lbwp1.setEnabled(true);
-	    	lbqp1.setEnabled(true);
-	    	lbwp2.setEnabled(true);
-	    	lbqp2.setEnabled(true);
-	    	lbwp3.setEnabled(true);
-	    	lbqp3.setEnabled(true);
-	    	lbwp4.setEnabled(true);
-	    	lbqp4.setEnabled(true);
-	    	lbwp5.setEnabled(true);
-	    	lbqp5.setEnabled(true);
-	    	lbwp6.setEnabled(true);
-	    	lbqp6.setEnabled(true);
-	    	lbwp7.setEnabled(true);
-	    	lbqp7.setEnabled(true);
-	    	lbwp8.setEnabled(false);
-	    	lbqp8.setEnabled(false);
-	    	lbwp9.setEnabled(false);
-	    	lbqp9.setEnabled(false);
-	    	lbwp10.setEnabled(false);
-	    	lbqp10.setEnabled(false);
+	    	for(int i=0;i<10;i++){
+	    		if(i<7){
+	    			lbwp[i].setEnabled(true);
+	    			lbqp[i].setEnabled(true);
+	    			tfwp[i].setEnabled(true);
+	    			tfqp[i].setEnabled(true);
+	    		}
+	    		else{
+	    			lbwp[i].setEnabled(false);
+	    			lbqp[i].setEnabled(false);
+	    			tfwp[i].setEnabled(false);
+	    			tfqp[i].setEnabled(false);
+	    		}
+	    	}
 	    	lbSigma.setEnabled(true);
-	    	
-	    	tfwp1.setEditable(true);
-	    	tfqp1.setEditable(true);
-	    	tfwp2.setEditable(true);
-	    	tfqp2.setEditable(true);
-	    	tfwp3.setEditable(true);
-	    	tfqp3.setEditable(true);
-	    	tfwp4.setEditable(true);
-	    	tfqp4.setEditable(true);
-	    	tfwp5.setEditable(true);
-	    	tfqp5.setEditable(true);
-	    	tfwp6.setEditable(true);
-	    	tfqp6.setEditable(true);
-	    	tfwp7.setEditable(true);
-	    	tfqp7.setEditable(true);
-	    	tfwp8.setEditable(false);
-	    	tfqp8.setEditable(false);
-	    	tfwp9.setEditable(false);
-	    	tfqp9.setEditable(false);
-	    	tfwp10.setEditable(false);
-	    	tfqp10.setEditable(false);
 	    	tfSigma.setEditable(true);
 	    	break;
 	    	
-	    case "8":
-	    	lbwp1.setEnabled(true);
-	    	lbqp1.setEnabled(true);
-	    	lbwp2.setEnabled(true);
-	    	lbqp2.setEnabled(true);
-	    	lbwp3.setEnabled(true);
-	    	lbqp3.setEnabled(true);
-	    	lbwp4.setEnabled(true);
-	    	lbqp4.setEnabled(true);
-	    	lbwp5.setEnabled(true);
-	    	lbqp5.setEnabled(true);
-	    	lbwp6.setEnabled(true);
-	    	lbqp6.setEnabled(true);
-	    	lbwp7.setEnabled(true);
-	    	lbqp7.setEnabled(true);
-	    	lbwp8.setEnabled(true);
-	    	lbqp8.setEnabled(true);
-	    	lbwp9.setEnabled(false);
-	    	lbqp9.setEnabled(false);
-	    	lbwp10.setEnabled(false);
-	    	lbqp10.setEnabled(false);
-	    	lbSigma.setEnabled(false);
 	    	
-	    	tfwp1.setEditable(true);
-	    	tfqp1.setEditable(true);
-	    	tfwp2.setEditable(true);
-	    	tfqp2.setEditable(true);
-	    	tfwp3.setEditable(true);
-	    	tfqp3.setEditable(true);
-	    	tfwp4.setEditable(true);
-	    	tfqp4.setEditable(true);
-	    	tfwp5.setEditable(true);
-	    	tfqp5.setEditable(true);
-	    	tfwp6.setEditable(true);
-	    	tfqp6.setEditable(true);
-	    	tfwp7.setEditable(true);
-	    	tfqp7.setEditable(true);
-	    	tfwp8.setEditable(true);
-	    	tfqp8.setEditable(true);
-	    	tfwp9.setEditable(false);
-	    	tfqp9.setEditable(false);
-	    	tfwp10.setEditable(false);
-	    	tfqp10.setEditable(false);
+	    case "8":
+	    	for(int i=0;i<10;i++){
+	    		if(i<8){
+	    			lbwp[i].setEnabled(true);
+	    			lbqp[i].setEnabled(true);
+	    			tfwp[i].setEnabled(true);
+	    			tfqp[i].setEnabled(true);
+	    		}
+	    		else{
+	    			lbwp[i].setEnabled(false);
+	    			lbqp[i].setEnabled(false);
+	    			tfwp[i].setEnabled(false);
+	    			tfqp[i].setEnabled(false);
+	    		}
+	    	}
+	    	lbSigma.setEnabled(false);
 	    	tfSigma.setEditable(false);
 	    	break;
 	    	
-	    case "9":
-	    	lbwp1.setEnabled(true);
-	    	lbqp1.setEnabled(true);
-	    	lbwp2.setEnabled(true);
-	    	lbqp2.setEnabled(true);
-	    	lbwp3.setEnabled(true);
-	    	lbqp3.setEnabled(true);
-	    	lbwp4.setEnabled(true);
-	    	lbqp4.setEnabled(true);
-	    	lbwp5.setEnabled(true);
-	    	lbqp5.setEnabled(true);
-	    	lbwp6.setEnabled(true);
-	    	lbqp6.setEnabled(true);
-	    	lbwp7.setEnabled(true);
-	    	lbqp7.setEnabled(true);
-	    	lbwp8.setEnabled(true);
-	    	lbqp8.setEnabled(true);
-	    	lbwp9.setEnabled(true);
-	    	lbqp9.setEnabled(true);
-	    	lbwp10.setEnabled(false);
-	    	lbqp10.setEnabled(false);
-	    	lbSigma.setEnabled(true);
 	    	
-	    	tfwp1.setEditable(true);
-	    	tfqp1.setEditable(true);
-	    	tfwp2.setEditable(true);
-	    	tfqp2.setEditable(true);
-	    	tfwp3.setEditable(true);
-	    	tfqp3.setEditable(true);
-	    	tfwp4.setEditable(true);
-	    	tfqp4.setEditable(true);
-	    	tfwp5.setEditable(true);
-	    	tfqp5.setEditable(true);
-	    	tfwp6.setEditable(true);
-	    	tfqp6.setEditable(true);
-	    	tfwp7.setEditable(true);
-	    	tfqp7.setEditable(true);
-	    	tfwp8.setEditable(true);
-	    	tfqp8.setEditable(true);
-	    	tfwp9.setEditable(true);
-	    	tfqp9.setEditable(true);
-	    	tfwp10.setEditable(false);
-	    	tfqp10.setEditable(false);
+	    case "9":
+	    	for(int i=0;i<10;i++){
+	    		if(i<9){
+	    			lbwp[i].setEnabled(true);
+	    			lbqp[i].setEnabled(true);
+	    			tfwp[i].setEnabled(true);
+	    			tfqp[i].setEnabled(true);
+	    		}
+	    		else{
+	    			lbwp[i].setEnabled(false);
+	    			lbqp[i].setEnabled(false);
+	    			tfwp[i].setEnabled(false);
+	    			tfqp[i].setEnabled(false);
+	    		}
+	    	}
+	    	lbSigma.setEnabled(true);
 	    	tfSigma.setEditable(true);
 	    	break;
 	    	
 	    case "10":
-	    	lbwp1.setEnabled(true);
-	    	lbqp1.setEnabled(true);
-	    	lbwp2.setEnabled(true);
-	    	lbqp2.setEnabled(true);
-	    	lbwp3.setEnabled(true);
-	    	lbqp3.setEnabled(true);
-	    	lbwp4.setEnabled(true);
-	    	lbqp4.setEnabled(true);
-	    	lbwp5.setEnabled(true);
-	    	lbqp5.setEnabled(true);
-	    	lbwp6.setEnabled(true);
-	    	lbqp6.setEnabled(true);
-	    	lbwp7.setEnabled(true);
-	    	lbqp7.setEnabled(true);
-	    	lbwp8.setEnabled(true);
-	    	lbqp8.setEnabled(true);
-	    	lbwp9.setEnabled(true);
-	    	lbqp9.setEnabled(true);
-	    	lbwp10.setEnabled(true);
-	    	lbqp10.setEnabled(true);
+	    	for(int i=0;i<10;i++){
+	    			lbwp[i].setEnabled(true);
+	    			lbqp[i].setEnabled(true);
+	    			tfwp[i].setEnabled(true);
+	    			tfqp[i].setEnabled(true);
+	    		}
 	    	lbSigma.setEnabled(false);
-	    	
-	    	tfwp1.setEditable(true);
-	    	tfqp1.setEditable(true);
-	    	tfwp2.setEditable(true);
-	    	tfqp2.setEditable(true);
-	    	tfwp3.setEditable(true);
-	    	tfqp3.setEditable(true);
-	    	tfwp4.setEditable(true);
-	    	tfqp4.setEditable(true);
-	    	tfwp5.setEditable(true);
-	    	tfqp5.setEditable(true);
-	    	tfwp6.setEditable(true);
-	    	tfqp6.setEditable(true);
-	    	tfwp7.setEditable(true);
-	    	tfqp7.setEditable(true);
-	    	tfwp8.setEditable(true);
-	    	tfqp8.setEditable(true);
-	    	tfwp9.setEditable(true);
-	    	tfqp9.setEditable(true);
-	    	tfwp10.setEditable(true);
-	    	tfqp10.setEditable(true);
 	    	tfSigma.setEditable(false);
 	    	break;
-		
-		
-	}
-		
+	    }
 	}
 }
 
