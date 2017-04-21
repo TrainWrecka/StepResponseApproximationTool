@@ -27,55 +27,65 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 
 public class Plots extends JPanel{
-//    JFreeChart lineChart = ChartFactory.createLineChart(
-//       "Title",
-//       "Years","Number of Schools",
-//       new DefaultCategoryDataset( ),
-//       PlotOrientation.VERTICAL,
-//       true,true,false);
-//       
-//	    ChartPanel chartPanel = new ChartPanel( lineChart );
+	   JFreeChart lineChart = ChartFactory.createLineChart(
+    	       "Title",
+    	       "Years","Number of Schools",
+    	       new DefaultCategoryDataset( ),
+    	       PlotOrientation.VERTICAL,
+    	       true,true,false);
+   
+    	       
+    		    ChartPanel chartPanel = new ChartPanel( lineChart );
    
 	// create a dataset...
 
-	JPanel Resize = new JPanel(new GridBagLayout());
 	
     public Plots(){
-		this.setLayout(new BorderLayout());
+		this.setLayout(new GridBagLayout());
     	XYSeries series1 = new XYSeries("Planned");
-    	series1.add(1.0, 1.0);
-    	series1.add(2.0, 4.0);
-    	series1.add(3.0, -3.0);
-    	series1.add(4.0, 5.0);
-    	series1.add(5.0, 5.0);
-    	series1.add(6.0, 7.0);
-    	series1.add(7.0, 7.0);
-    	series1.add(8.0, 8.0);
+		for(double i=0.0;i<10;){			
+				series1.add(i, Math.cos(i));
+				i= i + 0.1;	
+		}
+    	
+    	
+    	
+	 
+		
+//    	XYSeries series1 = new XYSeries("Planned");
+//    	series1.add(1.0, 1.0);
+//    	series1.add(2.0, 4.0);
+//    	series1.add(3.0, -3.0);
+//    	series1.add(4.0, 5.0);
+//    	series1.add(5.0, 5.0);
+//    	series1.add(6.0, 7.0);
+//    	series1.add(7.0, 7.0);
+//    	series1.add(8.0, 8.0);
 
-    	XYSeries series2 = new XYSeries("Delivered");
-    	series2.add(9.0, 5.0);
-    	series2.add(10.0, 7.0);
-    	series2.add(11.0, 6.0);
-    	series2.add(12.0, 8.0);
-    	series2.add(13.0, -4.0);
-    	series2.add(14.0, 4.0);
-    	series2.add(15.0, 2.0);
-    	series2.add(16.0, 1.0);
+//    	XYSeries series2 = new XYSeries("Delivered");
+//    	series2.add(9.0, 5.0);
+//    	series2.add(10.0, 7.0);
+//    	series2.add(11.0, 6.0);
+//    	series2.add(12.0, 8.0);
+//    	series2.add(13.0, -4.0);
+//    	series2.add(14.0, 4.0);
+//    	series2.add(15.0, 2.0);
+//    	series2.add(16.0, 1.0);
+//
+//    	XYSeries series3 = new XYSeries("Third");
+//    	series3.add(17.0, 4.0);
+//    	series3.add(18.0, 3.0);
+//    	series3.add(19.0, 2.0);
+//    	series3.add(20.0, -3.0);
+//    	series3.add(21.0, 6.0);
+//    	series3.add(22.0, 3.0);
+//    	series3.add(23.0, -4.0);
+//    	series3.add(24.0, 3.0);
 
-    	XYSeries series3 = new XYSeries("Third");
-    	series3.add(17.0, 4.0);
-    	series3.add(18.0, 3.0);
-    	series3.add(19.0, 2.0);
-    	series3.add(20.0, -3.0);
-    	series3.add(21.0, 6.0);
-    	series3.add(22.0, 3.0);
-    	series3.add(23.0, -4.0);
-    	series3.add(24.0, 3.0);
-
-    	XYSeriesCollection dataset = new XYSeriesCollection();
-    	dataset.addSeries(series1);
-    	dataset.addSeries(series2);
-    	dataset.addSeries(series3);
+		XYSeriesCollection dataset = new XYSeriesCollection();
+		dataset.addSeries(series1);
+//    	dataset.addSeries(series2);
+//    	dataset.addSeries(series3);
 
     	JFreeChart chart = ChartFactory.createXYLineChart(
     	"Line Chart Demo",
@@ -90,7 +100,8 @@ public class Plots extends JPanel{
     	
     	ChartPanel chartPanel = new ChartPanel(chart);
     	
-    	add(chartPanel);
+    	add(chartPanel,new GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
+				new Insets(0, 0, 0, 0), 0, 0));
     	
     		
     }

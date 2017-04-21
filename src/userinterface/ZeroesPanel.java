@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 public class ZeroesPanel extends JPanel implements ActionListener{
 	
 	
-	private Plots Zeroesplot;
+	private Plots Zeroesplot=new Plots();
 	
 	
 	private JLabel lbk =new JLabel("K:");
@@ -29,16 +29,19 @@ public class ZeroesPanel extends JPanel implements ActionListener{
 	public ZeroesPanel(){
 		super(new GridBagLayout());
 		setSize(getPreferredSize());
-		add(lbk, new GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+//		add(lbk, new GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+//				new Insets(0, 0, 0, 0), 0, 0));
+//		add(lbwp,new GridBagConstraints( 0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+//				new Insets(0, 0, 0, 0), 0, 0));
+//		add(lbqp, new GridBagConstraints( 0, 2, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+//				new Insets(0, 0, 0, 0), 0, 0));
+//		add(lbSigma, new GridBagConstraints( 0, 3, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+//				new Insets(0, 0, 0, 0), 0, 0));
+//		add(lbError, new GridBagConstraints( 0, 4, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+//				new Insets(0, 0, 0, 0), 0, 0));	
+		
+		add(Zeroesplot, new GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
 				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbwp,new GridBagConstraints( 0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbqp, new GridBagConstraints( 0, 2, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbSigma, new GridBagConstraints( 0, 3, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbError, new GridBagConstraints( 0, 4, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
-				new Insets(0, 0, 0, 0), 0, 0));	
 		
 		setBorder(MyBorderFactory.createMyBorder("Zeroes"));
 	}

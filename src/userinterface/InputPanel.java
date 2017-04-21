@@ -41,7 +41,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
     
     private String Ordnung;
     
-//    private StatusBar statusBar = new StatusBar();
+    private StatusBar statusBar = new StatusBar();
     
 	public InputPanel(){
 		super(new GridBagLayout());		
@@ -60,7 +60,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		add(rbtManual,new GridBagConstraints( 0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
 				new Insets(5, 40, 0, 10), 0, 0));
 		
-		add(btRun,new GridBagConstraints( 0, 25, 1, 1, 0.0, 1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
+		add(btRun,new GridBagConstraints( 0, 25, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
 				new Insets(10, 40, 0, 10), 0, 0));
 		
 		// add Labels to Panel	
@@ -108,6 +108,12 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		add(cbOrdnungsauswahl,new GridBagConstraints( 1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
 				new Insets(10, 0, 0, 0), 0, 0));
 		
+		statusBar.setPreferredSize(new Dimension(100,100));
+		
+		
+		
+		add(statusBar, new GridBagConstraints( 0, 26, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
+				new Insets(30, 0, 0, 0), 0, 0));
 		
 		cbOrdnungsauswahl.addItemListener(this);
 		rbtAuto.addActionListener(this);

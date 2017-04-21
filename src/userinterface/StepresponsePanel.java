@@ -29,16 +29,21 @@ public class StepresponsePanel extends JPanel implements ActionListener{
 	public StepresponsePanel(){
 		super(new GridBagLayout());
 		setSize(getPreferredSize());
-		add(lbk, new GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+//		add(lbk, new GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+//				new Insets(0, 0, 0, 0), 0, 0));
+//		add(lbwp,new GridBagConstraints( 0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+//				new Insets(0, 0, 0, 0), 0, 0));
+//		add(lbqp, new GridBagConstraints( 0, 2, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+//				new Insets(0, 0, 0, 0), 0, 0));
+//		add(lbSigma, new GridBagConstraints( 0, 3, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+//				new Insets(0, 0, 0, 0), 0, 0));
+//		add(lbError, new GridBagConstraints( 0, 4, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
+//				new Insets(0, 0, 0, 0), 0, 0));	
+		
+		
+		add(StepResponseplot, new GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
 				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbwp,new GridBagConstraints( 0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbqp, new GridBagConstraints( 0, 2, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbSigma, new GridBagConstraints( 0, 3, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
-				new Insets(0, 0, 0, 0), 0, 0));
-		add(lbError, new GridBagConstraints( 0, 4, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
-				new Insets(0, 0, 0, 0), 0, 0));	
+		
 		
 		setBorder(MyBorderFactory.createMyBorder("StepResponse"));
 		
