@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 
 import java.awt.GridBagLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayoutInfo;
 import java.awt.Insets;
@@ -22,11 +23,14 @@ public class VariablePanel extends JPanel implements ActionListener{
     private JLabel lbSigma=new JLabel("\u03C3:");
     private JLabel lbError=new JLabel("Error:");
     
+    private Font myfont= new Font("myFont",1,100);
+    
 
 	
 	public VariablePanel(){
 		super(new GridBagLayout());
 		setSize(getPreferredSize());
+		
 		add(lbk, new GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
 				new Insets(0, 0, 0, 0), 0, 0));
 		add(lbwp,new GridBagConstraints( 0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
