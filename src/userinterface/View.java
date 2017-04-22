@@ -1,10 +1,8 @@
 package userinterface;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,17 +12,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Scanner;
-
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.opencsv.CSVReader;
-
-import JFreeChart.Plots;
-import javafx.stage.FileChooser;
 
 public class View extends JPanel implements Observer, ActionListener {
 
