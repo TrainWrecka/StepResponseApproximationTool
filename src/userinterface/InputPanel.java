@@ -72,65 +72,34 @@ public class InputPanel extends JPanel implements ActionListener {
 		// add Buttons to Panel
 		add(btLoad,new GridBagConstraints
 				( 0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
-				new Insets(10, 30, 0, 10), 0, 0));
+				new Insets(10, 10, 0, 10), 0, 0));
 		add(rbtAuto,new GridBagConstraints( 0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
-				new Insets(10, 30, 0, 10), 0, 0));
+				new Insets(10, 10, 0, 10), 0, 0));
 		add(rbtManual,new GridBagConstraints( 0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
-				new Insets(10, 30, 0, 10), 0, 0));
-		add(btRun,new GridBagConstraints( 0, 15, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
-				new Insets(10, 30, 0, 10), 0, 0));
+				new Insets(10, 10, 0, 10), 0, 0));
 		// add Labels to Panel	
 		add(lbOrdnung,new GridBagConstraints( 0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
-				new Insets(0, 30, 0, 0), 0, 0));
+				new Insets(0, 10, 0, 0), 0, 0));
 		add(lbwp1,new GridBagConstraints( 0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(lbwq1,new GridBagConstraints( 0, 5, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(lbwp2,new GridBagConstraints( 0, 6, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(lbwq2,new GridBagConstraints( 0, 7, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(lbwp3,new GridBagConstraints( 0, 8, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(lbwq3,new GridBagConstraints( 0, 9, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(lbwp4,new GridBagConstraints( 0, 10, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(lbwq4,new GridBagConstraints( 0, 11, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(lbwp5,new GridBagConstraints( 0, 12, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 0), 0, 0));
+				new Insets(10, 0, 0, 10), 0, 0));
 		add(lbwq5,new GridBagConstraints( 0, 13, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 0), 0, 0));
-		add(lbSigma,new GridBagConstraints( 0, 14, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 0), 0, 0));
-		
-		
-		add(tfwp1,new GridBagConstraints( 1, 4, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
 				new Insets(10, 0, 0, 10), 0, 0));
-		add(tfwq1,new GridBagConstraints( 1, 5, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 10), 0, 0));
-		add(tfwp2,new GridBagConstraints( 1, 6, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 10), 0, 0));
-		add(tfwq2,new GridBagConstraints( 1, 7, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 10), 0, 0));
-		add(tfwp3,new GridBagConstraints( 1, 8, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 10), 0, 0));
-		add(tfwq3,new GridBagConstraints( 1, 9, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 10), 0, 0));
-		add(tfwp4,new GridBagConstraints( 1, 10, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 10), 0, 0));
-		add(tfwq4,new GridBagConstraints( 1, 11, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 10), 0, 0));
-		add(tfwp5,new GridBagConstraints( 1, 12, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 10), 0, 0));
-		add(tfwq5,new GridBagConstraints( 1, 13, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 10), 0, 0));
-		add(tfSigma,new GridBagConstraints( 1, 14, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,  
-				new Insets(10, 0, 0, 10), 0, 0));
-		
-		
-		
 //		add(lbwp6,new GridBagConstraints( 0, 14, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
 //				new Insets(10, 0, 0, 10), 0, 0));
 //		add(lbwq6,new GridBagConstraints( 0, 15, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,  
