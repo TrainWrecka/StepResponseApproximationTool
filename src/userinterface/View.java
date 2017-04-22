@@ -27,8 +27,6 @@ public class View extends JPanel implements Observer, ActionListener {
 	private OutputPanel outputPanel;
 	private JFileChooser fileChooser = new JFileChooser();
 	private File file;
-	//private CSVReader reader;
-	//private List<String[]> listString;
 
 	public View(Controller controller) {
 		super(new GridBagLayout());
