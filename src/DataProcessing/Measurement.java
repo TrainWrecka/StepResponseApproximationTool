@@ -2,30 +2,60 @@ package DataProcessing;
 
 import java.util.List;
 
-public class Measurement {
-	
-	double[][] measurementData;
-	
-	public Measurement(){
+import org.jfree.data.xy.XYSeries;
 
-	
+public class Measurement {
+
+	private double[][] measurementData;// = new double[1000][2];
+
+	private List<String[]> measurementList;
+
+	private PlotData plotData = new PlotData();
+
+	public Measurement() {
+
 	}
-	
-	public void setMeasurement(List<String[]> measurementList){		
-		String[][] array = new String[measurementList.size()][];
-		for (int i = 0; i < measurementList.size(); i++) {
-			String[] row = measurementList.get(i);
-		    array[i] = row;
+
+	public void setMeasurement(List<String[]> measurementList) {
+		this.measurementList = measurementList;
+
+		measurementData = convertList(measurementList);
+
+		plotData.removeStepresponseData();
+		plotData.setStepresponseData(measurementData);
+	}
+
+	public double[][] getMeasurement() {
+		return measurementData;
+	}
+
+	public List<String[]> getMeasurementList() {
+		return measurementList;
+	}
+
+	public XYSeries getStepresponseData() {
+		return plotData.getStepresponseData();
+	}
+
+	/*
+	 * converts 2D list of strings in 2d array of doubles
+	 * uses string array for conversion
+	 */
+	private double[][] convertList(List<String[]> listString) {
+		String[][] tempArrayString = new String[listString.size()][];
+		for (int i = 0; i < listString.size(); i++) {
+			String[] arrayRow = listString.get(i);
+			tempArrayString[i] = arrayRow;
 		}
-		
-		measurementData = new double[array.length][2];
-		for(int i = 0; i < array.length; i++){
-			for(int j = 0; j < 2; j++){
-				measurementData[i][j] = Double.parseDouble(array[i][j]);
+
+		double[][] tempArrayDouble = new double[tempArrayString.length][tempArrayString[0].length];
+		for (int i = 0; i < tempArrayString.length; i++) {
+			for (int j = 0; j < 2; j++) {
+				tempArrayDouble[i][j] = Double.parseDouble(tempArrayString[i][j]);
 			}
-			
 		}
-		
+
+		return tempArrayDouble;
 	}
-		
+
 }
