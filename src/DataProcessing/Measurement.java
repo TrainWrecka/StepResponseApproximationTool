@@ -6,7 +6,7 @@ import org.jfree.data.xy.XYSeries;
 
 public class Measurement {
 
-	private double[][] measurementData;// = new double[1000][2];
+	private double[][] measurementData;
 
 	private List<String[]> measurementList;
 

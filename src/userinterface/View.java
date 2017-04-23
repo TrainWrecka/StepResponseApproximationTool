@@ -74,7 +74,6 @@ public class View extends JPanel implements Observer, ActionListener {
 
 		dataset.removeAllSeries();
 		dataset.addSeries(model.getStepresponseData());
-		
 		StatusBar.showStatus("Data Set");
 	}
 

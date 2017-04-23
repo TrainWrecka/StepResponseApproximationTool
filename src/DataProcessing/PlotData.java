@@ -4,10 +4,9 @@ import org.jfree.data.xy.XYSeries;
 
 public class PlotData {
 	
-	XYSeries seriesStepresponse;
+	private XYSeries seriesStepresponse;
 	
 	public PlotData(){
-		
 	}
 	
 	public void setStepresponseData(double[][] stepresponseData){
