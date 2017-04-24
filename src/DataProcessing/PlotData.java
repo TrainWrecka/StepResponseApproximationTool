@@ -3,51 +3,49 @@ package DataProcessing;
 import org.jfree.data.xy.XYSeries;
 
 public class PlotData {
-	
+
 	private XYSeries[] seriesStepresponse = new XYSeries[2];
-	
-	public PlotData(){
-	}
-	
-	public void setStepresponseData(double[][] stepresponseData){
-		int index = 0;
-		
-		
-		if(stepresponseData[0].length == 3){
-			
-			seriesStepresponse[0] = new XYSeries("Input");
+
+	public PlotData() {}
+
+	public void setStepresponseData(double[][] stepresponseData) {
+		int index = 1;
+
+		if (stepresponseData[0].length == 3) {
+
+			seriesStepresponse[1] = new XYSeries("Input");
 			for (int i = 0; i < stepresponseData.length; i++) {
-				seriesStepresponse[0].add(stepresponseData[i][0], stepresponseData[i][index+1]);
+				seriesStepresponse[1].add(stepresponseData[i][0], stepresponseData[i][index]);
 			}
-			index = 1;
+
+			index++;
 		}
-		
-		seriesStepresponse[index] = new XYSeries("Output");
+
+		seriesStepresponse[0] = new XYSeries("Output");
 		for (int i = 0; i < stepresponseData.length; i++) {
-			seriesStepresponse[0].add(stepresponseData[i][0], stepresponseData[i][index+1]);
+			seriesStepresponse[0].add(stepresponseData[i][0], stepresponseData[i][index]);
 		}
 	}
-	
-	public XYSeries[] getStepresponseData(){
+
+	public XYSeries[] getStepresponseData() {
 		return seriesStepresponse;
 	}
-	
-	public void removeStepresponseData(){
-		if(seriesStepresponse != null){
-			for(int i = 0; i < seriesStepresponse[0].getItemCount(); i++){
-				seriesStepresponse[0].remove(i);
-				seriesStepresponse[1].remove(i);
-			}
-		}	
+
+	public void removeStepresponseData() {
+		if (seriesStepresponse[0] != null) {
+			seriesStepresponse[0].clear();
+		}
+		if (seriesStepresponse[1] != null) {
+			seriesStepresponse[1].clear();
+		}
 	}
-	
-	
-	public void setErrorData(){
-		
+
+	public void setErrorData() {
+
 	}
-	
-	public void setZeroesData(){
-		
+
+	public void setZeroesData() {
+
 	}
-	
+
 }
