@@ -21,7 +21,7 @@ public class Measurement {
 
 		measurementData = convertList(measurementList);
 
-		plotData.removeStepresponseData();
+		//plotData.removeStepresponseData();
 		plotData.setStepresponseData(measurementData);
 	}
 
@@ -33,7 +33,7 @@ public class Measurement {
 		return measurementList;
 	}
 
-	public XYSeries getStepresponseData() {
+	public XYSeries[] getStepresponseData() {
 		return plotData.getStepresponseData();
 	}
 
@@ -50,7 +50,7 @@ public class Measurement {
 
 		double[][] tempArrayDouble = new double[tempArrayString.length][tempArrayString[0].length];
 		for (int i = 0; i < tempArrayString.length; i++) {
-			for (int j = 0; j < 2; j++) {
+			for (int j = 0; j < tempArrayString[0].length; j++) {
 				tempArrayDouble[i][j] = Double.parseDouble(tempArrayString[i][j]);
 			}
 		}

@@ -29,7 +29,7 @@ public class Model extends Observable {
 		return measurement.getMeasurementList();
 	}
 	
-	public XYSeries getStepresponseData(){
+	public XYSeries[] getStepresponseData(){
 		return measurement.getStepresponseData();
 	}
 	
