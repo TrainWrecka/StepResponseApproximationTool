@@ -73,7 +73,8 @@ public class View extends JPanel implements Observer, ActionListener {
 		Model model = (Model) obs;
 
 		dataset.removeAllSeries();
-		dataset.addSeries(model.getStepresponseData());
+		dataset.addSeries(model.getStepresponseData()[0]);
+		dataset.addSeries(model.getStepresponseData()[1]);
 		StatusBar.showStatus("Data Set");
 	}
 
