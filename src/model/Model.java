@@ -6,6 +6,8 @@ import DataProcessing.Approximation;
 import DataProcessing.Measurement;
 import DataProcessing.PlotData;
 
+import org.jfree.data.xy.XYSeries;
+
 public class Model extends Observable {
 	private Approximation approximation;
 	private PlotData plotData;
@@ -16,5 +18,25 @@ public class Model extends Observable {
 	
 	public void setMeasurement(List<String[]> measurementList){
 		measurement.setMeasurement(measurementList);
+		notifyObservers();
 	}
+	
+	public double[][] getMeasurement(){
+		return measurement.getMeasurement();
+	}
+	
+	public List<String[]> getMeasurementList(){
+		return measurement.getMeasurementList();
+	}
+	
+	public XYSeries getStepresponseData(){
+		return measurement.getStepresponseData();
+	}
+	
+	public void notifyObservers() {
+		setChanged();
+		super.notifyObservers();
+	}
+
+	
 }
