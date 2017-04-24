@@ -21,7 +21,7 @@ public class Measurement {
 
 		measurementData = convertList(measurementList);
 
-		//plotData.removeStepresponseData();
+		plotData.removeStepresponseData();
 		plotData.setStepresponseData(measurementData);
 	}
 
