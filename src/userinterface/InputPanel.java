@@ -52,15 +52,15 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		gruppeAuto_Manual.add(rbtManual);
 		
 		// add Buttons to Panel
-		add(btLoad,new GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
+		add(btLoad,new GridBagConstraints( 0, 0, 2, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
 				new Insets(10, 40, 0, 10), 0, 0));
 		
-		add(rbtAuto,new GridBagConstraints( 0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
+		add(rbtAuto,new GridBagConstraints( 0, 1, 2, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
 				new Insets(10, 40, 0, 10), 0, 0));
-		add(rbtManual,new GridBagConstraints( 0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
+		add(rbtManual,new GridBagConstraints( 0, 2, 2, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
 				new Insets(5, 40, 0, 10), 0, 0));
 		
-		add(btRun,new GridBagConstraints( 0, 25, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
+		add(btRun,new GridBagConstraints( 0, 25, 2, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,  
 				new Insets(10, 40, 0, 10), 0, 0));
 		
 		// add Labels to Panel	
