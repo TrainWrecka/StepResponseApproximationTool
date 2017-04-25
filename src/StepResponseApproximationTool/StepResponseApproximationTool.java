@@ -34,9 +34,9 @@ public class StepResponseApproximationTool extends JFrame {
 	private View view = new View(controller);
 	private MenuBar menuBar = new MenuBar(controller, this);
 	private StatusBar statusBar = new StatusBar();
-	Dimension screenSize= Toolkit.getDefaultToolkit().getScreenSize();
-	int height =screenSize.height *8/9;
-	int width = screenSize.width *2/4;
+	Dimension screenSize= Toolkit.getDefaultToolkit().getScreenSize();	// ScreenSize Problem
+	int height =screenSize.height *8/9;			// ScreenSize Problem
+	int width = screenSize.width *2/4;			// ScreenSize Problem
 	
 
 	private static enum LAF {
@@ -62,7 +62,6 @@ public class StepResponseApproximationTool extends JFrame {
 		// Center the window
 		switch (mode) {
 			case FIXED:
-//				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 				setMinimumSize(getPreferredSize());
 				setSize(width, height);
 				setResizable(false);
@@ -70,7 +69,7 @@ public class StepResponseApproximationTool extends JFrame {
 				break;
 			case FIXEDRESIZABLE:
 				setMinimumSize(getPreferredSize());
-//				setSize(width, height);
+				setSize(width, height);
 				setResizable(true);
 				validate();
 				break;
