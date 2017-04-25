@@ -27,13 +27,13 @@ public class StepResponseApproximationTool extends JFrame {
 		FIXED, PACKED, FIXEDRESIZABLE, PACKEDRESIZABLE
 	};
 
-	private Mode mode = Mode.PACKED;
+	private Mode mode = Mode.FIXED;
 	private int width = 1200, height = 800;
 	private Model model = new Model();
 	private Controller controller = new Controller(model, this);
 	private View view = new View(controller);
 	private MenuBar menuBar = new MenuBar(controller, this);
-//	private StatusBar statusBar = new StatusBar();
+	private StatusBar statusBar = new StatusBar();
 
 	private static enum LAF {
 		METAL, OCEAN, SYSTEM, NIMROD, NAPKIN
@@ -48,7 +48,6 @@ public class StepResponseApproximationTool extends JFrame {
 		getContentPane().add(view, BorderLayout.CENTER);
 //		getContentPane().add(statusBar, BorderLayout.SOUTH);
 		setJMenuBar(menuBar);
-
 		pack();
 		
 		synchronized (getTreeLock()) {
@@ -58,6 +57,7 @@ public class StepResponseApproximationTool extends JFrame {
 		// Center the window
 		switch (mode) {
 			case FIXED:
+//				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 				setMinimumSize(getPreferredSize());
 				setSize(width, height);
 				setResizable(false);
@@ -65,7 +65,7 @@ public class StepResponseApproximationTool extends JFrame {
 				break;
 			case FIXEDRESIZABLE:
 				setMinimumSize(getPreferredSize());
-				setSize(width, height);
+//				setSize(width, height);
 				setResizable(true);
 				validate();
 				break;

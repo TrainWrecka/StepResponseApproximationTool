@@ -5,10 +5,13 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 
 import java.awt.GridBagLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayoutInfo;
 import java.awt.Insets;
+import java.awt.Toolkit;
+
 import JFreeChart.Plots;
 
 import javax.swing.JPanel;
@@ -29,7 +32,10 @@ public class VariablePanel extends JPanel implements ActionListener{
 	
 	public VariablePanel(){
 		super(new GridBagLayout());
-		setSize(getPreferredSize());
+
+//		Dimension screensize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/10, Toolkit.getDefaultToolkit().getScreenSize().height/7);
+//		setMaximumSize(screensize);
+		
 		
 		add(lbk, new GridBagConstraints( 0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,  
 				new Insets(30, 0, 30, 0), 0, 0));

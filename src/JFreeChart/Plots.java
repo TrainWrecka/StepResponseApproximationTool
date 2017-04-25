@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -28,6 +29,8 @@ public class Plots extends JPanel {
 
 	// create a dataset...
 	XYSeriesCollection dataset = new XYSeriesCollection();
+	Dimension screensize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/10, Toolkit.getDefaultToolkit().getScreenSize().height/7);
+
 
 	public Plots(String type) {
 		this.setLayout(new GridBagLayout());
@@ -84,6 +87,7 @@ public class Plots extends JPanel {
 		plot.setRangeGridlinePaint(Color.black);
 
 		ChartPanel chartPanel = new ChartPanel(chart);
+//		chartPanel.setSize(screensize);
 
 		add(chartPanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 0, 0), 0, 0));
@@ -93,9 +97,10 @@ public class Plots extends JPanel {
 	private void createStepresponsePlot() {
 		JFreeChart chart = ChartFactory.createXYLineChart("Input Data", "t [s]", "U [V]", dataset);
 		ChartPanel chartPanel = new ChartPanel(chart);
+//		chartPanel.setSize(screensize);
+		
 		add(chartPanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 0, 0), 0, 0));
-
 		XYPlot plot = (XYPlot) chart.getPlot();
 		plot.setBackgroundPaint(Color.WHITE);
 		plot.setDomainGridlinePaint(Color.black);
