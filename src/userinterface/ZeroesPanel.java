@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 public class ZeroesPanel extends JPanel implements ActionListener{
 	
 	
-	private Plots Zeroesplot=new Plots();
+	private Plots Zeroesplot=new Plots("null");
 	
 	
 	private JLabel lbk =new JLabel("K:");
