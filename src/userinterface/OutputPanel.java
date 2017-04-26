@@ -26,12 +26,15 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 	JTabbedPane tabpane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 	
 	private JPanel DefaultPanel = new JPanel(new GridBagLayout());
+
+	
+	
 	
 	private StepresponsePanel DefaultStepresponsePanel = new StepresponsePanel();
-	private ZeroesPanel DefaultZeroesPanel = new ZeroesPanel();
-	private ErrorPanel DefaultErrorPanel = new ErrorPanel();
-	private VariablePanel DefaultVariablePanel = new VariablePanel();
-	
+	private JPanel DefaultZeroesPanel = new ZeroesPanel();
+	private JPanel DefaultErrorPanel = new ErrorPanel();
+	private JPanel DefaultVariablePanel = new VariablePanel();
+
 	private StepresponsePanel StepresponsePanel = new StepresponsePanel();
 	private ZeroesPanel ZeroesPanel = new ZeroesPanel();
 	private ErrorPanel ErrorPanel = new ErrorPanel();
@@ -95,11 +98,14 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 	public void update(Observable obs, Object obj) {
 		Model model = (Model) obs;
 
+		DefaultStepresponsePanel.clearStepresponseData();
 		StepresponsePanel.clearStepresponseData();
 		/*if(model.getStepresponseData()[1] != null){
 			StepresponsePanel.addStepresponseData(model.getStepresponseData()[1]);
 		}*/
 		
+		DefaultStepresponsePanel.addStepresponseData(model.getStepresponseData()[0]);
+		DefaultStepresponsePanel.addStepresponseData(model.getStepresponseData()[1]);
 		StepresponsePanel.addStepresponseData(model.getStepresponseData()[0]);
 		StepresponsePanel.addStepresponseData(model.getStepresponseData()[1]);
 		
