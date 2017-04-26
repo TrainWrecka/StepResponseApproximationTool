@@ -7,6 +7,7 @@ import org.jfree.data.xy.XYSeries;
 public class Measurement {
 
 	private double[][] measurementData;
+	private double[][] cutData;
 
 	private List<String[]> measurementList;
 
@@ -20,8 +21,10 @@ public class Measurement {
 		this.measurementList = measurementList;
 
 		measurementData = convertList(measurementList);
+		cutData = cutMeasurement(measurementData);
 
 		plotData.removeStepresponseData();
+		//plotData.setStepresponseData(cutData);
 		plotData.setStepresponseData(measurementData);
 	}
 
@@ -56,6 +59,33 @@ public class Measurement {
 		}
 
 		return tempArrayDouble;
+	}
+
+	private double[][] cutMeasurement(double[][] measurementData) {
+		double[][] cutData = null;
+
+		if (measurementData[0].length != 3) {
+			return cutData = measurementData;
+		}
+
+		int j = 0;
+		for (int i = 0; i < measurementData.length; i++) {
+			if (measurementData[i][1] != 0) {
+				j = i;
+				break;
+			}
+		}
+
+		cutData = new double[measurementData.length - j][measurementData[0].length];
+
+		for (int i = 0; i < cutData.length; i++) {
+			cutData[i][0] = measurementData[i][0];
+			cutData[i][1] = measurementData[j][1];
+			cutData[i][2] = measurementData[j][2];
+			j++;
+		}
+
+		return cutData;
 	}
 
 }
