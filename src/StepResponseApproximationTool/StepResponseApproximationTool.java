@@ -89,7 +89,6 @@ public class StepResponseApproximationTool extends JFrame {
 				setMinimumSize(getPreferredSize());
 				setResizable(true);
 				break;
-				
 			case CHRIS:
 				setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2,(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()-300));
 				setMinimumSize(getPreferredSize());
