@@ -6,6 +6,7 @@ import java.util.Observable;
 
 import java.awt.GridBagLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayoutInfo;
 import java.awt.Insets;
@@ -26,6 +27,9 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 	
 	private JPanel DefaultPanel = new JPanel(new GridBagLayout());
 
+	
+	
+	
 	private StepresponsePanel DefaultStepresponsePanel = new StepresponsePanel();
 	private JPanel DefaultZeroesPanel = new ZeroesPanel();
 	private JPanel DefaultErrorPanel = new ErrorPanel();
@@ -38,11 +42,11 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 	private JPanel TabStepresponsePanel=new JPanel(new GridBagLayout());
 	private JPanel TabErrorPanel=new JPanel(new GridBagLayout());
 	private JPanel TabZeroesPanel=new JPanel(new GridBagLayout());
-	
-
+	private double ysize;
+	public Font myFont= new Font("Serif", Font.BOLD, 20);
 	public OutputPanel() {
 		super(new GridBagLayout());	
-		
+		setFont(myFont);
 //		DefaultPanel.add(DefaultStepresponsePanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,
 //				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 //		
@@ -62,12 +66,11 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 		DefaultPanel.add(ZeroesPanel, new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
-		DefaultPanel.add(ErrorPanel, new GridBagConstraints(0, 1, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER,
+		DefaultPanel.add(ErrorPanel, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,	// Wenn y ausdehnung 0.0 in 4k screen nicht symetrisch und wenn full hd dasselbe wenn y ausdehnung 1.0
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
-		DefaultPanel.add(DefaultVariablePanel, new GridBagConstraints(1, 1, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER,
+		DefaultPanel.add(DefaultVariablePanel, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-
 		
 //		tabpane.addTab("Default", DefaultPanel);
 //		tabpane.addTab("StepresponsePanel", StepresponsePanel);
@@ -134,10 +137,10 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
         	DefaultPanel.add(ZeroesPanel, new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,
         			GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
-        	DefaultPanel.add(ErrorPanel, new GridBagConstraints(0, 1, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER,
+        	DefaultPanel.add(ErrorPanel, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,
         			GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
-        	DefaultPanel.add(DefaultVariablePanel, new GridBagConstraints(1, 1, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER,
+        	DefaultPanel.add(DefaultVariablePanel, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,
         			GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
         	break;
         case 1:

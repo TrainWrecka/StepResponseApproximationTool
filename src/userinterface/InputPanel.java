@@ -173,9 +173,10 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 			cbOrdnungsauswahl.setEnabled(true);
 			lbOrdnung.setEnabled(true);
 		}
-
-		if (fileChooser.showOpenDialog(getParent()) == JFileChooser.APPROVE_OPTION) {
-			controller.setMeasurement(readCSV());
+		if(e.getSource()==btLoad){
+			if (fileChooser.showOpenDialog(getParent()) == JFileChooser.APPROVE_OPTION) {
+				controller.setMeasurement(readCSV());
+		}
 		}
 	}
 

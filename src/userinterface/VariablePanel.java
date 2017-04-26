@@ -26,13 +26,11 @@ public class VariablePanel extends JPanel implements ActionListener{
     private JLabel lbSigma=new JLabel("\u03C3:");
     private JLabel lbError=new JLabel("Error:");
     
-    private Font myfont= new Font("myFont",1,100);
-    
+//    private Font myfont= new Font("myFont",1,100);
 
 	
 	public VariablePanel(){
 		super(new GridBagLayout());
-
 //		Dimension screensize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/10, Toolkit.getDefaultToolkit().getScreenSize().height/7);
 //		setMaximumSize(screensize);
 		
