@@ -26,6 +26,10 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 	JTabbedPane tabpane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 	
 	private JPanel DefaultPanel = new JPanel(new GridBagLayout());
+
+	
+	
+	
 	private StepresponsePanel DefaultStepresponsePanel = new StepresponsePanel();
 	private JPanel DefaultZeroesPanel = new ZeroesPanel();
 	private JPanel DefaultErrorPanel = new ErrorPanel();
