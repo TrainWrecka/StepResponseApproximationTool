@@ -27,13 +27,17 @@ public class StepResponseApproximationTool extends JFrame {
 		FIXED, PACKED, FIXEDRESIZABLE, PACKEDRESIZABLE
 	};
 
-	private Mode mode = Mode.PACKED;
-	private int width = 1200, height = 800;
+	private Mode mode = Mode.FIXED;
+//	private int width = 1200, height = 800;
 	private Model model = new Model();
 	private Controller controller = new Controller(model, this);
 	private View view = new View(controller);
 	private MenuBar menuBar = new MenuBar(controller, this);
-//	private StatusBar statusBar = new StatusBar();
+	private StatusBar statusBar = new StatusBar();
+	Dimension screenSize= Toolkit.getDefaultToolkit().getScreenSize();	// ScreenSize Problem
+	int height =screenSize.height *8/9;			// ScreenSize Problem
+	int width = screenSize.width *2/4;			// ScreenSize Problem
+	
 
 	private static enum LAF {
 		METAL, OCEAN, SYSTEM, NIMROD, NAPKIN
@@ -42,13 +46,13 @@ public class StepResponseApproximationTool extends JFrame {
 	private static LAF laf = LAF.SYSTEM;
 
 	public void init() {
+		setPreferredSize(new Dimension(width,height));
 		model.addObserver(view);
 		model.addObserver(menuBar);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(view, BorderLayout.CENTER);
-//		getContentPane().add(statusBar, BorderLayout.SOUTH);
+		getContentPane().add(statusBar, BorderLayout.SOUTH);
 		setJMenuBar(menuBar);
-
 		pack();
 		
 		synchronized (getTreeLock()) {
