@@ -24,8 +24,8 @@ public class Measurement {
 		cutData = cutMeasurement(measurementData);
 
 		plotData.removeStepresponseData();
-		//plotData.setStepresponseData(cutData);
-		plotData.setStepresponseData(measurementData);
+		plotData.setStepresponseData(cutData);
+		//plotData.setStepresponseData(measurementData);
 	}
 
 	public double[][] getMeasurement() {
