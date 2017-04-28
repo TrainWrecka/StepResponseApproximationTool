@@ -124,7 +124,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		lbOrdnung.setEnabled(false);
 
 		// Label und Textfeld Sigma platzieren
-		add(lbSigma, new GridBagConstraints(0, 24, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,
+		add(lbSigma, new GridBagConstraints(0, 24, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,
 				new Insets(0, 0, 0, 0), 0, 0));
 		add(tfSigma, new GridBagConstraints(1, 24, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,
 				new Insets(5, 0, 0, 0), 0, 0));

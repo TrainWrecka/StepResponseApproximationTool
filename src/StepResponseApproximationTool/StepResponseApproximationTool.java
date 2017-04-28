@@ -29,7 +29,7 @@ public class StepResponseApproximationTool extends JFrame {
 		FIXED, PACKED, FIXEDRESIZABLE, PACKEDRESIZABLE, CHRIS
 	};
 
-	private Mode mode = Mode.CHRIS;
+	private Mode mode = Mode.FIXED;
 	private int width = 1200, height = 800;
 	private Model model = new Model();
 	private Controller controller = new Controller(model, this);
