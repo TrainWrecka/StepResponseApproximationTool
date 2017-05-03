@@ -27,6 +27,28 @@ public class PlotData {
 		}
 	}
 
+	public void setStepresponseData(double[] timeData, double[] inputData, double[] stepData) {
+
+		seriesStepresponse[0] = new XYSeries("Output");
+		for (int i = 0; i < timeData.length; i++) {
+			seriesStepresponse[0].add(timeData[i], stepData[i]);
+		}
+
+		seriesStepresponse[1] = new XYSeries("Input");
+		for (int i = 0; i < timeData.length; i++) {
+			seriesStepresponse[1].add(timeData[i], inputData[i]);
+		}
+
+	}
+
+	public void setStepresponseData(double[] timeData, double[] stepData) {
+
+		seriesStepresponse[0] = new XYSeries("Output");
+		for (int i = 0; i < timeData.length; i++) {
+			seriesStepresponse[0].add(timeData[i], stepData[i]);
+		}
+	}
+
 	public XYSeries[] getStepresponseData() {
 		return seriesStepresponse;
 	}
@@ -38,6 +60,7 @@ public class PlotData {
 		if (seriesStepresponse[1] != null) {
 			seriesStepresponse[1].clear();
 		}
+
 	}
 
 	public void setErrorData() {

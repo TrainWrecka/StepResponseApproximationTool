@@ -33,6 +33,12 @@ public class Model extends Observable {
 		return measurement.getStepresponseData();
 	}
 	
+	public boolean inputExisting(){
+		return measurement.inputExisting();
+	}
+	
+	
+	
 	public void notifyObservers() {
 		setChanged();
 		super.notifyObservers();

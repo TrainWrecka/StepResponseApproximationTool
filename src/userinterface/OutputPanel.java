@@ -39,6 +39,7 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 	private ZeroesPanel ZeroesPanel = new ZeroesPanel();
 	private ErrorPanel ErrorPanel = new ErrorPanel();
 	
+	
 	private JPanel TabStepresponsePanel=new JPanel(new GridBagLayout());
 	private JPanel TabErrorPanel=new JPanel(new GridBagLayout());
 	private JPanel TabZeroesPanel=new JPanel(new GridBagLayout());
@@ -97,23 +98,13 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 
 	public void update(Observable obs, Object obj) {
 		Model model = (Model) obs;
+		
 
-		DefaultStepresponsePanel.clearStepresponseData();
 		StepresponsePanel.clearStepresponseData();
-		/*if(model.getStepresponseData()[1] != null){
-			StepresponsePanel.addStepresponseData(model.getStepresponseData()[1]);
-		}*/
-		
-		DefaultStepresponsePanel.addStepresponseData(model.getStepresponseData()[0]);
-		DefaultStepresponsePanel.addStepresponseData(model.getStepresponseData()[1]);
 		StepresponsePanel.addStepresponseData(model.getStepresponseData()[0]);
-		StepresponsePanel.addStepresponseData(model.getStepresponseData()[1]);
-		
-		/*
-		dataset.removeAllSeries();
-		dataset.addSeries(model.getStepresponseData()[0]);
-		dataset.addSeries(model.getStepresponseData()[1]);
-		StatusBar.showStatus("Data Set");*/
+		if(model.inputExisting()){
+			StepresponsePanel.addStepresponseData(model.getStepresponseData()[1]);
+		}
 	}
 
 	@Override
