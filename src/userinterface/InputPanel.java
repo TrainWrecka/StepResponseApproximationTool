@@ -120,8 +120,8 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 
 		lbSigma.setEnabled(false);
 		tfSigma.setEnabled(false);
-		cbOrdnungsauswahl.setEnabled(false);
-		lbOrdnung.setEnabled(false);
+		cbOrdnungsauswahl.setEnabled(true);
+		lbOrdnung.setEnabled(true);
 
 		// Label und Textfeld Sigma platzieren
 		add(lbSigma, new GridBagConstraints(0, 24, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,
@@ -171,8 +171,6 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 			}
 			lbSigma.setEnabled(false);
 			tfSigma.setEnabled(false);
-			cbOrdnungsauswahl.setEnabled(false);
-			lbOrdnung.setEnabled(false);
 		} else {
 			lbwp[0].setEnabled(true);
 			lbqp[0].setEnabled(true);
@@ -180,8 +178,6 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 			tfqp[0].setEnabled(true);
 			lbSigma.setEnabled(true);
 			tfSigma.setEnabled(true);
-			cbOrdnungsauswahl.setEnabled(true);
-			lbOrdnung.setEnabled(true);
 		}
 		if(e.getSource()==btLoad){
 			if (fileChooser.showOpenDialog(getParent()) == JFileChooser.APPROVE_OPTION) {
