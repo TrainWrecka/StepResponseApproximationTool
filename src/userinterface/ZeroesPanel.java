@@ -16,7 +16,12 @@ import JFreeChart.Plots;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import org.apache.commons.math3.complex.Complex;
+
 import javax.swing.JLabel;
+
+
 
 public class ZeroesPanel extends JPanel implements ActionListener{
 	
@@ -47,6 +52,9 @@ public class ZeroesPanel extends JPanel implements ActionListener{
 		
 		
 		setBorder(MyBorderFactory.createMyBorder("Zeroes"));
+		
+		
+		
 	}
 	
 	
@@ -59,3 +67,7 @@ public class ZeroesPanel extends JPanel implements ActionListener{
 	}
 
 }
+
+
+
+

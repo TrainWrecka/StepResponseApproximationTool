@@ -29,7 +29,7 @@ public class StepResponseApproximationTool extends JFrame {
 		FIXED, PACKED, FIXEDRESIZABLE, PACKEDRESIZABLE, CHRIS
 	};
 
-	private Mode mode = Mode.CHRIS;
+	private Mode mode = Mode.FIXED;
 	private int width = 1200, height = 800;
 	private Model model = new Model();
 	private Controller controller = new Controller(model, this);
@@ -89,10 +89,10 @@ public class StepResponseApproximationTool extends JFrame {
 				setMinimumSize(getPreferredSize());
 				setResizable(true);
 				break;
-				
 			case CHRIS:
-				setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2,(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()));
-				//setMinimumSize(getPreferredSize());
+				setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2,(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()-300));
+				setMinimumSize(getPreferredSize());
+
 				setSize(getPreferredSize());
 				setMaximumSize(getPreferredSize());
 				validate();
