@@ -170,13 +170,16 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 			}
 			lbSigma.setEnabled(false);
 			tfSigma.setEnabled(false);
-		} else {
+		} else if(e.getSource()==rbtManual){
 			lbwp[0].setEnabled(true);
 			lbqp[0].setEnabled(true);
 			tfwp[0].setEnabled(true);
 			tfqp[0].setEnabled(true);
-			lbSigma.setEnabled(true);
-			tfSigma.setEnabled(true);
+			lbwp[1].setEnabled(true);
+			lbqp[1].setEnabled(true);
+			tfwp[1].setEnabled(true);
+			tfqp[1].setEnabled(true);
+
 		}
 		if(e.getSource()==btLoad){
 			if (fileChooser.showOpenDialog(getParent()) == JFileChooser.APPROVE_OPTION) {
@@ -206,7 +209,14 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 				tfqp[i].setEnabled(false);
 			}
 		}
-		
+		if ((Ordnung1%2)!=0){
+			lbSigma.setEnabled(true);
+			tfSigma.setEnabled(true);
+		}
+		else{
+			lbSigma.setEnabled(false);
+			tfSigma.setEnabled(false);
+		}
 //		switch (Ordnung) {
 //			case "1":
 //				for (int i = 0; i < 10; i++) {

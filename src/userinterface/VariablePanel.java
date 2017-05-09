@@ -67,16 +67,16 @@ public class VariablePanel extends JPanel implements ActionListener{
 //		lbError.setPreferredSize(SizeLabels);
 		
 		
-//		add(lbk, new GridBagConstraints( 0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,  
-//				new Insets(0, 0, 0, 0), 0, 0));
-//		add(lbwp,new GridBagConstraints( 0, 1, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,  
-//				new Insets(0, 0, 0, 0), 0, 0));
-//		add(lbqp, new GridBagConstraints( 0, 2, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,  
-//				new Insets(0, 0, 0, 0), 0, 0));
-//		add(lbSigma, new GridBagConstraints( 0, 3, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,  
-//				new Insets(0, 0, 0, 0), 0, 0));
-//		add(lbError, new GridBagConstraints( 0, 4, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,  
-//				new Insets(0, 0, 0, 0), 0, 0));	
+		add(lbk, new GridBagConstraints( 0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,  
+				new Insets(0, 0, 0, 0), 0, 0));
+		add(lbwp,new GridBagConstraints( 0, 1, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,  
+				new Insets(0, 0, 0, 0), 0, 0));
+		add(lbqp, new GridBagConstraints( 0, 2, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,  
+				new Insets(0, 0, 0, 0), 0, 0));
+		add(lbSigma, new GridBagConstraints( 0, 3, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,  
+				new Insets(0, 0, 0, 0), 0, 0));
+		add(lbError, new GridBagConstraints( 0, 4, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,  
+				new Insets(0, 0, 0, 0), 0, 0));	
 		
 		setBorder(MyBorderFactory.createMyBorder("Variables"));
 	}
