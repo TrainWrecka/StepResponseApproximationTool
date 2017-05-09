@@ -1,6 +1,7 @@
 package matlabfunctions;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 
 import org.apache.commons.math3.analysis.interpolation.*;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
@@ -13,6 +14,10 @@ import org.apache.commons.math3.transform.*;
 public class Matlab {
 	static final FastFourierTransformer transformer = new FastFourierTransformer(DftNormalization.STANDARD);
 	static final SplineInterpolator interpolator = new SplineInterpolator();
+	
+	public static double acosh(double x) {
+		return Math.log(x + Math.sqrt(x * x - 1.0));
+	}
 
 	public static String add(String s1, String s2) {
 		String[] a = s1.split("[, ]+");
@@ -43,6 +48,10 @@ public class Matlab {
 
 		return res;
 	}
+	
+	public static double asinh(double x) {
+		return Math.log(x + Math.sqrt(x * x + 1.0));
+	}
 
 	/**
 	 * <pre>
@@ -65,6 +74,10 @@ public class Matlab {
 		String stExp = decimalFormat.format(exp);
 		String stAct = decimalFormat.format(act);
 		return stExp.equals(stAct);
+	}
+	
+	public static double atanh(double x) {
+		return 0.5 * Math.log((x + 1.0) / (x - 1.0));
 	}
 
 	public static final double[] c2d(Complex[] c) {
@@ -388,6 +401,14 @@ public class Matlab {
 		}
 		return res;
 	}
+	
+	public static double[] real(Complex[] c) {
+		double[] res = new double[c.length];
+		for (int i = 0; i < res.length; i++) {
+			res[i] = c[i].getReal();
+		}
+		return res;
+	}
 
 	public static final Object[] residue(double[] b, double[] a) {
 		double K = 0;
@@ -553,7 +574,42 @@ public class Matlab {
 	}
 
 	public static void main(String[] args) {
-
+		
 	}
-
+	
+	/*
+	 * returns max value of array
+	 */
+	public static double max(double[] data) {
+		double max = 0;
+		for (int i = 0; i < data.length - 1; i++) {
+			if (data[i] > max) {
+				max = data[i];
+			}
+		}
+		return max;
+	}
+	
+	/*
+	 * calculates the mean value of array
+	 * elements
+	 */
+	public static double mean(double[] m) {
+		double sum = 0;
+		for (int i = 0; i < m.length; i++) {
+			sum += m[i];
+		}
+		return sum / m.length;
+	}
+	
+	/*
+	 * norms a vector
+	 */
+	public static double norm(double[] vect){
+		double sum = 0;
+		for(int i = 0; i < vect.length; i++){
+			sum += Math.pow(vect[i], 2);
+		}
+		return Math.sqrt(sum);
+	}
 }
