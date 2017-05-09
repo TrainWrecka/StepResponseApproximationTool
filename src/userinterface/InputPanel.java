@@ -37,7 +37,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	// Buttongroup
 	private ButtonGroup gruppeAuto_Manual = new ButtonGroup();
 	// JCombobox
-	private String comboBoxListe[] = { ""+1, ""+2, ""+3, ""+4, ""+5, ""+6, ""+7, ""+8, ""+9, ""+10 };
+	private String comboBoxListe[] = { ""+2, ""+3, ""+4, ""+5, ""+6, ""+7, ""+8, ""+9, ""+10 };
 	private JComboBox cbOrdnungsauswahl = new JComboBox(comboBoxListe);
 	// Labels
 
@@ -65,7 +65,6 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 
 	public InputPanel() {
 		super(new GridBagLayout());
-
 		// create Buttongroup
 		rbtAuto.setSelected(true);
 		gruppeAuto_Manual.add(rbtAuto);
@@ -99,7 +98,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 			add(lbwp[i], new GridBagConstraints(0, wpPlacement, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START,
 					GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 			add(tfwp[i], new GridBagConstraints(1, wpPlacement, 1, 1, 1.0, 0.0, GridBagConstraints.FIRST_LINE_START,
-					GridBagConstraints.BOTH, new Insets(5, 0, 0, 0), 0, 0));
+					GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 			
 			lbwp[i].setEnabled(false);
 			tfwp[i].setEnabled(false);
@@ -112,7 +111,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 			add(lbqp[i], new GridBagConstraints(0, qpPlacement, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START,
 					GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 			add(tfqp[i], new GridBagConstraints(1, qpPlacement, 1, 1, 1.0, 0.0, GridBagConstraints.FIRST_LINE_START,
-					GridBagConstraints.BOTH, new Insets(5, 0, 0, 0), 0, 0));
+					GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 			lbqp[i].setEnabled(false);
 			tfqp[i].setEnabled(false);
 			qpPlacement = qpPlacement + 2;

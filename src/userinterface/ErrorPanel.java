@@ -28,6 +28,7 @@ public class ErrorPanel extends JPanel implements ActionListener{
     private JLabel lbSigma=new JLabel("\u03C3:");
     private JLabel lbError=new JLabel("Error:");
 
+    
 	
 	public ErrorPanel(){
 		super(new GridBagLayout());

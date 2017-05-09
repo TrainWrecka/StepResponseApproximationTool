@@ -26,8 +26,6 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 	JTabbedPane tabpane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 	
 	private JPanel DefaultPanel = new JPanel(new GridBagLayout());
-
-	
 	
 	
 	private StepresponsePanel DefaultStepresponsePanel = new StepresponsePanel();
@@ -45,6 +43,10 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 	private JPanel TabZeroesPanel=new JPanel(new GridBagLayout());
 	private double ysize;
 	public Font myFont= new Font("Serif", Font.BOLD, 20);
+	
+	public Dimension ErrorPanelDimension;
+	
+	
 	public OutputPanel() {
 		super(new GridBagLayout());	
 		setFont(myFont);
@@ -61,22 +63,33 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 //				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
 		
-		DefaultPanel.add(StepresponsePanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,
+		DefaultPanel.add(StepresponsePanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.NORTHWEST,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		DefaultPanel.add(ZeroesPanel, new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.NORTHEAST,
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
-		DefaultPanel.add(ZeroesPanel, new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,
+		DefaultPanel.add(ErrorPanel, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.SOUTHWEST,	// Wenn y ausdehnung 0.0 in 4k screen nicht symetrisch und wenn full hd dasselbe wenn y ausdehnung 1.0
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
-		DefaultPanel.add(ErrorPanel, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,	// Wenn y ausdehnung 0.0 in 4k screen nicht symetrisch und wenn full hd dasselbe wenn y ausdehnung 1.0
+//		ErrorPanelDimension=StepresponsePanel.getPreferredSize();
+//		DefaultVariablePanel.setSize(ErrorPanelDimension);
+		DefaultPanel.add(DefaultVariablePanel, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.SOUTHEAST,
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
-		DefaultPanel.add(DefaultVariablePanel, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,
-				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
-//		tabpane.addTab("Default", DefaultPanel);
-//		tabpane.addTab("StepresponsePanel", StepresponsePanel);
-//		tabpane.addTab("Zeroes", ZeroesPanel);
-//		tabpane.addTab("Error", ErrorPanel);
+//		DefaultPanel.add(lbk, new GridBagConstraints( 0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.VERTICAL,  
+//				new Insets(0, 0, 0, 0), 0, 0));
+//		DefaultPanel.add(lbwp,new GridBagConstraints( 0, 1, 1, 1, 1.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.VERTICAL,  
+//				new Insets(0, 0, 0, 0), 0, 0));
+//		DefaultPanel.add(lbqp, new GridBagConstraints( 0, 2, 1, 1, 1.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.VERTICAL,  
+//				new Insets(0, 0, 0, 0), 0, 0));
+//		DefaultPanel.add(lbSigma, new GridBagConstraints( 0, 3, 1, 1, 1.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.VERTICAL,  
+//				new Insets(0, 0, 0, 0), 0, 0));
+//		DefaultPanel.add(lbError, new GridBagConstraints( 0, 4, 1, 1, 1.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.VERTICAL,  
+//				new Insets(0, 0, 0, 0), 0, 0));	
+		
+		
+		
 		
 		
 		tabpane.addTab("Default", DefaultPanel);

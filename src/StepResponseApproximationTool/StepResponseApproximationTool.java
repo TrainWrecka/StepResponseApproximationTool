@@ -30,16 +30,16 @@ public class StepResponseApproximationTool extends JFrame {
 	};
 
 	private Mode mode = Mode.FIXED;
-	private int width = 1200, height = 800;
+//	private int width = 1200, height = 800;
 	private Model model = new Model();
 	private Controller controller = new Controller(model, this);
 	private View view = new View(controller);
 	private MenuBar menuBar = new MenuBar(controller, this);
 	private StatusBar statusBar = new StatusBar();
-//	Dimension screenSize= Toolkit.getDefaultToolkit().getScreenSize();	// ScreenSize Problem
-//	int screenRes= Toolkit.getDefaultToolkit().getScreenResolution();	// ScreenSize Problem
-//	int height =screenRes *6;			// ScreenSize Problem
-//	int width = screenRes *8;			// ScreenSize Problem
+	Dimension screenSize= Toolkit.getDefaultToolkit().getScreenSize();	// ScreenSize Problem
+	int screenRes= Toolkit.getDefaultToolkit().getScreenResolution();	// ScreenSize Problem
+	int height =screenSize.height*6/7 ;			// ScreenSize Problem
+	int width = screenSize.width *2/4;			// ScreenSize Problem
 	
 
 	private static enum LAF {
@@ -49,7 +49,7 @@ public class StepResponseApproximationTool extends JFrame {
 	private static LAF laf = LAF.SYSTEM;
 
 	public void init() {
-//		setPreferredSize(new Dimension(width,height));
+		setPreferredSize(new Dimension(width,height));
 
 		
 		
@@ -59,6 +59,11 @@ public class StepResponseApproximationTool extends JFrame {
 		getContentPane().add(view, BorderLayout.CENTER);
 		getContentPane().add(statusBar, BorderLayout.SOUTH);
 		setJMenuBar(menuBar);
+		
+		System.out.println(width);
+//		D
+
+		
 		pack();
 		
 		synchronized (getTreeLock()) {

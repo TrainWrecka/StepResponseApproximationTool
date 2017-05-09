@@ -69,6 +69,7 @@
   		inputPanel.setBorder(MyBorderFactory.createMyBorder("InputPanel"));
  		add(outputPanel,new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
   				new Insets(0, 0, 10, 10), 0, 0));
+ 		
 
  		
   	}
