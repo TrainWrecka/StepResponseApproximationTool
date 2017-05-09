@@ -6,10 +6,16 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.math3.complex.Complex;
 import org.jfree.data.xy.XYSeries;
 
+import com.sun.org.apache.bcel.internal.generic.FMUL;
+
+import matlabfunctions.Filter;
+import matlabfunctions.FilterFactory;
 import matlabfunctions.Filtfilt;
 import matlabfunctions.Matlab;
+import matlabfunctions.SVTools;
 import userinterface.StatusBar;
 
 public class Measurement {
@@ -68,14 +74,16 @@ public class Measurement {
 			} else {
 				//getfirstSignalChange();
 				removeDeadTimeNoise();
-				
+
 			}
 
 			StatusBar.showStatus("Filtered Location: " + stepResponseLocation);
 		}
-		
+
 		removeDeadTime();
 		removeOffset(offset);
+
+		normTime();
 
 		//cutData = cutMeasurement(measurementData);
 		//findData();
@@ -180,8 +188,6 @@ public class Measurement {
 		return false;
 	}
 
-
-
 	/*
 	 * if three columns are found, the format of the data is [time, input, output]
 	 * if two columns are found, the format of the data is [time, output]
@@ -236,7 +242,7 @@ public class Measurement {
 	 */
 	private double getOffset() {
 		double[] tempArray = Arrays.copyOfRange(stepData, 0, unitStepLocation);
-		double offset = mean(tempArray);
+		double offset = Matlab.mean(tempArray);
 		StatusBar.showStatus("Offset:" + Double.toString(offset));
 		return offset;
 	}
@@ -306,14 +312,13 @@ public class Measurement {
 
 		oneOne = new ArrayList<Double>();
 		oneOne.add(1.0);
-		
+
 		Double[] onesArray = new Double[iN];
 		for (int i = 0; i < onesArray.length; i++) {
 			onesArray[i] = 1.0 / iN;
 		}
 
 		while (Math.abs(noiseError) > errorMax) {
-			
 
 			onesArrayList = new ArrayList<Double>();
 			for (double d : onesArray)
@@ -330,7 +335,7 @@ public class Measurement {
 				yFiltered[i] = (stepData[i] - yFilteredList.get(i)) / stepData[i];
 			}
 
-			noiseError = Math.abs(mean(yFiltered));
+			noiseError = Math.abs(Matlab.mean(yFiltered));
 
 			iN--;
 
@@ -346,18 +351,6 @@ public class Measurement {
 	}
 
 	/*
-	 * calculates the mean value of array
-	 * elements
-	 */
-	private static double mean(double[] m) {
-		double sum = 0;
-		for (int i = 0; i < m.length; i++) {
-			sum += m[i];
-		}
-		return sum / m.length;
-	}
-
-	/*
 	 * get first signal change
 	 * only applicable if no noise
 	 */
@@ -370,21 +363,7 @@ public class Measurement {
 			}
 		}
 	}
-	
-	/*
-	 * returns max value of array
-	 */
-	private double max(double[] data) {
-		double max = 0;
-		for (int i = 0; i < data.length - 1; i++) {
-			if (data[i] > max) {
-				max = data[i];
-			}
-		}
-		return max;
-	}
 
-	
 	/*
 	 * removes deadtime if signal is 
 	 * affected by noise
@@ -395,7 +374,7 @@ public class Measurement {
 			start = stepResponseLocation;
 		}
 
-		double max = max(stepData);
+		double max = Matlab.max(stepData);
 
 		for (int i = start; i < stepData.length; i++) {
 			if (stepData[i] <= offset && stepData[i + 1] >= offset) {
@@ -404,8 +383,74 @@ public class Measurement {
 				break;
 			}
 		}
-
 		StatusBar.showStatus("Last offset intersection" + stepResponseLocation);
+
+	}
+
+	private void normTime() {
+		double nor = (175 * 30);
+		double tNorm = Matlab.norm(timeData);
+
+		for (int i = 0; i < timeData.length; i++) {
+			timeData[i] = timeData[i] / tNorm * nor;
+		}
+	}
+
+	public static void fminsearchImpl() {
+		int N = 2;
+	
+		
+		Filter filt = FilterFactory.createButter(N, 1.0);
+	
+		Object[] resi = Matlab.residue(filt.B, filt.A);
+				
+		Complex[] R = (Complex[]) resi[0];
+		Complex[] P = (Complex[]) resi[1];
+		double K = (double) resi[2];
+		
+		//System.out.println(""+K);
+		
+		//optimset
+		
+		//awert
+		
+		//fminsearch
+		
+		
+		
+		
+		//		%options für den fminsearch werden gesetzt
+		//		options = optimset('MaxFunEvals', 200*length(P), 'MaxIter', 200*length(P),'TolFun',1e-24, 'TolX', 1e-24);
+		//		
+		//		[x0,k]=awert(N, P);
+		//		X = fminsearch(@(x) FehlerFunktion(t, y_soll, x, N),x0,options);
+		//		
+		//		for n=(k)
+		//		    [X, output] = fminsearch(@(x) FehlerFunktion(t, y_soll, x, N),X,options);
+		//		e=FehlerFunktion(t, y_soll, x, N);
+		//		 if (e<1e-15) %Bestimmt ab welchem Fehler man nicht mehr in den fminsearch muss. 
+		//		     %Falls die Fehlerabweichung nicht erreicht wird, läuft er die forcierten 
+		//		     %Werte des awertes ab.
+		//		 break
+		//		 end
+		//		end
+
+	}
+
+	public static void main(String[] args) {
+		fminsearchImpl();
+	}
+	
+	private double errorFunction(double[] stepTarget, int N){
+		double error = 0;
+		
+		//[y_ist, t] = schritt(x, t, N);
+		
+		for(int i = 0; i < stepTarget.length; i++){
+			error += Math.pow(stepTarget[i] - stepData[i], 2);
+		}
+		
+		return error;
 	}
 
 }
