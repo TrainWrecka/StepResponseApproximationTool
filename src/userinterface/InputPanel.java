@@ -396,6 +396,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			StatusBar.showStatus("File does not exist");
 		}
 
 		try {
@@ -403,6 +404,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
+			StatusBar.showStatus("File does not exist");
 		}
 
 		StatusBar.showStatus(fileChooser.getSelectedFile().getName() + " loading...");
