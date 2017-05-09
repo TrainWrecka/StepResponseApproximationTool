@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 
 public class ErrorPanel extends JPanel implements ActionListener{
 	
-	private Plots Errorplot = new Plots("null");
+	public Plots Errorplot = new Plots("null");
 	
 	
 	private JLabel lbk =new JLabel("K:");

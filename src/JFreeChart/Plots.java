@@ -10,6 +10,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -25,12 +27,15 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-public class Plots extends JPanel {
+public class Plots extends JPanel{
 
 	// create a dataset...
 	XYSeriesCollection dataset = new XYSeriesCollection();
 	Dimension screensize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/10, Toolkit.getDefaultToolkit().getScreenSize().height/7);
 
+	public ChartPanel ErrorChartPanel;
+	public static ChartPanel StepresponseChartPanel;
+	public ChartPanel ZeroesChartPanel;
 
 	public Plots(String type) {
 		this.setLayout(new GridBagLayout());
@@ -85,26 +90,26 @@ public class Plots extends JPanel {
 		plot.setBackgroundPaint(Color.WHITE);
 		plot.setDomainGridlinePaint(Color.black);
 		plot.setRangeGridlinePaint(Color.black);
-
-		ChartPanel chartPanel = new ChartPanel(chart);
-//		chartPanel.setSize(screensize);
-
-		add(chartPanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 0, 0), 0, 0));
-
-	}
-
-	private void createStepresponsePlot() {
-		JFreeChart chart = ChartFactory.createXYLineChart("Input Data", "t [s]", "U [V]", dataset);
+		
 		ChartPanel chartPanel = new ChartPanel(chart);
 //		chartPanel.setSize(screensize);
 		
 		add(chartPanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 				new Insets(0, 0, 0, 0), 0, 0));
+		
+	}
+
+	private void createStepresponsePlot() {
+		JFreeChart chart = ChartFactory.createXYLineChart("Input Data", "t [s]", "U [V]", dataset);
+		StepresponseChartPanel = new ChartPanel(chart);
+//		chartPanel.setSize(screensize);
+		add(StepresponseChartPanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+				new Insets(0, 0, 0, 0), 0, 0));
 		XYPlot plot = (XYPlot) chart.getPlot();
 		plot.setBackgroundPaint(Color.WHITE);
 		plot.setDomainGridlinePaint(Color.black);
 		plot.setRangeGridlinePaint(Color.black);
+		
 	}
 
 	public void addSeries(XYSeries series) {
@@ -114,5 +119,17 @@ public class Plots extends JPanel {
 	public void clearSeries(){
 		dataset.removeAllSeries();
 	}
-
+	
+	
+    public static void zoomChartAxis(ChartPanel chartP, boolean increase)
+    {              
+        int width = chartP.getMaximumDrawWidth() - chartP.getMinimumDrawWidth();
+        int height = chartP.getMaximumDrawHeight() - chartP.getMinimumDrawWidth();        
+        if(increase){
+           chartP.zoomInBoth(width/2, height/2);
+        }else{
+           chartP.zoomOutBoth(width/2, height/2);
+        }
+	
+    }
 }

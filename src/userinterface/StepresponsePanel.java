@@ -25,7 +25,7 @@ import javax.swing.JLabel;
 
 public class StepresponsePanel extends JPanel implements ActionListener {
 
-	private Plots StepResponseplot = new Plots("Stepresponse");
+	public Plots StepResponseplot = new Plots("Stepresponse");
 
 
 	public StepresponsePanel() {

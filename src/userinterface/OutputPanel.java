@@ -2,6 +2,10 @@ package userinterface;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.Observable;
 
 import java.awt.GridBagLayout;
@@ -21,7 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class OutputPanel extends JPanel implements ActionListener, ChangeListener {
+public class OutputPanel extends JPanel implements ActionListener, ChangeListener, MouseWheelListener {
 
 	JTabbedPane tabpane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 	
@@ -105,6 +109,7 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 				new Insets(0, 0, 0, 0), 0, 0));
 		
 		tabpane.addChangeListener(this);
+		StepresponsePanel.addMouseWheelListener(this);
 	}
 	
 	
@@ -165,4 +170,19 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
         
         
 	}
+
+
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		if(e.getSource()==StepresponsePanel){
+		Plots.zoomChartAxis(Plots.StepresponseChartPanel, true);
+
+	}
+	}
+
+
+
+	
 }
+

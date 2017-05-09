@@ -73,16 +73,16 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		// add Buttons to Panel
 
 
-		add(btLoad, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,
-				new Insets(10, 90, 0, 10), 0, 0));
+		add(btLoad, new GridBagConstraints(0, 0, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 5, 0, 10), 0, 0));
 
-		add(rbtAuto, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,
-				new Insets(10, 90, 0, 10), 0, 0));
-		add(rbtManual, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,
-				new Insets(5, 90, 0, 10), 0, 0));
+		add(rbtAuto, new GridBagConstraints(0, 1, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 5, 0, 10), 0, 0));
+		add(rbtManual, new GridBagConstraints(0, 2, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
+				new Insets(5, 5, 0, 10), 0, 0));
 
-		add(btRun, new GridBagConstraints(0, 25, 2, 1, 0.0, 1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,
-				new Insets(10, 90, 0, 10), 0, 0));
+		add(btRun, new GridBagConstraints(0, 25, 2, 1, 1.0, 1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 5, 0, 10), 0, 0));
 
 		// add Labels to Panel	
 		add(lbOrdnung, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,
@@ -197,7 +197,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		
 		for (int i = 0; i < 10; i++) {
 			
-			if (i < Ordnung1) {
+			if (i < Ordnung1& rbtAuto.isSelected()==false) {
 				lbwp[i].setEnabled(true);
 				lbqp[i].setEnabled(true);
 				tfwp[i].setEnabled(true);
@@ -209,7 +209,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 				tfqp[i].setEnabled(false);
 			}
 		}
-		if ((Ordnung1%2)!=0){
+		if ((Ordnung1%2)!=0&rbtAuto.isSelected()==false){
 			lbSigma.setEnabled(true);
 			tfSigma.setEnabled(true);
 		}
