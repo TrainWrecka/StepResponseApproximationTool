@@ -29,7 +29,6 @@ public class SVTools {
 		return res;
 	}
 
-
 	public static final Object[] schrittIFFT(double[] B, double[] A, double fs, int N) {
 		double[] h = null;
 
@@ -85,7 +84,9 @@ public class SVTools {
 	public static final Object[] step(double[] B, double[] A, double[] t) {
 
 		// Koeff. der höchste Potenz des Nenners auf 1.0 normieren:
+		B = B.clone();
 		B = Matlab.multiply(B, 1.0 / A[0]);
+		A = A.clone();
 		A = Matlab.multiply(A, 1.0 / A[0]);
 
 		// 1e-12 an A anhängen und Residuen rechnen
