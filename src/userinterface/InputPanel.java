@@ -22,6 +22,7 @@ import com.opencsv.CSVReader;
 import model.Model;
 
 import java.awt.*;
+import java.awt.Window.Type;
 import java.util.List;
 import java.util.Observable;
 
@@ -32,8 +33,8 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	// Buttons
 	public JButton btLoad = new JButton("Load");
 	private JButton btRun = new JButton("Run");
-	private JRadioButton rbtAuto = new JRadioButton("Auto");
-	private JRadioButton rbtManual = new JRadioButton("Manual");
+	private JRadioButton rbtAutomatically = new JRadioButton("Automatically");
+	private JRadioButton rbtManually = new JRadioButton("Manually");
 	// Buttongroup
 	private ButtonGroup gruppeAuto_Manual = new ButtonGroup();
 	// JCombobox
@@ -60,15 +61,18 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 
 	private String Ordnung;
 	private double Ordnung1;
+	
+	
+	private JFrame settingsFrame;
 
 //	private StatusBar statusBar = new StatusBar();
 
 	public InputPanel() {
 		super(new GridBagLayout());
 		// create Buttongroup
-		rbtAuto.setSelected(true);
-		gruppeAuto_Manual.add(rbtAuto);
-		gruppeAuto_Manual.add(rbtManual);
+		rbtAutomatically.setSelected(true);
+		gruppeAuto_Manual.add(rbtAutomatically);
+		gruppeAuto_Manual.add(rbtManually);
 
 		// add Buttons to Panel
 
@@ -76,9 +80,9 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		add(btLoad, new GridBagConstraints(0, 0, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
 				new Insets(10, 5, 0, 10), 0, 0));
 
-		add(rbtAuto, new GridBagConstraints(0, 1, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
+		add(rbtAutomatically, new GridBagConstraints(0, 1, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
 				new Insets(10, 5, 0, 10), 0, 0));
-		add(rbtManual, new GridBagConstraints(0, 2, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
+		add(rbtManually, new GridBagConstraints(0, 2, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
 				new Insets(5, 5, 0, 10), 0, 0));
 
 		add(btRun, new GridBagConstraints(0, 25, 2, 1, 1.0, 1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
@@ -140,8 +144,8 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("CSV Files", "csv"));
 
 		cbOrdnungsauswahl.addItemListener(this);
-		rbtAuto.addActionListener(this);
-		rbtManual.addActionListener(this);
+		rbtAutomatically.addActionListener(this);
+		rbtManually.addActionListener(this);
 
 	}
 	private double[] stringToCoeff(String s) {
@@ -161,16 +165,16 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	// Ausgrauen von allen Textfeldern, Labels, Ordnungsauswahl und Combobox bei entsprechender Aktion
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == rbtAuto) {
+		if (e.getSource() == rbtAutomatically) {
 			for (int i = 0; i < 10; i++) {
 				lbwp[i].setEnabled(false);
 				lbqp[i].setEnabled(false);
 				tfwp[i].setEnabled(false);
-				tfqp[i].setEnabled(false);
+				tfqp[i].setEnabled(false);				
 			}
 			lbSigma.setEnabled(false);
 			tfSigma.setEnabled(false);
-		} else if(e.getSource()==rbtManual){
+		} else if(e.getSource()==rbtManually){
 			lbwp[0].setEnabled(true);
 			lbqp[0].setEnabled(true);
 			tfwp[0].setEnabled(true);
@@ -197,7 +201,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		
 		for (int i = 0; i < 10; i++) {
 			
-			if (i < Ordnung1& rbtAuto.isSelected()==false) {
+			if (i < Ordnung1& rbtAutomatically.isSelected()==false) {
 				lbwp[i].setEnabled(true);
 				lbqp[i].setEnabled(true);
 				tfwp[i].setEnabled(true);
@@ -209,7 +213,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 				tfqp[i].setEnabled(false);
 			}
 		}
-		if ((Ordnung1%2)!=0&rbtAuto.isSelected()==false){
+		if ((Ordnung1%2)!=0&rbtAutomatically.isSelected()==false){
 			lbSigma.setEnabled(true);
 			tfSigma.setEnabled(true);
 		}

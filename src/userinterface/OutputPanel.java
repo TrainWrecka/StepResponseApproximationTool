@@ -117,6 +117,7 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 		tabpane.addChangeListener(this);
 		StepresponsePanel.addMouseWheelListener(this);
 		ZeroesPanel.addMouseWheelListener(this);
+		ErrorPanel.addMouseWheelListener(this);
 	}
 	
 	

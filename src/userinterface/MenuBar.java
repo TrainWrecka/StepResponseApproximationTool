@@ -1,5 +1,9 @@
 package userinterface;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +26,10 @@ public class MenuBar extends JMenuBar implements Observer, ActionListener {
 	JFrame frame;
 	Controller controller;
 	public JFrame settingsFrame;
+	private SettingsPanel settingsPanel=new SettingsPanel();
+	private double xPosition;
+	private double yPosition;
+	
 
 	public MenuBar(Controller controller, JFrame frame) {
 		this.frame = frame;
@@ -57,12 +65,17 @@ public class MenuBar extends JMenuBar implements Observer, ActionListener {
 		
 		optionsMenu=new JMenu("Options");
 		settingsItem=new JMenuItem("Settings");
-		exampleItem=new JMenuItem("Example");
 		settingsItem.setActionCommand("Settings");
 		settingsItem.addActionListener(this);
 		optionsMenu.add(settingsItem);
-		optionsMenu.add(exampleItem);
 		add(optionsMenu);
+		
+		if(Toolkit.getDefaultToolkit().getScreenSize().getWidth()==3840){
+			xPosition=600;
+		}
+		else{
+			xPosition=320;
+		}
 		
 		
 	}
@@ -93,10 +106,20 @@ public class MenuBar extends JMenuBar implements Observer, ActionListener {
 			}
 		}
 		if(e.getActionCommand().equals("Settings")){
-			settingsFrame= new JFrame();
+			settingsFrame= new JFrame("Settings");
 			settingsFrame.setType(Type.POPUP);
 			settingsFrame.setVisible(true);
+			settingsFrame.setResizable(false);
+			settingsFrame.setLayout(new GridBagLayout());
+			settingsFrame.add(settingsPanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+					new Insets(0, 0, 0, 0), 0, 0));
+			settingsFrame.setPreferredSize(settingsPanel.getPreferredSize());
+			settingsFrame.setSize((int) settingsFrame.getPreferredSize().getWidth()+50, (int) settingsFrame.getPreferredSize().getHeight()+100);
 			
+			settingsFrame.setLocation((int) (frame.getLocation().getX()-xPosition), (int) frame.getLocation().getY());
+			
+//			System.out.println(settingsFrame.getSize());
+			System.out.println(settingsPanel.getSize().getWidth());
 		}
 	}
 }

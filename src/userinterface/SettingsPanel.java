@@ -30,7 +30,7 @@ public class SettingsPanel extends JPanel implements ActionListener, ItemListene
 
 	private Controller controller;
 	
-	private JLabel lbLaguerre=new JLabel();
+	private JLabel lbLaguerre=new JLabel("Laguerrefilter Accuracy");
 	private JLabel lbSimplexOptimizerRelative=new JLabel("Simplex Optimizer relative Optimum");
 	private JLabel lbSimplexOptimizerAbsolute=new JLabel("Simplex Optimizer absolute Optimum"); 
 	private JLabel lbMaxEval=new JLabel("Max Eval length");
@@ -41,7 +41,8 @@ public class SettingsPanel extends JPanel implements ActionListener, ItemListene
 	private JLabel lbFilterSignal=new JLabel("Filter Signal");
 	private JLabel lbShowFilteredSignal=new JLabel("Show filtered Signal");
 	
-	
+	private JPanel Optimizer=new JPanel();
+	private JPanel Filter=new JPanel();
 	
 	
 	private JTextField tfLaguerre=new JTextField();
@@ -60,14 +61,59 @@ public class SettingsPanel extends JPanel implements ActionListener, ItemListene
 	private ButtonGroup groupFilterSignal = new ButtonGroup();
 	private ButtonGroup groupShowFilteredSignal=new ButtonGroup();
 	
+	private JButton btApply=new JButton("Apply");
+	private JButton btOk=new JButton("OK");
+	private JButton btCancel=new JButton("Cancel");
+	private JButton btdefault=new JButton("Default Settings");
+	
 	
 	
 	public SettingsPanel() {
 		super(new GridBagLayout());
+		
 		groupFilterSignal.add(rbtFilterSignalYes);
-//		groupFilterSignal.add(FilterSignal);
+		groupFilterSignal.add(rbtFilterSignalNo);
 		
+		groupShowFilteredSignal.add(rbtShowFilteredSignalYes);
+		groupShowFilteredSignal.add(rbtShowFilteredSignalNo);
 		
+		add(lbLaguerre, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 10, 0, 0), 0, 0));
+		add(tfLaguerre, new GridBagConstraints(1, 0, 2, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		add(lbSimplexOptimizerRelative, new GridBagConstraints(0, 1, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 10, 0, 0), 0, 0));
+		add(tfSimplexOptimizerRelative, new GridBagConstraints(1, 1, 2, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		add(lbSimplexOptimizerAbsolute ,new GridBagConstraints(0, 3, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 10, 0, 0), 0, 0));
+		add(tfSimplexOptimizerAbsolute, new GridBagConstraints(1, 3, 2, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		add(lbNelderMeadSimplexSteps, new GridBagConstraints(0, 4, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 10, 0, 0), 0, 0));
+		add(tfNelderMeadSimplexSteps, new GridBagConstraints(1, 4, 2, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		add(lbMaxEval, new GridBagConstraints(0, 5, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 10, 0, 0), 0, 0));
+		add(tfMaxEval, new GridBagConstraints(1, 5, 2, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		
+		add(lbFilterSignal, new GridBagConstraints(0, 6, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 10, 0, 0), 0, 0));
+		add(rbtFilterSignalYes, new GridBagConstraints(1, 6, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 0), 0, 0));
+		add(rbtFilterSignalNo, new GridBagConstraints(2, 6, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		
+		add(lbShowFilteredSignal, new GridBagConstraints(0, 7, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 10, 0, 0), 0, 0));
+		add(rbtShowFilteredSignalYes, new GridBagConstraints(1, 7, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 0), 0, 0));
+		add(rbtShowFilteredSignalNo, new GridBagConstraints(2, 7, 2, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		
+//		setBorder(MyBorderFactory.createMyBorder("Settings"));
+
 		
 		}
 	
