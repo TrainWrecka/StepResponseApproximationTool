@@ -33,16 +33,14 @@
  import org.jfree.data.xy.XYSeries;
  import org.jfree.data.xy.XYSeriesCollection;
 
+ import userinterface.MenuBar;
 
-
- import JFreeChart.Plots;
  import model.Model;
  import javax.swing.JButton;
  import javax.swing.JFileChooser;
  import javax.swing.JPanel;
  import com.opencsv.CSVReader;
   
- import JFreeChart.Plots;
  import javafx.stage.FileChooser;
   
   public class View extends JPanel implements Observer, ActionListener{
@@ -52,6 +50,7 @@
   	private OutputPanel outputPanel = new OutputPanel();
 	private Controller controller;
 	private File file;
+	public SettingsPanel settingsPanel=new SettingsPanel();
 
 	double[][] measurementData;
 
@@ -69,8 +68,6 @@
   		inputPanel.setBorder(MyBorderFactory.createMyBorder("InputPanel"));
  		add(outputPanel,new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
   				new Insets(0, 0, 10, 10), 0, 0));
- 		
-
  		
   	}
   

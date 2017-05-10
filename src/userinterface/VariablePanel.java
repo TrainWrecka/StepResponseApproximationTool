@@ -12,7 +12,6 @@ import java.awt.GridBagLayoutInfo;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
-import JFreeChart.Plots;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;

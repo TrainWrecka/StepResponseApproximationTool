@@ -102,7 +102,6 @@ public class StepResponseApproximationTool extends JFrame {
 				validate();
 				break;
 		}
-
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = getSize();
 		if (frameSize.height > screenSize.height) {

@@ -11,7 +11,7 @@ import java.awt.GridBagLayoutInfo;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
-import JFreeChart.Plots;
+import JFreeChart.StepResponsePlot;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -25,7 +25,7 @@ import javax.swing.JLabel;
 
 public class StepresponsePanel extends JPanel implements ActionListener {
 
-	public Plots StepResponseplot = new Plots("Stepresponse");
+	public StepResponsePlot StepResponseplot = new StepResponsePlot("Stepresponse");
 
 
 	public StepresponsePanel() {

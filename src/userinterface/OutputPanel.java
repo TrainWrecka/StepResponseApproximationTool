@@ -16,7 +16,9 @@ import java.awt.GridBagLayoutInfo;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
-import JFreeChart.Plots;
+import JFreeChart.ErrorPlot;
+import JFreeChart.StepResponsePlot;
+import JFreeChart.ZeroesPlot;
 import model.Model;
 
 import javax.swing.JPanel;
@@ -31,6 +33,9 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 	
 	private JPanel DefaultPanel = new JPanel(new GridBagLayout());
 	
+	
+	public ErrorPlot Errorplot = new ErrorPlot("ERROR");
+
 	
 	private StepresponsePanel DefaultStepresponsePanel = new StepresponsePanel();
 	private JPanel DefaultZeroesPanel = new ZeroesPanel();
@@ -75,8 +80,9 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 		DefaultPanel.add(ErrorPanel, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.SOUTHWEST,	// Wenn y ausdehnung 0.0 in 4k screen nicht symetrisch und wenn full hd dasselbe wenn y ausdehnung 1.0
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
-//		ErrorPanelDimension=StepresponsePanel.getPreferredSize();
-		DefaultVariablePanel.setMinimumSize(StepresponsePanel.StepResponseplot.StepresponseChartPanel.getMinimumSize());
+		
+		
+		DefaultVariablePanel.setMinimumSize(StepresponsePanel.StepResponseplot.getMinimumSize());
 		DefaultPanel.add(DefaultVariablePanel, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.SOUTHEAST,
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
@@ -110,6 +116,7 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 		
 		tabpane.addChangeListener(this);
 		StepresponsePanel.addMouseWheelListener(this);
+		ZeroesPanel.addMouseWheelListener(this);
 	}
 	
 	
@@ -173,12 +180,29 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 
 
 
+
+
+
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
+		
+		
 		if(e.getSource()==StepresponsePanel){
-		Plots.zoomChartAxis(Plots.StepresponseChartPanel, true);
+			if(e.getWheelRotation()<0){
+				StepResponsePlot.zoomChartAxis(StepResponsePlot.StepresponseChartPanel, true);
+			}else{
+				StepResponsePlot.zoomChartAxis(StepResponsePlot.StepresponseChartPanel, false);				
+			}
+		}
+		
+		if(e.getSource()==ZeroesPanel){
+			if(e.getWheelRotation()<0){
+				ZeroesPlot.zoomChartAxis(ZeroesPlot.ZeroesChartPanel, true);
+			}else{
+				ZeroesPlot.zoomChartAxis(ZeroesPlot.ZeroesChartPanel, false);
+			}
+		}
 
-	}
 	}
 
 

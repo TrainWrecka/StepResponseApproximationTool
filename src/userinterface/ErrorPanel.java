@@ -11,7 +11,8 @@ import java.awt.GridBagLayoutInfo;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
-import JFreeChart.Plots;
+import JFreeChart.ErrorPlot;
+//import JFreeChart.Plots;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -19,7 +20,7 @@ import javax.swing.JLabel;
 
 public class ErrorPanel extends JPanel implements ActionListener{
 	
-	public Plots Errorplot = new Plots("null");
+	public ErrorPlot Errorplot = new ErrorPlot("Error");
 	
 	
 	private JLabel lbk =new JLabel("K:");
