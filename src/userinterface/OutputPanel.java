@@ -76,7 +76,7 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
 //		ErrorPanelDimension=StepresponsePanel.getPreferredSize();
-//		DefaultVariablePanel.setSize(ErrorPanelDimension);
+		DefaultVariablePanel.setMinimumSize(StepresponsePanel.StepResponseplot.StepresponseChartPanel.getMinimumSize());
 		DefaultPanel.add(DefaultVariablePanel, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.SOUTHEAST,
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
