@@ -6,7 +6,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.math3.analysis.MultivariateFunction;
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.exception.TooManyEvaluationsException;
+import org.apache.commons.math3.optim.InitialGuess;
+import org.apache.commons.math3.optim.MaxEval;
+import org.apache.commons.math3.optim.PointValuePair;
+import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
+import org.apache.commons.math3.optim.nonlinear.scalar.ObjectiveFunction;
+import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.NelderMeadSimplex;
+import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.SimplexOptimizer;
+import org.apache.commons.math3.util.FastMath;
 import org.jfree.data.xy.XYSeries;
 
 import com.sun.org.apache.bcel.internal.generic.FMUL;
@@ -25,6 +35,9 @@ public class Measurement {
 	private double[] inputData;
 	private double[] timeData;
 	private double[] stepData;
+	
+	
+	private double[] approxData;
 
 	private List<String[]> measurementList;
 
@@ -46,6 +59,9 @@ public class Measurement {
 		measurementData = convertList(measurementList);
 
 		extractData();
+
+	
+
 		if (input) {
 			getStepLocation();
 		} else {
@@ -70,32 +86,37 @@ public class Measurement {
 			stepResponseLocation = 0;
 			filtFunction();
 			if (input) {
-				removeDeadTimeNoise();
+				//removeDeadTimeNoise();
 			} else {
 				//getfirstSignalChange();
-				removeDeadTimeNoise();
+				//removeDeadTimeNoise();
 
 			}
+			
+			
 
 			StatusBar.showStatus("Filtered Location: " + stepResponseLocation);
 		}
 
-		removeDeadTime();
+		//removeDeadTime();
 		removeOffset(offset);
 
-		normTime();
+		//normTime();
+		
+		fminsearchImpl();
 
-		//cutData = cutMeasurement(measurementData);
-		//findData();
+		
 
 		plotData.removeStepresponseData();
-		//plotData.setStepresponseData(cutData);
-		//plotData.setStepresponseData(measurementData);
+		
+		/*
 		if (input) {
 			plotData.setStepresponseData(timeData, inputData, stepData);
 		} else {
 			plotData.setStepresponseData(timeData, stepData);
-		}
+		}*/
+		
+		plotData.setStepresponseData(timeData, stepData, approxData);
 
 		StatusBar.showStatus("Number of points: " + timeData.length);
 		StatusBar.showStatus("Last entry: " + timeData[timeData.length - 1]);
@@ -395,62 +416,99 @@ public class Measurement {
 			timeData[i] = timeData[i] / tNorm * nor;
 		}
 	}
-
-	public static void fminsearchImpl() {
-		int N = 2;
 	
+	private static class Target implements MultivariateFunction {
+		double[] t;
+		double[] y_soll;
+		int order;
+		double evals = 0;
+		double[] poles;
+		double error;
 		
-		Filter filt = FilterFactory.createButter(N, 1.0);
-	
+		public Target(double[] t, double[] y_soll, int order){
+			this.t= t;
+			this.y_soll = y_soll;
+			this.order = order;
+		}
+		
+		public double value(double[] variables) {
+			
+			final double[] poles = variables;
+			//final double y = variables[1];
+			double error = Approximation.errorFunction(t, y_soll, poles, order);
+			System.out.println(""+error);
+			for(int i = 0; i < poles.length; i++){
+				System.out.println("Nr:"+i+" val:"+ poles[i]);
+			}
+			
+			evals++;
+			System.out.println("Evals: "+evals);
+			System.out.println("Error: "+error);
+			
+			this.error = error;
+			this.poles = poles;
+			
+			
+			
+			return error;
+			
+			//return FastMath.cos(x) * FastMath.sin(y);
+		}
+	}
+
+	public void fminsearchImpl() {
+		int order = 4;
+
+		Filter filt = FilterFactory.createButter(order, 1.0);
+
 		Object[] resi = Matlab.residue(filt.B, filt.A);
-				
+
 		Complex[] R = (Complex[]) resi[0];
 		Complex[] P = (Complex[]) resi[1];
 		double K = (double) resi[2];
 		
-		//System.out.println(""+K);
+		Object[] resi1 = Approximation.Awert(order, P);
+		double[] initPoles = (double[])resi1[0];
+		int k = (int)resi1[1];
 		
-		//optimset
+		double[] nelderValues = new double[order+1];
 		
-		//awert
+		for(int i = 0; i < nelderValues.length; i++){
+			nelderValues[i] = 0.2;
+		}
 		
-		//fminsearch
+		SimplexOptimizer optimizer = new SimplexOptimizer(1e-16, 1e-16);
+		Target target = new Target(timeData, stepData, order);
+		PointValuePair optimum = null;
+		double[] approxPoles = null;
+		boolean flag = false;
 		
+		try {
+			 optimum = optimizer.optimize(new MaxEval(1000*P.length), new ObjectiveFunction(target), GoalType.MINIMIZE,
+					new InitialGuess(initPoles), new NelderMeadSimplex(nelderValues));
+		} catch (TooManyEvaluationsException e) {
+			approxPoles = target.poles;
+			flag = true;
+		}
 		
+	
+		if(flag == false){
+			approxPoles = optimum.getPoint();
+		}
+		 		
+		Object[] result = Approximation.schritt(approxPoles, timeData, order);
 		
+		approxData = (double[]) result[0];
 		
-		//		%options für den fminsearch werden gesetzt
-		//		options = optimset('MaxFunEvals', 200*length(P), 'MaxIter', 200*length(P),'TolFun',1e-24, 'TolX', 1e-24);
-		//		
-		//		[x0,k]=awert(N, P);
-		//		X = fminsearch(@(x) FehlerFunktion(t, y_soll, x, N),x0,options);
-		//		
-		//		for n=(k)
-		//		    [X, output] = fminsearch(@(x) FehlerFunktion(t, y_soll, x, N),X,options);
-		//		e=FehlerFunktion(t, y_soll, x, N);
-		//		 if (e<1e-15) %Bestimmt ab welchem Fehler man nicht mehr in den fminsearch muss. 
-		//		     %Falls die Fehlerabweichung nicht erreicht wird, läuft er die forcierten 
-		//		     %Werte des awertes ab.
-		//		 break
-		//		 end
-		//		end
 
 	}
 
 	public static void main(String[] args) {
-		fminsearchImpl();
+		
+
 	}
+
 	
-	private double errorFunction(double[] stepTarget, int N){
-		double error = 0;
-		
-		//[y_ist, t] = schritt(x, t, N);
-		
-		for(int i = 0; i < stepTarget.length; i++){
-			error += Math.pow(stepTarget[i] - stepData[i], 2);
-		}
-		
-		return error;
-	}
+	
 
 }
