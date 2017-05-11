@@ -12,7 +12,7 @@ import java.awt.GridBagLayoutInfo;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
-import JFreeChart.ZeroesPlot;
+import JFreeChart.Plots;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -26,7 +26,7 @@ import javax.swing.JLabel;
 public class ZeroesPanel extends JPanel implements ActionListener{
 	
 	
-	public ZeroesPlot Zeroesplot=new ZeroesPlot("null");
+	private Plots Zeroesplot=new Plots("null");
 	
 	
 	private JLabel lbk =new JLabel("K:");
