@@ -22,7 +22,6 @@ import com.opencsv.CSVReader;
 import model.Model;
 
 import java.awt.*;
-import java.awt.Window.Type;
 import java.util.List;
 import java.util.Observable;
 
@@ -33,12 +32,12 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	// Buttons
 	public JButton btLoad = new JButton("Load");
 	private JButton btRun = new JButton("Run");
-	private JRadioButton rbtAutomatically = new JRadioButton("Automatically");
-	private JRadioButton rbtManually = new JRadioButton("Manually");
+	private JRadioButton rbtAuto = new JRadioButton("Auto");
+	private JRadioButton rbtManual = new JRadioButton("Manual");
 	// Buttongroup
 	private ButtonGroup gruppeAuto_Manual = new ButtonGroup();
 	// JCombobox
-	private String comboBoxListe[] = { ""+2, ""+3, ""+4, ""+5, ""+6, ""+7, ""+8, ""+9, ""+10 };
+	private String comboBoxListe[] = {""+2, ""+3, ""+4, ""+5, ""+6, ""+7, ""+8, ""+9, ""+10 };
 	private JComboBox cbOrdnungsauswahl = new JComboBox(comboBoxListe);
 	// Labels
 
@@ -61,32 +60,30 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 
 	private String Ordnung;
 	private double Ordnung1;
-	
-	
-	private JFrame settingsFrame;
 
 //	private StatusBar statusBar = new StatusBar();
 
 	public InputPanel() {
 		super(new GridBagLayout());
+
 		// create Buttongroup
-		rbtAutomatically.setSelected(true);
-		gruppeAuto_Manual.add(rbtAutomatically);
-		gruppeAuto_Manual.add(rbtManually);
+		rbtAuto.setSelected(true);
+		gruppeAuto_Manual.add(rbtAuto);
+		gruppeAuto_Manual.add(rbtManual);
 
 		// add Buttons to Panel
 
 
-		add(btLoad, new GridBagConstraints(0, 0, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
-				new Insets(10, 5, 0, 10), 0, 0));
+		add(btLoad, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,
+				new Insets(10, 90, 0, 10), 0, 0));
 
-		add(rbtAutomatically, new GridBagConstraints(0, 1, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
-				new Insets(10, 5, 0, 10), 0, 0));
-		add(rbtManually, new GridBagConstraints(0, 2, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
-				new Insets(5, 5, 0, 10), 0, 0));
+		add(rbtAuto, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,
+				new Insets(10, 90, 0, 10), 0, 0));
+		add(rbtManual, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,
+				new Insets(5, 90, 0, 10), 0, 0));
 
-		add(btRun, new GridBagConstraints(0, 25, 2, 1, 1.0, 1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
-				new Insets(10, 5, 0, 10), 0, 0));
+		add(btRun, new GridBagConstraints(0, 25, 2, 1, 0.0, 1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,
+				new Insets(10, 90, 0, 10), 0, 0));
 
 		// add Labels to Panel	
 		add(lbOrdnung, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,
@@ -102,7 +99,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 			add(lbwp[i], new GridBagConstraints(0, wpPlacement, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START,
 					GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 			add(tfwp[i], new GridBagConstraints(1, wpPlacement, 1, 1, 1.0, 0.0, GridBagConstraints.FIRST_LINE_START,
-					GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+					GridBagConstraints.BOTH, new Insets(5, 0, 0, 0), 0, 0));
 			
 			lbwp[i].setEnabled(false);
 			tfwp[i].setEnabled(false);
@@ -115,7 +112,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 			add(lbqp[i], new GridBagConstraints(0, qpPlacement, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START,
 					GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 			add(tfqp[i], new GridBagConstraints(1, qpPlacement, 1, 1, 1.0, 0.0, GridBagConstraints.FIRST_LINE_START,
-					GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+					GridBagConstraints.BOTH, new Insets(5, 0, 0, 0), 0, 0));
 			lbqp[i].setEnabled(false);
 			tfqp[i].setEnabled(false);
 			qpPlacement = qpPlacement + 2;
@@ -130,7 +127,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		add(lbSigma, new GridBagConstraints(0, 24, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE,
 				new Insets(0, 0, 0, 0), 0, 0));
 		add(tfSigma, new GridBagConstraints(1, 24, 1, 1, 0.0, 0.0, GridBagConstraints.FIRST_LINE_START, GridBagConstraints.BOTH,
-				new Insets(0, 0, 0, 0), 0, 0));
+				new Insets(5, 0, 0, 0), 0, 0));
 
 		// Combobox platzieren
 //		cbOrdnungsauswahl.setPreferredSize(new Dimension(50, 20));
@@ -139,13 +136,13 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 
 
 		//file chooser options
-		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home") + "/Desktop/SignaleCSV"));
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("CSV Files", "csv"));
 
 		cbOrdnungsauswahl.addItemListener(this);
-		rbtAutomatically.addActionListener(this);
-		rbtManually.addActionListener(this);
+		rbtAuto.addActionListener(this);
+		rbtManual.addActionListener(this);
 
 	}
 	private double[] stringToCoeff(String s) {
@@ -165,28 +162,26 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	// Ausgrauen von allen Textfeldern, Labels, Ordnungsauswahl und Combobox bei entsprechender Aktion
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == rbtAutomatically) {
+		if (e.getSource() == rbtAuto) {
 			for (int i = 0; i < 10; i++) {
 				lbwp[i].setEnabled(false);
 				lbqp[i].setEnabled(false);
 				tfwp[i].setEnabled(false);
-				tfqp[i].setEnabled(false);				
+				tfqp[i].setEnabled(false);
 			}
 			lbSigma.setEnabled(false);
 			tfSigma.setEnabled(false);
-		} else if(e.getSource()==rbtManually){
+		} else {
 			lbwp[0].setEnabled(true);
 			lbqp[0].setEnabled(true);
 			tfwp[0].setEnabled(true);
 			tfqp[0].setEnabled(true);
-			lbwp[1].setEnabled(true);
-			lbqp[1].setEnabled(true);
-			tfwp[1].setEnabled(true);
-			tfqp[1].setEnabled(true);
-
+			lbSigma.setEnabled(true);
+			tfSigma.setEnabled(true);
 		}
 		if(e.getSource()==btLoad){
 			if (fileChooser.showOpenDialog(getParent()) == JFileChooser.APPROVE_OPTION) {
+				controller.setOrder(Integer.parseInt((String) cbOrdnungsauswahl.getSelectedItem()));
 				controller.setMeasurement(readCSV());
 		}
 		}
@@ -201,7 +196,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		
 		for (int i = 0; i < 10; i++) {
 			
-			if (i < Ordnung1& rbtAutomatically.isSelected()==false) {
+			if (i < Ordnung1) {
 				lbwp[i].setEnabled(true);
 				lbqp[i].setEnabled(true);
 				tfwp[i].setEnabled(true);
@@ -213,14 +208,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 				tfqp[i].setEnabled(false);
 			}
 		}
-		if ((Ordnung1%2)!=0&rbtAutomatically.isSelected()==false){
-			lbSigma.setEnabled(true);
-			tfSigma.setEnabled(true);
-		}
-		else{
-			lbSigma.setEnabled(false);
-			tfSigma.setEnabled(false);
-		}
+		
 //		switch (Ordnung) {
 //			case "1":
 //				for (int i = 0; i < 10; i++) {
