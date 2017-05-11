@@ -125,7 +125,7 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 	public void update(Observable obs, Object obj) {
 		Model model = (Model) obs;
 		
-
+ 
 		StepresponsePanel.clearStepresponseData();
 		StepresponsePanel.addStepresponseData(model.getStepresponseData()[0]);
 		if(model.inputExisting()){
