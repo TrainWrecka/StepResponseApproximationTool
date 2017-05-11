@@ -102,8 +102,9 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 
 		StepresponsePanel.clearStepresponseData();
 		StepresponsePanel.addStepresponseData(model.getStepresponseData()[0]);
+		StepresponsePanel.addStepresponseData(model.getStepresponseData()[1]);
 		if(model.inputExisting()){
-			StepresponsePanel.addStepresponseData(model.getStepresponseData()[1]);
+			StepresponsePanel.addStepresponseData(model.getStepresponseData()[2]);
 		}
 	}
 

@@ -6,7 +6,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.math3.analysis.MultivariateFunction;
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.exception.TooManyEvaluationsException;
+import org.apache.commons.math3.optim.InitialGuess;
+import org.apache.commons.math3.optim.MaxEval;
+import org.apache.commons.math3.optim.PointValuePair;
+import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
+import org.apache.commons.math3.optim.nonlinear.scalar.ObjectiveFunction;
+import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.NelderMeadSimplex;
+import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.SimplexOptimizer;
+import org.apache.commons.math3.util.FastMath;
 import org.jfree.data.xy.XYSeries;
 
 import com.sun.org.apache.bcel.internal.generic.FMUL;
@@ -20,95 +30,104 @@ import userinterface.StatusBar;
 
 public class Measurement {
 
-	private double[][] measurementData;
+	//private double[][] measurement;
 	private double[][] cutData;
 	private double[] inputData;
 	private double[] timeData;
 	private double[] stepData;
+	private double[] stepDataFiltered;
+	private double[] stepDataConditioned;
+	private double[] inputDataConditioned;
+	private double[] timeDataConditioned;
 
-	private List<String[]> measurementList;
+	private double[] approxData;
+
+	//private List<String[]> measurementList;
 
 	private PlotData plotData = new PlotData();
 
 	private boolean input = false;
-	int unitStepLocation = 0;
-	int stepResponseLocation = 0;
 
-	double offset = 0;
+	int stepIndex = 0;
+
+	int order = 1;
 
 	public Measurement() {
 
 	}
 
 	public void setMeasurement(List<String[]> measurementList) {
-		this.measurementList = measurementList;
+		//this.measurementList = measurementList;
 
-		measurementData = convertList(measurementList);
+		int unitStepLocation = 0;
+		double offset = 0;
 
-		extractData();
+		extractData(convertList(measurementList));
+
 		if (input) {
-			getStepLocation();
+			unitStepLocation = getStepLocation(inputData);
 		} else {
-			unitStepLocation = 1;
-		}
-		offset = getOffset();
-
-		if (checkNoise() == false) {
-			//cutData2();
-			if (input) {
-				getfirstSignalChange();
-			}
-
-			else {
-				getfirstSignalChange();
-
-			}
-
+			unitStepLocation = 10;
 		}
 
-		if (checkNoise() == true) {
-			stepResponseLocation = 0;
-			filtFunction();
-			if (input) {
-				removeDeadTimeNoise();
-			} else {
-				//getfirstSignalChange();
-				removeDeadTimeNoise();
+		offset = getOffset(stepData, unitStepLocation);
 
-			}
+		boolean noise = checkNoise(stepData, unitStepLocation);
 
-			StatusBar.showStatus("Filtered Location: " + stepResponseLocation);
+		if (noise) {
+			stepIndex = 0;
+			stepDataFiltered = filtFunction(stepData, 30, 100.9e-3);
+			stepIndex = getLastOffsetIntersection(stepDataFiltered, offset);
 		}
 
-		removeDeadTime();
-		removeOffset(offset);
+		else {
+			stepIndex = getFirstSignalChange(stepData);
+		}
 
+		if (noise) {
+			stepDataConditioned = removeDeadTime(removeOffset(stepDataFiltered, offset),
+					new int[] { stepIndex, stepData.length });
+		}
+
+		else {
+			stepDataConditioned = removeDeadTime(removeOffset(stepData, offset), new int[] { stepIndex, stepData.length });
+		}
+
+		if (input) {
+			inputDataConditioned = removeDeadTime(removeOffset(inputData, getOffset(inputData, unitStepLocation)),
+					new int[] { stepIndex, inputData.length });
+		}
+		
 		normTime();
 
-		//cutData = cutMeasurement(measurementData);
-		//findData();
+		timeDataConditioned = removeDeadTime(timeData, new int[] { 0, timeData.length - stepIndex });
+
+		
+
+		approxData = Approximation.approximate(timeDataConditioned, stepDataConditioned, order);
 
 		plotData.removeStepresponseData();
-		//plotData.setStepresponseData(cutData);
-		//plotData.setStepresponseData(measurementData);
+
 		if (input) {
-			plotData.setStepresponseData(timeData, inputData, stepData);
+			plotData.setPlotData(new Object[][] {{ timeDataConditioned, "Time" }, { inputDataConditioned, "Input" },
+					new Object[] { stepDataConditioned, "Step" },{approxData, "Approximation"}});
 		} else {
-			plotData.setStepresponseData(timeData, stepData);
+			plotData.setPlotData(new Object[][] {{ timeDataConditioned, "Time" },
+				new Object[] { stepDataConditioned, "Step" },{approxData, "Approximation"}});
 		}
-
-		StatusBar.showStatus("Number of points: " + timeData.length);
-		StatusBar.showStatus("Last entry: " + timeData[timeData.length - 1]);
-
+	}
+	
+	public void approximateMeasurement(){
+		
 	}
 
-	public double[][] getMeasurement() {
-		return measurementData;
-	}
+	//	public double[][] getMeasurement() {
+	//		return measurement;
+	//	}
 
-	public List<String[]> getMeasurementList() {
-		return measurementList;
-	}
+	/*	public List<String[]> getMeasurementList() {
+			return measurementList;
+		}*/
 
 	public XYSeries[] getStepresponseData() {
 		return plotData.getStepresponseData();
@@ -138,27 +157,27 @@ public class Measurement {
 	/*
 	 * removes the unused data
 	 */
-	private double[][] cutMeasurement(double[][] measurementData) {
+	private double[][] cutMeasurement(double[][] measurement) {
 		double[][] cutData = null;
 
-		if (measurementData[0].length != 3) {
-			return cutData = measurementData;
+		if (measurement[0].length != 3) {
+			return cutData = measurement;
 		}
 
 		int j = 0;
-		for (int i = 0; i < measurementData.length; i++) {
-			if (measurementData[i][1] != 0) {
+		for (int i = 0; i < measurement.length; i++) {
+			if (measurement[i][1] != 0) {
 				j = i;
 				break;
 			}
 		}
 
-		cutData = new double[measurementData.length - j][measurementData[0].length];
+		cutData = new double[measurement.length - j][measurement[0].length];
 
 		for (int i = 0; i < cutData.length; i++) {
-			cutData[i][0] = measurementData[i][0];
-			cutData[i][1] = measurementData[j][1];
-			cutData[i][2] = measurementData[j][2];
+			cutData[i][0] = measurement[i][0];
+			cutData[i][1] = measurement[j][1];
+			cutData[i][2] = measurement[j][2];
 			j++;
 		}
 
@@ -167,25 +186,23 @@ public class Measurement {
 
 	/*
 	 * returns true if a fluctuation exists in
-	 * the first 20 elements of the step response Data
+	 * the signal for the specified range
 	 */
-	private boolean checkNoise() {
-		boolean flagUp = false;
-		boolean flagDown = false;
-		for (int i = 0; i < 20; i++) {
-			if (stepData[i] > stepData[i + 1]) {
-				flagUp = true;
-			} else if (stepData[i] < stepData[i + 1]) {
-				flagDown = true;
+	private boolean checkNoise(double[] signal, int range) {
+		boolean pos = false;
+		boolean neg = false;
+		for (int i = 0; i < range; i++) {
+			if (signal[i] > signal[i + 1]) {
+				neg = true;
+			} else if (signal[i] < signal[i + 1]) {
+				pos = true;
 			}
 
-			if ((flagUp & flagDown) == true) {
-				StatusBar.showStatus("noise");
-				return true;
+			if ((pos & neg) == true) {
+				break;
 			}
 		}
-		StatusBar.showStatus("no noise");
-		return false;
+		return (pos & neg);
 	}
 
 	/*
@@ -194,28 +211,28 @@ public class Measurement {
 	 * else an error message is printed
 	 * if an input column exist a flag gets set
 	 */
-	private void extractData() {
+	private void extractData(double[][] measurement) {
 		input = false;
 
-		if (measurementData[0].length == 3) {
-			timeData = new double[measurementData.length];
-			inputData = new double[measurementData.length];
-			stepData = new double[measurementData.length];
-			for (int i = 0; i < measurementData.length; i++) {
-				timeData[i] = measurementData[i][0];
-				inputData[i] = measurementData[i][1];
-				stepData[i] = measurementData[i][2];
+		if (measurement[0].length == 3) {
+			timeData = new double[measurement.length];
+			inputData = new double[measurement.length];
+			stepData = new double[measurement.length];
+			for (int i = 0; i < measurement.length; i++) {
+				timeData[i] = measurement[i][0];
+				inputData[i] = measurement[i][1];
+				stepData[i] = measurement[i][2];
 			}
 			input = true;
-		} else if (measurementData[0].length == 2) {
-			timeData = new double[measurementData.length];
+		} else if (measurement[0].length == 2) {
+			timeData = new double[measurement.length];
 			inputData = new double[1];
-			stepData = new double[measurementData.length];
-			for (int i = 0; i < measurementData.length; i++) {
-				timeData[i] = measurementData[i][0];
-				stepData[i] = measurementData[i][1];
+			stepData = new double[measurement.length];
+			for (int i = 0; i < measurement.length; i++) {
+				timeData[i] = measurement[i][0];
+				stepData[i] = measurement[i][1];
 			}
-		} else if (measurementData[0].length == 0) {
+		} else if (measurement[0].length == 0) {
 			StatusBar.showStatus("No data found");
 		} else {
 			StatusBar.showStatus("Too many data columns");
@@ -226,22 +243,22 @@ public class Measurement {
 	 * gets the location where the step of 
 	 * the unit data occurs
 	 */
-	private void getStepLocation() {
-		unitStepLocation = 0;
-		for (int i = 0; i < inputData.length; i++) {
-			if (inputData[i] != inputData[i + 1]) {
+	private int getStepLocation(double[] signal) {
+		int unitStepLocation = 0;
+		for (int i = 0; i < signal.length; i++) {
+			if (signal[i] != signal[i + 1]) {
 				unitStepLocation = i;
-				StatusBar.showStatus("Step location:" + Integer.toString(i));
 				break;
 			}
 		}
+		return unitStepLocation;
 	}
 
 	/*
 	 * returns the offset value
 	 */
-	private double getOffset() {
-		double[] tempArray = Arrays.copyOfRange(stepData, 0, unitStepLocation);
+	private double getOffset(double[] signal, int range) {
+		double[] tempArray = Arrays.copyOfRange(signal, 0, range);
 		double offset = Matlab.mean(tempArray);
 		StatusBar.showStatus("Offset:" + Double.toString(offset));
 		return offset;
@@ -250,38 +267,18 @@ public class Measurement {
 	/*
 	 * removes the offset from the signal
 	 */
-	private void removeOffset(double offset) {
-		for (int i = 0; i < stepData.length; i++) {
-			stepData[i] -= offset;
+	private double[] removeOffset(double[] signal, double offset) {
+		for (int i = 0; i < signal.length; i++) {
+			signal[i] -= offset;
 		}
+		return signal;
 	}
 
 	/*
 	 * removes the deadtime
 	 */
-	private void removeDeadTime() {
-		if (stepResponseLocation < unitStepLocation) {
-			stepResponseLocation = unitStepLocation;
-		}
-		double[] tempTime = new double[timeData.length - stepResponseLocation];
-		double[] tempStep = new double[timeData.length - stepResponseLocation];
-
-		tempTime = Arrays.copyOfRange(timeData, 0, timeData.length - stepResponseLocation);
-		tempStep = Arrays.copyOfRange(stepData, stepResponseLocation, stepData.length);
-
-		timeData = new double[tempTime.length];
-		stepData = new double[tempStep.length];
-
-		System.arraycopy(tempTime, 0, timeData, 0, tempTime.length);
-		System.arraycopy(tempStep, 0, stepData, 0, tempStep.length);
-
-		if (input) {
-			double[] tempInput = new double[timeData.length - stepResponseLocation];
-			tempInput = Arrays.copyOfRange(inputData, stepResponseLocation, inputData.length);
-			inputData = new double[tempInput.length];
-			System.arraycopy(tempInput, 0, inputData, 0, tempInput.length);
-		}
-
+	private double[] removeDeadTime(double[] signal, int[] range) {
+		return Arrays.copyOfRange(signal, range[0], range[1]);
 	}
 
 	/*
@@ -294,99 +291,74 @@ public class Measurement {
 	/*
 	 * filter function
 	 */
-	private void filtFunction() {
-		int iN = 30;
-		double[] yFiltered = null;
-		double[] ySignal = null;
-
-		double errorMax = 100.9e-3;
-
-		ArrayList<Double> oneOne;
-		ArrayList<Double> onesArrayList;
-		ArrayList<Double> stepDataList = new ArrayList<Double>();
-		for (double d : stepData)
-			stepDataList.add(d);
-
+	private double[] filtFunction(double[] signal, int filterLength, double maxError) {
+		double[] diff = new double[signal.length];
+		double[] signalFiltered = new double[signal.length];
 		double noiseError = 1;
-		ArrayList<Double> yFilteredList;
+		ArrayList<Double> signalFilteredList;
+		ArrayList<Double> signalList = new ArrayList<Double>();
+		for (double d : signal)
+			signalList.add(d);
 
-		oneOne = new ArrayList<Double>();
-		oneOne.add(1.0);
+		ArrayList<Double> vectorA = new ArrayList<Double>();
+		vectorA.add(1.0);
 
-		Double[] onesArray = new Double[iN];
-		for (int i = 0; i < onesArray.length; i++) {
-			onesArray[i] = 1.0 / iN;
-		}
+		for (int iN = filterLength; (Math.abs(noiseError) > maxError) && (iN > 0); iN--) {
 
-		while (Math.abs(noiseError) > errorMax) {
-
-			onesArrayList = new ArrayList<Double>();
-			for (double d : onesArray)
-				onesArrayList.add(d);
-
-			yFilteredList = Filtfilt.doFiltfilt(onesArrayList, oneOne, stepDataList);
-
-			yFiltered = new double[yFilteredList.size()];
-
-			ySignal = new double[yFilteredList.size()];
-
-			for (int i = 0; i < yFilteredList.size(); i++) {
-				ySignal[i] = yFilteredList.get(i);
-				yFiltered[i] = (stepData[i] - yFilteredList.get(i)) / stepData[i];
+			ArrayList<Double> vectorB = new ArrayList<Double>();
+			for (int i = 0; i < filterLength; i++) {
+				vectorB.add(1.0 / filterLength);
 			}
 
-			noiseError = Math.abs(Matlab.mean(yFiltered));
+			signalFilteredList = Filtfilt.doFiltfilt(vectorB, vectorA, signalList);
 
-			iN--;
-
-			if (iN == 0) {
-				StatusBar.showStatus("iN = 0");
-				break;
+			for (int i = 0; i < signalFilteredList.size(); i++) {
+				signalFiltered[i] = signalFilteredList.get(i);
+				diff[i] = (signal[i] - signalFiltered[i]) / signal[i];
 			}
+
+			noiseError = Math.abs(Matlab.mean(diff));
 		}
 
-		stepData = ySignal;
-		StatusBar.showStatus("iN = " + iN);
-
+		return signalFiltered;
 	}
 
 	/*
 	 * get first signal change
 	 * only applicable if no noise
 	 */
-	private void getfirstSignalChange() {
-		for (int i = 0; i < stepData.length; i++) {
-			if (stepData[i] != stepData[i + 1]) {
-				stepResponseLocation = i;
-				StatusBar.showStatus("Stepresponse location:" + Integer.toString(i));
+	private int getFirstSignalChange(double[] signal) {
+		int index = 0;
+		for (int i = 0; i < signal.length; i++) {
+			if (signal[i] != signal[i + 1]) {
+				index = i;
 				break;
 			}
 		}
+		return index;
 	}
 
 	/*
-	 * removes deadtime if signal is 
-	 * affected by noise
+	 * returns last intersection of
+	 * signal and offset, before signal
+	 * reaches the middle of its maximum
 	 */
-	private void removeDeadTimeNoise() {
-		int start = 0;
-		if (stepResponseLocation != 0) {
-			start = stepResponseLocation;
-		}
-
-		double max = Matlab.max(stepData);
-
-		for (int i = start; i < stepData.length; i++) {
-			if (stepData[i] <= offset && stepData[i + 1] >= offset) {
-				stepResponseLocation = i;
-			} else if ((stepData[i] - offset) > ((max - offset) / 2)) {
+	private int getLastOffsetIntersection(double[] signal, double offset) {
+		double max = Matlab.max(signal);
+		int index = 0;
+		for (int i = 0; i < signal.length; i++) {
+			if (signal[i] <= offset && signal[i + 1] >= offset) {
+				index = i;
+			} else if ((signal[i] - offset) > ((max - offset) / 2)) {
 				break;
 			}
 		}
-		StatusBar.showStatus("Last offset intersection" + stepResponseLocation);
-
+		return index;
 	}
 
+	/*
+	 * norms the time axis
+	 */
 	private void normTime() {
 		double nor = (175 * 30);
 		double tNorm = Matlab.norm(timeData);
@@ -396,61 +368,12 @@ public class Measurement {
 		}
 	}
 
-	public static void fminsearchImpl() {
-		int N = 2;
-	
-		
-		Filter filt = FilterFactory.createButter(N, 1.0);
-	
-		Object[] resi = Matlab.residue(filt.B, filt.A);
-				
-		Complex[] R = (Complex[]) resi[0];
-		Complex[] P = (Complex[]) resi[1];
-		double K = (double) resi[2];
-		
-		//System.out.println(""+K);
-		
-		//optimset
-		
-		//awert
-		
-		//fminsearch
-		
-		
-		
-		
-		//		%options für den fminsearch werden gesetzt
-		//		options = optimset('MaxFunEvals', 200*length(P), 'MaxIter', 200*length(P),'TolFun',1e-24, 'TolX', 1e-24);
-		//		
-		//		[x0,k]=awert(N, P);
-		//		X = fminsearch(@(x) FehlerFunktion(t, y_soll, x, N),x0,options);
-		//		
-		//		for n=(k)
-		//		    [X, output] = fminsearch(@(x) FehlerFunktion(t, y_soll, x, N),X,options);
-		//		e=FehlerFunktion(t, y_soll, x, N);
-		//		 if (e<1e-15) %Bestimmt ab welchem Fehler man nicht mehr in den fminsearch muss. 
-		//		     %Falls die Fehlerabweichung nicht erreicht wird, läuft er die forcierten 
-		//		     %Werte des awertes ab.
-		//		 break
-		//		 end
-		//		end
-
+	public void setOrder(int order) {
+		this.order = order;
 	}
 
 	public static void main(String[] args) {
-		fminsearchImpl();
-	}
-	
-	private double errorFunction(double[] stepTarget, int N){
-		double error = 0;
-		
-		//[y_ist, t] = schritt(x, t, N);
-		
-		for(int i = 0; i < stepTarget.length; i++){
-			error += Math.pow(stepTarget[i] - stepData[i], 2);
-		}
-		
-		return error;
+
 	}
 
 }

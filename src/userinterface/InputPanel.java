@@ -37,7 +37,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 	// Buttongroup
 	private ButtonGroup gruppeAuto_Manual = new ButtonGroup();
 	// JCombobox
-	private String comboBoxListe[] = { ""+1, ""+2, ""+3, ""+4, ""+5, ""+6, ""+7, ""+8, ""+9, ""+10 };
+	private String comboBoxListe[] = {""+2, ""+3, ""+4, ""+5, ""+6, ""+7, ""+8, ""+9, ""+10 };
 	private JComboBox cbOrdnungsauswahl = new JComboBox(comboBoxListe);
 	// Labels
 
@@ -181,6 +181,7 @@ public class InputPanel extends JPanel implements ActionListener, ItemListener {
 		}
 		if(e.getSource()==btLoad){
 			if (fileChooser.showOpenDialog(getParent()) == JFileChooser.APPROVE_OPTION) {
+				controller.setOrder(Integer.parseInt((String) cbOrdnungsauswahl.getSelectedItem()));
 				controller.setMeasurement(readCSV());
 		}
 		}
