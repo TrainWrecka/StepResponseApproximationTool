@@ -38,8 +38,10 @@ public class StepResponseApproximationTool extends JFrame {
 	private StatusBar statusBar = new StatusBar();
 	Dimension screenSize= Toolkit.getDefaultToolkit().getScreenSize();	// ScreenSize Problem
 	int screenRes= Toolkit.getDefaultToolkit().getScreenResolution();	// ScreenSize Problem
-	int height =screenRes *6;			// ScreenSize Problem
-	int width = screenRes *8;			// ScreenSize Problem
+
+	int height =screenSize.height*10/11 ;			// ScreenSize Problem
+	int width = screenSize.width *2/4;			// ScreenSize Problem
+
 	
 
 	private static enum LAF {
@@ -49,7 +51,7 @@ public class StepResponseApproximationTool extends JFrame {
 	private static LAF laf = LAF.SYSTEM;
 
 	public void init() {
-//		setPreferredSize(new Dimension(width,height));
+		setPreferredSize(new Dimension(width,height));
 
 		
 		
@@ -59,6 +61,11 @@ public class StepResponseApproximationTool extends JFrame {
 		getContentPane().add(view, BorderLayout.CENTER);
 		getContentPane().add(statusBar, BorderLayout.SOUTH);
 		setJMenuBar(menuBar);
+		
+		System.out.println(width);
+//		D
+
+		
 		pack();
 		
 		synchronized (getTreeLock()) {
@@ -90,15 +97,13 @@ public class StepResponseApproximationTool extends JFrame {
 				setResizable(true);
 				break;
 			case CHRIS:
-				setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2,(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()));
+				setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2,(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()-300));
 				setMinimumSize(getPreferredSize());
-
 				setSize(getPreferredSize());
 				setMaximumSize(getPreferredSize());
 				validate();
 				break;
 		}
-
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = getSize();
 		if (frameSize.height > screenSize.height) {
