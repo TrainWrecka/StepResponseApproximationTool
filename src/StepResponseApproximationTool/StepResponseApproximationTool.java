@@ -38,8 +38,10 @@ public class StepResponseApproximationTool extends JFrame {
 	private StatusBar statusBar = new StatusBar();
 	Dimension screenSize= Toolkit.getDefaultToolkit().getScreenSize();	// ScreenSize Problem
 	int screenRes= Toolkit.getDefaultToolkit().getScreenResolution();	// ScreenSize Problem
+
 	int height =screenSize.height*10/11 ;			// ScreenSize Problem
 	int width = screenSize.width *2/4;			// ScreenSize Problem
+
 	
 
 	private static enum LAF {
