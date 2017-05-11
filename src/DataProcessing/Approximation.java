@@ -32,6 +32,8 @@ public class Approximation {
 	public double[] yIst;
 	public double[] t;
 
+	
+	//chng
 	//	public Complex[] res = new Complex[10];
 
 	private static PlotData plotData = new PlotData();
