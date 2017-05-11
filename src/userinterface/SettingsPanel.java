@@ -35,14 +35,15 @@ public class SettingsPanel extends JPanel implements ActionListener, ItemListene
 	private JLabel lbSimplexOptimizerAbsolute=new JLabel("Simplex Optimizer absolute Optimum"); 
 	private JLabel lbMaxEval=new JLabel("Max Eval length");
 	private JLabel lbNelderMeadSimplexSteps=new JLabel("Nelder Mead Simplex Steps");
+
+	
 	private JLabel lbFilterLength=new JLabel("Filter length");
 	private JLabel lbFilterErrorMax=new JLabel("Filter Error Max");
-	
 	private JLabel lbFilterSignal=new JLabel("Filter Signal");
 	private JLabel lbShowFilteredSignal=new JLabel("Show filtered Signal");
 	
-	private JPanel Optimizer=new JPanel();
-	private JPanel Filter=new JPanel();
+	private JLabel lbFill=new JLabel("");
+	private JLabel lbFill1=new JLabel("");
 	
 	
 	private JTextField tfLaguerre=new JTextField();
@@ -64,8 +65,8 @@ public class SettingsPanel extends JPanel implements ActionListener, ItemListene
 	private JButton btApply=new JButton("Apply");
 	private JButton btOk=new JButton("OK");
 	private JButton btCancel=new JButton("Cancel");
-	private JButton btdefault=new JButton("Default Settings");
-	
+
+	private JButton btDefaults=new JButton("Defaults");
 	
 	
 	public SettingsPanel() {
@@ -112,6 +113,24 @@ public class SettingsPanel extends JPanel implements ActionListener, ItemListene
 		add(rbtShowFilteredSignalNo, new GridBagConstraints(2, 7, 2, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
 				new Insets(10, 0, 0, 10), 0, 0));
 		
+
+		add(lbFill, new GridBagConstraints(0, 8, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		add(btDefaults, new GridBagConstraints(1, 8, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		btApply.setPreferredSize(btDefaults.getMinimumSize());
+		
+		add(btApply, new GridBagConstraints(2, 8, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		
+		add(lbFill1, new GridBagConstraints(0, 9, 2, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		add(btOk, new GridBagConstraints(1, 9, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		add(btCancel, new GridBagConstraints(2, 9, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+				new Insets(10, 0, 0, 10), 0, 0));
+		
+
 //		setBorder(MyBorderFactory.createMyBorder("Settings"));
 
 		

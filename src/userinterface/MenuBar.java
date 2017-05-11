@@ -28,8 +28,8 @@ public class MenuBar extends JMenuBar implements Observer, ActionListener {
 	public JFrame settingsFrame;
 	private SettingsPanel settingsPanel=new SettingsPanel();
 	private double xPosition;
-	private double yPosition;
-	
+	private int settingsFrameWidth;
+	private int settingsFrameHeight;
 
 	public MenuBar(Controller controller, JFrame frame) {
 		this.frame = frame;
@@ -69,12 +69,16 @@ public class MenuBar extends JMenuBar implements Observer, ActionListener {
 		settingsItem.addActionListener(this);
 		optionsMenu.add(settingsItem);
 		add(optionsMenu);
-		
-		if(Toolkit.getDefaultToolkit().getScreenSize().getWidth()==3840){
-			xPosition=600;
+
+		if(Toolkit.getDefaultToolkit().getScreenSize().getWidth()>=3700){
+			xPosition=710;
+			settingsFrameWidth=50;
+			settingsFrameHeight=100;
 		}
 		else{
-			xPosition=320;
+			xPosition=350;
+			settingsFrameWidth=0;
+			settingsFrameHeight=50;
 		}
 		
 		
@@ -114,7 +118,8 @@ public class MenuBar extends JMenuBar implements Observer, ActionListener {
 			settingsFrame.add(settingsPanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 					new Insets(0, 0, 0, 0), 0, 0));
 			settingsFrame.setPreferredSize(settingsPanel.getPreferredSize());
-			settingsFrame.setSize((int) settingsFrame.getPreferredSize().getWidth()+50, (int) settingsFrame.getPreferredSize().getHeight()+100);
+
+			settingsFrame.setSize((int) (settingsFrame.getPreferredSize().getWidth())+settingsFrameWidth, (int) (settingsFrame.getPreferredSize().getHeight())+settingsFrameHeight);
 			
 			settingsFrame.setLocation((int) (frame.getLocation().getX()-xPosition), (int) frame.getLocation().getY());
 			
