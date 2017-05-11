@@ -106,6 +106,8 @@ public class OutputPanel extends JPanel implements ActionListener, ChangeListene
 		if(model.inputExisting()){
 			StepresponsePanel.addStepresponseData(model.getStepresponseData()[2]);
 		}
+		
+		//some test comment
 	}
 
 	@Override
