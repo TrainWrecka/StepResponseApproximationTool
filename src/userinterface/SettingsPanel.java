@@ -35,7 +35,6 @@ public class SettingsPanel extends JPanel implements ActionListener, ItemListene
 	private JLabel lbSimplexOptimizerAbsolute=new JLabel("Simplex Optimizer absolute Optimum"); 
 	private JLabel lbMaxEval=new JLabel("Max Eval length");
 	private JLabel lbNelderMeadSimplexSteps=new JLabel("Nelder Mead Simplex Steps");
-
 	
 	private JLabel lbFilterLength=new JLabel("Filter length");
 	private JLabel lbFilterErrorMax=new JLabel("Filter Error Max");
@@ -65,8 +64,8 @@ public class SettingsPanel extends JPanel implements ActionListener, ItemListene
 	private JButton btApply=new JButton("Apply");
 	private JButton btOk=new JButton("OK");
 	private JButton btCancel=new JButton("Cancel");
-
 	private JButton btDefaults=new JButton("Defaults");
+	
 	
 	
 	public SettingsPanel() {
@@ -113,7 +112,7 @@ public class SettingsPanel extends JPanel implements ActionListener, ItemListene
 		add(rbtShowFilteredSignalNo, new GridBagConstraints(2, 7, 2, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
 				new Insets(10, 0, 0, 10), 0, 0));
 		
-
+		
 		add(lbFill, new GridBagConstraints(0, 8, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
 				new Insets(10, 0, 0, 10), 0, 0));
 		add(btDefaults, new GridBagConstraints(1, 8, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
@@ -130,7 +129,6 @@ public class SettingsPanel extends JPanel implements ActionListener, ItemListene
 		add(btCancel, new GridBagConstraints(2, 9, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
 				new Insets(10, 0, 0, 10), 0, 0));
 		
-
 //		setBorder(MyBorderFactory.createMyBorder("Settings"));
 
 		

@@ -21,13 +21,13 @@ public class Model extends Observable {
 		notifyObservers();
 	}
 	
-//	public double[][] getMeasurement(){
-//		return measurement.getMeasurement();
-//	}
-//	
-	/*public List<String[]> getMeasurementList(){
+	public double[][] getMeasurement(){
+		return measurement.getMeasurement();
+	}
+	
+	public List<String[]> getMeasurementList(){
 		return measurement.getMeasurementList();
-	}*/
+	}
 	
 	public XYSeries[] getStepresponseData(){
 		return measurement.getStepresponseData();
@@ -42,10 +42,6 @@ public class Model extends Observable {
 	public void notifyObservers() {
 		setChanged();
 		super.notifyObservers();
-	}
-	
-	public void setOrder(int order){
-		measurement.setOrder(order);
 	}
 
 	
