@@ -24,13 +24,13 @@ public class Controller {
 	public void setMeasurement(List<String[]> measurementList){
 		model.setMeasurement(measurementList);
 	}
-	
-	public List<String[]> getMeasurementList(){
-		return model.getMeasurementList();
-	}
-	
-	public double [][] getMeasurement(){
-		return model.getMeasurement();
-	}
+//	
+//	public List<String[]> getMeasurementList(){
+//		return model.getMeasurementList();
+//	}
+//	
+//	public double [][] getMeasurement(){
+//		return model.getMeasurement();
+//	}
 	
 }
