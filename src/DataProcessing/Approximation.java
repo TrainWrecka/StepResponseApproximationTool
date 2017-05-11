@@ -423,7 +423,6 @@ public class Approximation {
 			double error = Approximation.errorFunction(t, y_soll, poles, order);
 			
 			evals++;
-			StatusBar.showStatus("Error: "+error);
 			System.out.println("Evals: "+evals);
 			System.out.println("Error: "+error);
 			
@@ -444,7 +443,7 @@ public class Approximation {
 		double K = (double) resi[2];
 		
 		Object[] resi1 = Approximation.Awert(order, P);
-		double[] initPoles = (double[])resi1[0];
+		double[] initCoeffs = (double[])resi1[0];
 		int k = (int)resi1[1];
 		
 		double[] nelderValues = new double[order+1];
@@ -461,7 +460,7 @@ public class Approximation {
 		
 		try {
 			 optimum = optimizer.optimize(new MaxEval(1000*P.length), new ObjectiveFunction(target), GoalType.MINIMIZE,
-					new InitialGuess(initPoles), new NelderMeadSimplex(nelderValues));
+					new InitialGuess(initCoeffs), new NelderMeadSimplex(nelderValues));
 		} catch (TooManyEvaluationsException e) {
 			approxPoles = target.poles;
 			flag = true;
