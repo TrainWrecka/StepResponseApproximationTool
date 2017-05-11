@@ -11,7 +11,7 @@ import java.awt.GridBagLayoutInfo;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
-import JFreeChart.StepResponsePlot;
+import JFreeChart.Plots;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -19,14 +19,17 @@ import javax.swing.JTabbedPane;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-import com.sun.glass.ui.Size;
-
 import javax.swing.JLabel;
 
 public class StepresponsePanel extends JPanel implements ActionListener {
 
-	public StepResponsePlot StepResponseplot = new StepResponsePlot("Stepresponse");
+	private Plots StepResponseplot = new Plots("Stepresponse");
 
+	private JLabel lbk = new JLabel("K:");
+	private JLabel lbwp = new JLabel("\u03C9p:");
+	private JLabel lbqp = new JLabel("qp:");
+	private JLabel lbSigma = new JLabel("\u03C3:");
+	private JLabel lbError = new JLabel("Error:");
 
 	public StepresponsePanel() {
 		super(new GridBagLayout());
@@ -37,9 +40,8 @@ public class StepresponsePanel extends JPanel implements ActionListener {
 //		setMaximumSize(screensize);
 //		StepResponseplot.setMaximumSize(screensize);
 		
-				
-		setBorder(MyBorderFactory.createMyBorder("StepResponse"));
 		
+		setBorder(MyBorderFactory.createMyBorder("StepResponse"));
 	}
 	
 	public void clearStepresponseData(){
