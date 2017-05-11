@@ -25,12 +25,16 @@ public class Controller {
 		model.setMeasurement(measurementList);
 	}
 	
-	public List<String[]> getMeasurementList(){
+	/*public List<String[]> getMeasurementList(){
 		return model.getMeasurementList();
-	}
+	}*/
 	
-	public double [][] getMeasurement(){
-		return model.getMeasurement();
+//	public double [][] getMeasurement(){
+//		return model.getMeasurement();
+//	}
+	
+	public void setOrder(int order){
+		model.setOrder(order);
 	}
 	
 }

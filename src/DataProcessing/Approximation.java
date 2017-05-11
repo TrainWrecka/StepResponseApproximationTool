@@ -2,10 +2,22 @@ package DataProcessing;
 
 import java.util.Arrays;
 
+import org.apache.commons.math3.analysis.MultivariateFunction;
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.exception.TooManyEvaluationsException;
+import org.apache.commons.math3.optim.InitialGuess;
+import org.apache.commons.math3.optim.MaxEval;
+import org.apache.commons.math3.optim.PointValuePair;
+import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
+import org.apache.commons.math3.optim.nonlinear.scalar.ObjectiveFunction;
+import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.NelderMeadSimplex;
+import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.SimplexOptimizer;
 
+import matlabfunctions.Filter;
+import matlabfunctions.FilterFactory;
 import matlabfunctions.Matlab;
 import matlabfunctions.SVTools;
+import userinterface.StatusBar;
 
 public class Approximation {
 
@@ -389,4 +401,103 @@ public class Approximation {
 
 		return error;
 	}
+	
+	private static class Target implements MultivariateFunction {
+		double[] t;
+		double[] y_soll;
+		int order;
+		double evals = 0;
+		double[] poles;
+		double error;
+		
+		public Target(double[] t, double[] y_soll, int order){
+			this.t= t;
+			this.y_soll = y_soll;
+			this.order = order;
+		}
+		
+		public double value(double[] variables) {
+			
+			final double[] poles = variables;
+			//final double y = variables[1];
+			double error = Approximation.errorFunction(t, y_soll, poles, order);
+			
+			evals++;
+			StatusBar.showStatus("Error: "+error);
+			System.out.println("Evals: "+evals);
+			System.out.println("Error: "+error);
+			
+			this.error = error;
+			this.poles = poles;
+			
+			return error;
+		}
+	}
+	
+	public static double[] approximate(double[] timeData, double[]stepData, int order) {
+		Filter filt = FilterFactory.createButter(order, 1.0);
+
+		Object[] resi = Matlab.residue(filt.B, filt.A);
+
+		Complex[] R = (Complex[]) resi[0];
+		Complex[] P = (Complex[]) resi[1];
+		double K = (double) resi[2];
+		
+		Object[] resi1 = Approximation.Awert(order, P);
+		double[] initPoles = (double[])resi1[0];
+		int k = (int)resi1[1];
+		
+		double[] nelderValues = new double[order+1];
+		
+		for(int i = 0; i < nelderValues.length; i++){
+			nelderValues[i] = 0.0001;
+		}
+		
+		SimplexOptimizer optimizer = new SimplexOptimizer(1e-24, 1e-24);
+		Target target = new Target(timeData, stepData, order);
+		PointValuePair optimum = null;
+		double[] approxPoles = null;
+		boolean flag = false;
+		
+		try {
+			 optimum = optimizer.optimize(new MaxEval(1000*P.length), new ObjectiveFunction(target), GoalType.MINIMIZE,
+					new InitialGuess(initPoles), new NelderMeadSimplex(nelderValues));
+		} catch (TooManyEvaluationsException e) {
+			approxPoles = target.poles;
+			flag = true;
+		}
+		
+	
+		if(flag == false){
+			approxPoles = optimum.getPoint();
+		}
+		 		
+		Object[] result = Approximation.schritt(approxPoles, timeData, order);
+		
+		return (double[]) result[0];
+		
+
+	}
+	/*
+	public static approximationOptions setOptions(int maxEval, double relOpt, double absOpt){
+		return new approximationOptions(maxEval, relOpt, absOpt);
+	}
+	
+	
+	
+	public static class approximationOptions{
+		int maxEval;
+		double relOpt;
+		double absOpt;
+		
+		public approximationOptions(int maxEval, double relOpt, double absOpt){
+			this.maxEval = maxEval;
+			this.relOpt = relOpt;
+			this.absOpt = absOpt;
+		}
+		
+//		public double getOptions() {			
+//			
+//		}
+	}*/
 }
